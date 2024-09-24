@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Commons.Domain\Commons.Domain.csproj"/>
+        <ProjectReference Include="..\Contatos.Domain\Contatos.Domain.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Dapper" Version="2.1.35"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.7"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.4"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.4"/>
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.4"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Remove="Migrations\20240809225623_BaseInicial.cs"/>
+        <Compile Remove="Migrations\20240809225623_BaseInicial.Designer.cs"/>
+        <Compile Remove="Migrations\ContatoDbContextModelSnapshot.cs"/>
+        <Compile Remove="Extensions\**"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="Migrations\"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Remove="Extensions\**"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Remove="Extensions\**"/>
+    </ItemGroup>
+
+</Project>

@@ -1,0 +1,27 @@
+﻿version: '3'
+services:
+  contatos-api:
+    container_name: contatos-api
+    depends_on:
+      - postgres
+    build:
+      context: ../
+      dockerfile: ./src/Contatos.Api/Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+  postgres:
+    image: postgres:latest
+    container_name: contatos-db
+    environment:
+      POSTGRES_USER: contatos
+      POSTGRES_PASSWORD: contatos
+      POSTGRES_DB: contatos
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
