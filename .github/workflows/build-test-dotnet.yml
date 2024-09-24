@@ -33,6 +33,7 @@ jobs:
       with:
         reports: test/coverage/coverage.cobertura.xml
         targetdir: test/coverage/report
+        reporttypes: Html;Cobertura;MarkdownSummary
 
     - name: Upload coverage report artifact
       uses: actions/upload-artifact@v4
