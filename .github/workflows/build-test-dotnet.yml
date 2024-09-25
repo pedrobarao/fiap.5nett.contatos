@@ -31,9 +31,9 @@ jobs:
     - name: ReportGenerator
       uses: danielpalme/ReportGenerator-GitHub-Action@5.3.9
       with:
-        reports: test/coverage/coverage.cobertura.xml
-        targetdir: test/coverage/report
-        reporttypes: Html;Cobertura;MarkdownSummary
+        reports: test/results/coverlet/coverage.cobertura.xml
+        targetdir: test/results/coverage-report
+        reporttypes: Html;MarkdownSummaryGithub
 
     - name: Upload coverage report artifact
       uses: actions/upload-artifact@v4
@@ -43,11 +43,11 @@ jobs:
     
     - name: Add comment to PR # Only applicable if 'MarkdownSummaryGithub' or one of the other Markdown report types is generated
       if: github.event_name == 'pull_request'
-      run: gh pr comment $PR_NUMBER --body-file coveragereport/SummaryGithub.md # Adjust path and filename if necessary
+      run: gh pr comment $PR_NUMBER --body-file test/results/coverage-report/SummaryGithub.md # Adjust path and filename if necessary
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         PR_NUMBER: ${{ github.event.number }}
         
     - name: Publish coverage in build summary # Only applicable if 'MarkdownSummaryGithub' or one of the other Markdown report types is generated
-      run: cat coveragereport/SummaryGithub.md >> $GITHUB_STEP_SUMMARY # Adjust path and filename if necessary
+      run: cat test/results/coverage-report/SummaryGithub.md >> $GITHUB_STEP_SUMMARY # Adjust path and filename if necessary
       shell: bash
