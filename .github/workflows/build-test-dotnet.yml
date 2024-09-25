@@ -6,9 +6,18 @@ on:
   pull_request:
     branches: [ "main" ]
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 jobs:
   build:
-
+    name: Build and Test
     runs-on: ubuntu-latest
 
     steps:
@@ -50,3 +59,15 @@ jobs:
     - name: Publish coverage in build summary # Only applicable if 'MarkdownSummaryGithub' or one of the other Markdown report types is generated
       run: cat test/results/coverage-report/SummaryGithub.md >> $GITHUB_STEP_SUMMARY # Adjust path and filename if necessary
       shell: bash
+
+    - name: Setup Pages
+      uses: actions/configure-pages@v5
+      
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: test/results/coverage-report
+    
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
