@@ -1,0 +1,12 @@
+{
+  "uuid": "a5f87e5b-d30a-46de-87fd-ea3e44b15fd5",
+  "name": "Contatos.Domain.Test.ValueObjects.TelefoneTest",
+  "children": [
+    "285be020-86f9-4a36-8515-f207c0be135c"
+  ],
+  "befores": [],
+  "afters": [],
+  "links": [],
+  "start": 1727281805105,
+  "stop": 1727281805110
+}

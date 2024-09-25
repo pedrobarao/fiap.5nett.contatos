@@ -1,0 +1,12 @@
+{
+  "uuid": "b4bb14af-d1fe-4b1b-a48a-2b851cbc0cae",
+  "name": "Contatos.Application.Test.UseCases.ListarContatoUseCaseTest",
+  "children": [
+    "c69c9e2b-e31b-4f78-9cc0-fbfd572f89dd"
+  ],
+  "befores": [],
+  "afters": [],
+  "links": [],
+  "start": 1727289312472,
+  "stop": 1727289312569
+}

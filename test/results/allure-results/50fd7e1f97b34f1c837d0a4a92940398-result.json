@@ -1,0 +1,51 @@
+{
+  "uuid": "c990e3f5-d199-4e1c-b06a-370b36a9f718",
+  "historyId": "41b53900c3f78a882d010894e592079b",
+  "testCaseId": "69171ce2388761c58ec1025b2f1c457b",
+  "fullName": "Contatos.Domain.Test:Contatos.Domain.Test.ValueObjects.NomeTest.Nome_SobrenomeNuloOuVazio_DeveEstarValido()",
+  "labels": [
+    {
+      "name": "thread",
+      "value": ".NET Long Running Task"
+    },
+    {
+      "name": "host",
+      "value": "BRO-NT"
+    },
+    {
+      "name": "language",
+      "value": "C#"
+    },
+    {
+      "name": "framework",
+      "value": "xUnit.net"
+    },
+    {
+      "name": "testClass",
+      "value": "Contatos.Domain.Test.ValueObjects.NomeTest"
+    },
+    {
+      "name": "testMethod",
+      "value": "Sobrenome nulo ou vazio deve passar"
+    },
+    {
+      "name": "package",
+      "value": "Contatos.Domain.Test.ValueObjects.NomeTest"
+    }
+  ],
+  "links": [],
+  "name": "Sobrenome nulo ou vazio deve passar",
+  "status": "passed",
+  "statusDetails": {
+    "known": false,
+    "muted": false,
+    "flaky": false,
+    "message": ""
+  },
+  "stage": "finished",
+  "steps": [],
+  "attachments": [],
+  "parameters": [],
+  "start": 1727281962355,
+  "stop": 1727281962362
+}

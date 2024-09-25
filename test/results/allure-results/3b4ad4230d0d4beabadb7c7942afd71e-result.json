@@ -1,0 +1,51 @@
+{
+  "uuid": "8ee7392a-aafd-43a1-b98f-1b774e56693a",
+  "historyId": "9b376eee7fc13bf52cc09fe07bf6021f",
+  "testCaseId": "50336dcf5b320daf501ab5beda6ae2c0",
+  "fullName": "Contatos.Domain.Test:Contatos.Domain.Test.Entities.ContatoTest.Contato_ComTelefoneInvalido_DeveEstarInvalido()",
+  "labels": [
+    {
+      "name": "thread",
+      "value": ".NET Long Running Task"
+    },
+    {
+      "name": "host",
+      "value": "BRO-NT"
+    },
+    {
+      "name": "language",
+      "value": "C#"
+    },
+    {
+      "name": "framework",
+      "value": "xUnit.net"
+    },
+    {
+      "name": "testClass",
+      "value": "Contatos.Domain.Test.Entities.ContatoTest"
+    },
+    {
+      "name": "testMethod",
+      "value": "Contato com telefone inválido deve estar inválido"
+    },
+    {
+      "name": "package",
+      "value": "Contatos.Domain.Test.Entities.ContatoTest"
+    }
+  ],
+  "links": [],
+  "name": "Contato com telefone inválido deve estar inválido",
+  "status": "passed",
+  "statusDetails": {
+    "known": false,
+    "muted": false,
+    "flaky": false,
+    "message": ""
+  },
+  "stage": "finished",
+  "steps": [],
+  "attachments": [],
+  "parameters": [],
+  "start": 1727292364846,
+  "stop": 1727292364862
+}

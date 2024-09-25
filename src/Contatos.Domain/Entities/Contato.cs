@@ -1,4 +1,5 @@
-﻿using Commons.Domain.Communication;
+﻿using System.Diagnostics.CodeAnalysis;
+using Commons.Domain.Communication;
 using Commons.Domain.DomainObjects;
 using Contatos.Domain.ValueObjects;
 
@@ -8,20 +9,13 @@ public class Contato : Entity, IAggregateRoot
 {
     private List<Telefone> _telefones = null!;
 
+    [ExcludeFromCodeCoverage]
     protected Contato()
     {
     }
 
     public Contato(Nome nome, List<Telefone> telefone, Email? email)
     {
-        Nome = nome;
-        _telefones = telefone;
-        Email = email;
-    }
-
-    public Contato(Guid id, Nome nome, List<Telefone> telefone, Email? email)
-    {
-        Id = id;
         Nome = nome;
         _telefones = telefone;
         Email = email;

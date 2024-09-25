@@ -1,0 +1,69 @@
+{
+  "uuid": "fc44f8a9-336f-48a1-ae0f-a92326626ddc",
+  "historyId": "0a974c6af58f8b83b6c38ec4d4376688",
+  "testCaseId": "e59d011061207fd3cabc5552f987ec8a",
+  "fullName": "Contatos.Domain.Test:Contatos.Domain.Test.ValueObjects.TelefoneTest.Telefone_DddInvalido_DeveEstarInvalido(System.Int16)",
+  "labels": [
+    {
+      "name": "thread",
+      "value": ".NET TP Worker"
+    },
+    {
+      "name": "host",
+      "value": "BRO-NT"
+    },
+    {
+      "name": "language",
+      "value": "C#"
+    },
+    {
+      "name": "framework",
+      "value": "xUnit.net"
+    },
+    {
+      "name": "testClass",
+      "value": "Contatos.Domain.Test.ValueObjects.TelefoneTest"
+    },
+    {
+      "name": "testMethod",
+      "value": "Telefone com DDD inválido deve estar inválido(ddd: null)"
+    },
+    {
+      "name": "package",
+      "value": "Contatos.Domain.Test.ValueObjects.TelefoneTest"
+    },
+    {
+      "name": "feature",
+      "value": "Labels API"
+    },
+    {
+      "name": "layer",
+      "value": "rest"
+    },
+    {
+      "name": "tag",
+      "value": "smoke"
+    }
+  ],
+  "links": [],
+  "name": "Telefone com DDD inválido deve estar inválido",
+  "status": "passed",
+  "statusDetails": {
+    "known": false,
+    "muted": false,
+    "flaky": false,
+    "message": ""
+  },
+  "stage": "finished",
+  "steps": [],
+  "attachments": [],
+  "parameters": [
+    {
+      "name": "ddd",
+      "value": "null",
+      "excluded": false
+    }
+  ],
+  "start": 1727292383094,
+  "stop": 1727292383096
+}

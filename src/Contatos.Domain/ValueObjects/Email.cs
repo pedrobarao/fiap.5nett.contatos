@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Text.RegularExpressions;
 using Commons.Domain.Communication;
 
 namespace Contatos.Domain.ValueObjects;
@@ -7,6 +8,7 @@ public record Email
 {
     public const int MaxLength = 254;
 
+    [ExcludeFromCodeCoverage]
     protected Email()
     {
     }

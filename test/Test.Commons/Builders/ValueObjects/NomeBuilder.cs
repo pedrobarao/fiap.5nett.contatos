@@ -1,5 +1,4 @@
 ﻿using Bogus;
-using Contatos.Domain.Entities;
 using Contatos.Domain.ValueObjects;
 
 namespace Test.Commons.Builders.ValueObjects;
@@ -31,7 +30,7 @@ public class NomeBuilder
         _faker.RuleFor(x => x.Sobrenome, sobrenome);
         return this;
     }
-    
+
     public NomeBuilder ComSobrenomeVazio()
     {
         _faker.RuleFor(x => x.Sobrenome, "");

@@ -1,0 +1,65 @@
+{
+  "uuid": "1f5b5f51-daf2-4fa3-b0a3-d838c0079f95",
+  "historyId": "a10b34c7cb9d1fc6bcddfc5a34289198",
+  "testCaseId": "308ebe836377ed3fd52b54ca8badeae8",
+  "fullName": "Contatos.Domain.Test:Contatos.Domain.Test.ValueObjects.TelefoneTest.Telefone_NumeroResidencialEComercialInvalido_DeveEstarInvalido(System.String)",
+  "labels": [
+    {
+      "name": "thread",
+      "value": ".NET TP Worker"
+    },
+    {
+      "name": "host",
+      "value": "BRO-NT"
+    },
+    {
+      "name": "language",
+      "value": "C#"
+    },
+    {
+      "name": "framework",
+      "value": "xUnit.net"
+    },
+    {
+      "name": "testClass",
+      "value": "Contatos.Domain.Test.ValueObjects.TelefoneTest"
+    },
+    {
+      "name": "testMethod",
+      "value": "Telefone com número residencial e comercial inválido, deve estar inválido(numero: \"932121011\")"
+    },
+    {
+      "name": "package",
+      "value": "Contatos.Domain.Test.ValueObjects.TelefoneTest"
+    },
+    {
+      "name": "feature",
+      "value": "Labels API"
+    },
+    {
+      "name": "layer",
+      "value": "rest"
+    }
+  ],
+  "links": [],
+  "name": "Telefone com número residencial e comercial inválido, deve estar inválido",
+  "status": "passed",
+  "statusDetails": {
+    "known": false,
+    "muted": false,
+    "flaky": false,
+    "message": ""
+  },
+  "stage": "finished",
+  "steps": [],
+  "attachments": [],
+  "parameters": [
+    {
+      "name": "numero",
+      "value": "\"932121011\"",
+      "excluded": false
+    }
+  ],
+  "start": 1727281890583,
+  "stop": 1727281890587
+}

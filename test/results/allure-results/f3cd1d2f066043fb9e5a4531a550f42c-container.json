@@ -1,0 +1,12 @@
+{
+  "uuid": "e279afd3-a460-49d4-bf74-e9e40aa9309c",
+  "name": "Contatos.Domain.Test.Entities.ContatoTest",
+  "children": [
+    "ff128d96-2f6c-4eb7-8602-0b5d9a9ce700"
+  ],
+  "befores": [],
+  "afters": [],
+  "links": [],
+  "start": 1727292364641,
+  "stop": 1727292364758
+}

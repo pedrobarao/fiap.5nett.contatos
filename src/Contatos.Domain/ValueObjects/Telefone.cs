@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Text.RegularExpressions;
 using Commons.Domain.Communication;
 using Infra.CrossCutting.Utils;
 
@@ -6,6 +7,7 @@ namespace Contatos.Domain.ValueObjects;
 
 public record Telefone
 {
+    [ExcludeFromCodeCoverage]
     protected Telefone()
     {
     }
@@ -17,15 +19,9 @@ public record Telefone
         Tipo = tipo;
     }
 
-    public Guid ContatoId { get; set; }
     public short Ddd { get; init; }
     public string Numero { get; init; } = null!;
     public TipoTelefone Tipo { get; init; }
-
-    public void AssociarContato(Guid contatoId)
-    {
-        ContatoId = contatoId;
-    }
 
     public override string ToString()
     {
@@ -51,12 +47,7 @@ public record Telefone
         numero = StringUtil.JustNumbers(numero);
         if (numero.Length != 8 && numero.Length != 9) return false;
 
-        if (!Regex.IsMatch(numero, "^[0-9]")) return false;
-
-        if (tipo == TipoTelefone.Celular)
-        {
-            return numero.Length == 9 && numero.StartsWith('9');
-        }
+        if (tipo == TipoTelefone.Celular) return numero.Length == 9 && numero.StartsWith('9');
 
         return numero.Length == 8;
     }

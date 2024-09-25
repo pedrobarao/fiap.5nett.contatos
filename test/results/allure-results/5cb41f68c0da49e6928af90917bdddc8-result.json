@@ -1,0 +1,57 @@
+{
+  "uuid": "1f17a871-a57c-4470-9f69-1372300deb9e",
+  "historyId": "d804dadc8ab9485d4941368f9a4d9450",
+  "testCaseId": "6fa016d4fcfcd110bee08a0ec5b20a15",
+  "fullName": "Contatos.Domain.Test:Contatos.Domain.Test.ValueObjects.EmailTest.Email_Invalido_DeveEstarInvalido(System.String)",
+  "labels": [
+    {
+      "name": "thread",
+      "value": ".NET TP Worker"
+    },
+    {
+      "name": "host",
+      "value": "BRO-NT"
+    },
+    {
+      "name": "language",
+      "value": "C#"
+    },
+    {
+      "name": "framework",
+      "value": "xUnit.net"
+    },
+    {
+      "name": "testClass",
+      "value": "Contatos.Domain.Test.ValueObjects.EmailTest"
+    },
+    {
+      "name": "testMethod",
+      "value": "E-mail inválido deve estar inválido(endereco: \"@missingusername.com\")"
+    },
+    {
+      "name": "package",
+      "value": "Contatos.Domain.Test.ValueObjects.EmailTest"
+    }
+  ],
+  "links": [],
+  "name": "E-mail inválido deve estar inválido",
+  "status": "passed",
+  "statusDetails": {
+    "known": false,
+    "muted": false,
+    "flaky": false,
+    "message": ""
+  },
+  "stage": "finished",
+  "steps": [],
+  "attachments": [],
+  "parameters": [
+    {
+      "name": "endereco",
+      "value": "\"@missingusername.com\"",
+      "excluded": false
+    }
+  ],
+  "start": 1727281970601,
+  "stop": 1727281970602
+}

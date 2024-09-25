@@ -1,0 +1,51 @@
+{
+  "uuid": "2b258576-fe9e-4b2e-bd67-19a489e9aa31",
+  "historyId": "aa7ac4fbea6d5900e1ffb7f010cea60a",
+  "testCaseId": "c5688fca8bb3b220ef6e2123f0103293",
+  "fullName": "Contatos.Domain.Test:Contatos.Domain.Test.Entities.ContatoTest.Contato_Valido_DeveEstarValido()",
+  "labels": [
+    {
+      "name": "thread",
+      "value": ".NET Long Running Task"
+    },
+    {
+      "name": "host",
+      "value": "BRO-NT"
+    },
+    {
+      "name": "language",
+      "value": "C#"
+    },
+    {
+      "name": "framework",
+      "value": "xUnit.net"
+    },
+    {
+      "name": "testClass",
+      "value": "Contatos.Domain.Test.Entities.ContatoTest"
+    },
+    {
+      "name": "testMethod",
+      "value": "Contato com valores válidos deve estar válido"
+    },
+    {
+      "name": "package",
+      "value": "Contatos.Domain.Test.Entities.ContatoTest"
+    }
+  ],
+  "links": [],
+  "name": "Contato com valores válidos deve estar válido",
+  "status": "passed",
+  "statusDetails": {
+    "known": false,
+    "muted": false,
+    "flaky": false,
+    "message": ""
+  },
+  "stage": "finished",
+  "steps": [],
+  "attachments": [],
+  "parameters": [],
+  "start": 1727292364863,
+  "stop": 1727292364870
+}

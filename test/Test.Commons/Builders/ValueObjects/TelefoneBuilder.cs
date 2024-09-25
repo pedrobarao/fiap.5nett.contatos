@@ -9,7 +9,7 @@ public class TelefoneBuilder
     {
         Locale = "pt_BR"
     };
-    
+
     public TelefoneBuilder()
     {
         _faker.CustomInstantiator(f =>
@@ -18,27 +18,24 @@ public class TelefoneBuilder
             var numero = f.Random.Replace("9########");
             var tipo = f.PickRandom<TipoTelefone>();
 
-            if (tipo != TipoTelefone.Celular)
-            {
-                numero = numero.Remove(0, 1);
-            }
+            if (tipo != TipoTelefone.Celular) numero = numero.Remove(0, 1);
 
             return new Telefone(ddd, numero, tipo);
         });
     }
-    
+
     public TelefoneBuilder ComDdd(short ddd)
     {
         _faker.RuleFor(p => p.Ddd, ddd);
         return this;
     }
-    
+
     public TelefoneBuilder ComNumero(string numero)
     {
         _faker.RuleFor(p => p.Numero, numero);
         return this;
     }
-    
+
     public TelefoneBuilder ComTipo(TipoTelefone tipo)
     {
         _faker.RuleFor(p => p.Tipo, tipo);

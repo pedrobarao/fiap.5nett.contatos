@@ -11,18 +11,52 @@ public class ContatoBuilder
     {
         Locale = "pt_BR"
     };
-    
+
     public ContatoBuilder()
     {
-        _faker.RuleFor(c => c.Id, f => f.Random.Guid());
-        
-        _faker.RuleFor(c => c.Nome, f => new NomeBuilder().Build());
-        _faker.RuleFor(c => c.Email, f => new EmailBuilder().Build());
-        
-        _faker.RuleFor(c => c.Telefones, f => new List<Telefone>
-        {
-            new(f.Random.Short(11, 99), f.Person.Phone, f.PickRandom<TipoTelefone>())
-        });
+        _faker.CustomInstantiator(f => new Contato(
+            new NomeBuilder().Build(),
+            new TelefoneBuilder().Build(3),
+            new EmailBuilder().Build()
+        ));
+    }
+
+    public ContatoBuilder ComNomeInvalido()
+    {
+        var nome = new NomeBuilder()
+            .ComPrimeiroNome("")
+            .Build();
+
+        _faker.RuleFor(p => p.Nome, f => nome);
+
+        return this;
+    }
+
+    public ContatoBuilder ComEmailInvalido()
+    {
+        var email = new EmailBuilder()
+            .ComEndereco("invalido")
+            .Build();
+
+        _faker.RuleFor(p => p.Email, f => email);
+
+        return this;
+    }
+
+    public ContatoBuilder ComTelefoneInvalido()
+    {
+        var telefones = new TelefoneBuilder()
+            .ComDdd(0)
+            .ComNumero("12345678910")
+            .Build(1);
+
+        _faker.CustomInstantiator(f => new Contato(
+            new NomeBuilder().Build(),
+            telefones,
+            new EmailBuilder().Build()
+        ));
+
+        return this;
     }
 
     public Contato Build()

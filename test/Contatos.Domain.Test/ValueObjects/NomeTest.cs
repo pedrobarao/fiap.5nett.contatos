@@ -31,7 +31,7 @@ public class NomeTest
         var nomeSobrenomeNulo = new NomeBuilder()
             .ComSobrenomeNulo()
             .Build();
-        
+
         var nomeSobrenomeVazio = new NomeBuilder()
             .ComSobrenomeVazio()
             .Build();
@@ -44,7 +44,7 @@ public class NomeTest
         resultNomeSobrenomeNulo.IsValid.Should().BeTrue("o nome {0} deve estar válido", nomeSobrenomeNulo);
         resultNomeSobrenomeVazio.IsValid.Should().BeTrue("o nome {0} deve estar válido", nomeSobrenomeVazio);
     }
-    
+
     [Fact(DisplayName = "ToString deve retornar o nome completo")]
     [Trait("Category", "Nome")]
     public void Nome_ToString_DeveRetornarONomeESobrenome()

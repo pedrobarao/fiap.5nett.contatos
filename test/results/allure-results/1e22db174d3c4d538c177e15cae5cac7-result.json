@@ -1,0 +1,52 @@
+{
+  "uuid": "5f33f2f3-29b0-46e6-88e5-fd4a7a14c11a",
+  "historyId": "9b376eee7fc13bf52cc09fe07bf6021f",
+  "testCaseId": "50336dcf5b320daf501ab5beda6ae2c0",
+  "fullName": "Contatos.Domain.Test:Contatos.Domain.Test.Entities.ContatoTest.Contato_ComTelefoneInvalido_DeveEstarInvalido()",
+  "labels": [
+    {
+      "name": "thread",
+      "value": ".NET Long Running Task"
+    },
+    {
+      "name": "host",
+      "value": "BRO-NT"
+    },
+    {
+      "name": "language",
+      "value": "C#"
+    },
+    {
+      "name": "framework",
+      "value": "xUnit.net"
+    },
+    {
+      "name": "testClass",
+      "value": "Contatos.Domain.Test.Entities.ContatoTest"
+    },
+    {
+      "name": "testMethod",
+      "value": "Contato com telefone inválido deve estar inválido"
+    },
+    {
+      "name": "package",
+      "value": "Contatos.Domain.Test.Entities.ContatoTest"
+    }
+  ],
+  "links": [],
+  "name": "Contato com telefone inválido deve estar inválido",
+  "status": "failed",
+  "statusDetails": {
+    "known": false,
+    "muted": false,
+    "flaky": false,
+    "message": "Expected result.IsValid to be false because o contato deve estar inválido, but found True.",
+    "trace": "   at FluentAssertions.Execution.XUnit2TestFramework.Throw(String message)\r\n   at FluentAssertions.Execution.TestFrameworkProvider.Throw(String message)\r\n   at FluentAssertions.Execution.DefaultAssertionStrategy.HandleFailure(String message)\r\n   at FluentAssertions.Execution.AssertionScope.FailWith(Func`1 failReasonFunc)\r\n   at FluentAssertions.Execution.AssertionScope.FailWith(Func`1 failReasonFunc)\r\n   at FluentAssertions.Execution.AssertionScope.FailWith(String message, Object[] args)\r\n   at FluentAssertions.Primitives.BooleanAssertions`1.BeFalse(String because, Object[] becauseArgs)\r\n   at Contatos.Domain.Test.Entities.ContatoTest.Contato_ComTelefoneInvalido_DeveEstarInvalido() in C:\\dev\\fiap-net\\fiap.5nett.contatos\\test\\Contatos.Domain.Test\\Entities\\ContatoTest.cs:line 51\r\n   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)\r\n   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+  },
+  "stage": "finished",
+  "steps": [],
+  "attachments": [],
+  "parameters": [],
+  "start": 1727289813587,
+  "stop": 1727289813713
+}

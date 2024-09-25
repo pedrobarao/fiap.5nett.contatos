@@ -1,0 +1,52 @@
+{
+  "uuid": "241ef946-e03d-42e8-89d1-6ba1c014dfdd",
+  "historyId": "c9ffc5ee8afbe63dd33a08cad59c3df8",
+  "testCaseId": "9eeff61358c728b3e481a20ae80b2ff7",
+  "fullName": "Contatos.Domain.Test:Contatos.Domain.Test.ValueObjects.EmailTest.Email_ToString_DeveRetornarEnderecoEmail()",
+  "labels": [
+    {
+      "name": "thread",
+      "value": ".NET TP Worker"
+    },
+    {
+      "name": "host",
+      "value": "BRO-NT"
+    },
+    {
+      "name": "language",
+      "value": "C#"
+    },
+    {
+      "name": "framework",
+      "value": "xUnit.net"
+    },
+    {
+      "name": "testClass",
+      "value": "Contatos.Domain.Test.ValueObjects.EmailTest"
+    },
+    {
+      "name": "testMethod",
+      "value": "ToString deve retornar o endereço de email"
+    },
+    {
+      "name": "package",
+      "value": "Contatos.Domain.Test.ValueObjects.EmailTest"
+    }
+  ],
+  "links": [],
+  "name": "ToString deve retornar o endereço de email",
+  "status": "broken",
+  "statusDetails": {
+    "known": false,
+    "muted": false,
+    "flaky": false,
+    "message": "No parameterless constructor defined for type 'Contatos.Domain.ValueObjects.Email'.",
+    "trace": "   at System.RuntimeType.CreateInstanceOfT()\r\n   at System.Activator.CreateInstance[T]()\r\n   at Bogus.Faker`1.<>c.<.ctor>b__29_0(Faker faker)\r\n   at Bogus.Faker`1.Generate(String ruleSets)\r\n   at Test.Commons.Builders.ValueObjects.EmailBuilder.Build() in C:\\dev\\fiap-net\\fiap.5nett.contatos\\test\\Test.Commons\\Builders\\ValueObjects\\EmailBuilder.cs:line 26\r\n   at Contatos.Domain.Test.ValueObjects.EmailTest.Email_ToString_DeveRetornarEnderecoEmail() in C:\\dev\\fiap-net\\fiap.5nett.contatos\\test\\Contatos.Domain.Test\\ValueObjects\\EmailTest.cs:line 57\r\n   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)\r\n   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+  },
+  "stage": "finished",
+  "steps": [],
+  "attachments": [],
+  "parameters": [],
+  "start": 1727281685776,
+  "stop": 1727281685778
+}

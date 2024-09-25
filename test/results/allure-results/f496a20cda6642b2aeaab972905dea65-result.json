@@ -1,0 +1,51 @@
+{
+  "uuid": "d2b1844e-0878-4127-a6fe-61f19db8f23b",
+  "historyId": "010ad2561f6e1c1e7cefdf6f3c9542d0",
+  "testCaseId": "3e8b2d5cca486df01dfafe18257ade17",
+  "fullName": "Contatos.Application.Test:Contatos.Application.Test.UseCases.ListarContatoUseCaseTest.ListarContatoUseCase_DeveListarContatosComSucesso()",
+  "labels": [
+    {
+      "name": "thread",
+      "value": ".NET TP Worker"
+    },
+    {
+      "name": "host",
+      "value": "BRO-NT"
+    },
+    {
+      "name": "language",
+      "value": "C#"
+    },
+    {
+      "name": "framework",
+      "value": "xUnit.net"
+    },
+    {
+      "name": "testClass",
+      "value": "Contatos.Application.Test.UseCases.ListarContatoUseCaseTest"
+    },
+    {
+      "name": "testMethod",
+      "value": "Excluir contato inválido deve retornar erro"
+    },
+    {
+      "name": "package",
+      "value": "Contatos.Application.Test.UseCases.ListarContatoUseCaseTest"
+    }
+  ],
+  "links": [],
+  "name": "Excluir contato inválido deve retornar erro",
+  "status": "passed",
+  "statusDetails": {
+    "known": false,
+    "muted": false,
+    "flaky": false,
+    "message": ""
+  },
+  "stage": "finished",
+  "steps": [],
+  "attachments": [],
+  "parameters": [],
+  "start": 1727281887610,
+  "stop": 1727281887728
+}

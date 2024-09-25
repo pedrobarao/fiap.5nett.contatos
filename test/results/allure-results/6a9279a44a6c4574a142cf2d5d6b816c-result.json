@@ -1,0 +1,66 @@
+{
+  "uuid": "2813ad8d-4fff-49d7-98cf-41facaa3bbd0",
+  "historyId": "3664337172c6c7abc44409373777882b",
+  "testCaseId": "f5003f8c5c6b77b43131fa2cb36d800a",
+  "fullName": "Contatos.Domain.Test:Contatos.Domain.Test.ValueObjects.TelefoneTest.Telefone_DddValido_DeveEstarValido(System.Int16)",
+  "labels": [
+    {
+      "name": "thread",
+      "value": ".NET Long Running Task"
+    },
+    {
+      "name": "host",
+      "value": "BRO-NT"
+    },
+    {
+      "name": "language",
+      "value": "C#"
+    },
+    {
+      "name": "framework",
+      "value": "xUnit.net"
+    },
+    {
+      "name": "testClass",
+      "value": "Contatos.Domain.Test.ValueObjects.TelefoneTest"
+    },
+    {
+      "name": "testMethod",
+      "value": "Telefone com DDD válido deve estar válido(ddd: 21)"
+    },
+    {
+      "name": "package",
+      "value": "Contatos.Domain.Test.ValueObjects.TelefoneTest"
+    },
+    {
+      "name": "feature",
+      "value": "Labels API"
+    },
+    {
+      "name": "layer",
+      "value": "rest"
+    }
+  ],
+  "links": [],
+  "name": "Telefone com DDD válido deve estar válido",
+  "status": "failed",
+  "statusDetails": {
+    "known": false,
+    "muted": false,
+    "flaky": false,
+    "message": "Expected result.IsValid to be true because o telefone 2106270873 deve estar válido., but found False.",
+    "trace": "   at FluentAssertions.Execution.XUnit2TestFramework.Throw(String message)\r\n   at FluentAssertions.Execution.TestFrameworkProvider.Throw(String message)\r\n   at FluentAssertions.Execution.DefaultAssertionStrategy.HandleFailure(String message)\r\n   at FluentAssertions.Execution.AssertionScope.FailWith(Func`1 failReasonFunc)\r\n   at FluentAssertions.Execution.AssertionScope.FailWith(Func`1 failReasonFunc)\r\n   at FluentAssertions.Execution.AssertionScope.FailWith(String message, Object[] args)\r\n   at FluentAssertions.Primitives.BooleanAssertions`1.BeTrue(String because, Object[] becauseArgs)\r\n   at Contatos.Domain.Test.ValueObjects.TelefoneTest.Telefone_DddValido_DeveEstarValido(Int16 ddd) in C:\\dev\\fiap-net\\fiap.5nett.contatos\\test\\Contatos.Domain.Test\\ValueObjects\\TelefoneTest.cs:line 61\r\n   at InvokeStub_TelefoneTest.Telefone_DddValido_DeveEstarValido(Object, Span`1)\r\n   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)"
+  },
+  "stage": "finished",
+  "steps": [],
+  "attachments": [],
+  "parameters": [
+    {
+      "name": "ddd",
+      "value": "21",
+      "excluded": false
+    }
+  ],
+  "start": 1727289090524,
+  "stop": 1727289090635
+}

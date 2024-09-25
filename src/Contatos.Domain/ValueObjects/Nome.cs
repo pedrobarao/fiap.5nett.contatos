@@ -1,9 +1,11 @@
-﻿using Commons.Domain.Communication;
+﻿using System.Diagnostics.CodeAnalysis;
+using Commons.Domain.Communication;
 
 namespace Contatos.Domain.ValueObjects;
 
-public class Nome
+public record Nome
 {
+    [ExcludeFromCodeCoverage]
     protected Nome()
     {
     }

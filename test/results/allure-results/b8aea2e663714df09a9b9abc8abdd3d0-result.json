@@ -1,0 +1,51 @@
+{
+  "uuid": "77d8f983-8046-4cc0-a3cd-03689e56886f",
+  "historyId": "d148403aee6b24c799972c7c06719364",
+  "testCaseId": "17804e1217e1ac631cc449d6aad77d2e",
+  "fullName": "Contatos.Domain.Test:Contatos.Domain.Test.Entities.ContatoTest.Contato_ComNomeInvalido_DeveEstarInvalido()",
+  "labels": [
+    {
+      "name": "thread",
+      "value": ".NET TP Worker"
+    },
+    {
+      "name": "host",
+      "value": "BRO-NT"
+    },
+    {
+      "name": "language",
+      "value": "C#"
+    },
+    {
+      "name": "framework",
+      "value": "xUnit.net"
+    },
+    {
+      "name": "testClass",
+      "value": "Contatos.Domain.Test.Entities.ContatoTest"
+    },
+    {
+      "name": "testMethod",
+      "value": "Contato com nome inválido deve estar inválido"
+    },
+    {
+      "name": "package",
+      "value": "Contatos.Domain.Test.Entities.ContatoTest"
+    }
+  ],
+  "links": [],
+  "name": "Contato com nome inválido deve estar inválido",
+  "status": "passed",
+  "statusDetails": {
+    "known": false,
+    "muted": false,
+    "flaky": false,
+    "message": ""
+  },
+  "stage": "finished",
+  "steps": [],
+  "attachments": [],
+  "parameters": [],
+  "start": 1727292383373,
+  "stop": 1727292383381
+}

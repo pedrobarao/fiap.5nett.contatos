@@ -1,0 +1,51 @@
+{
+  "uuid": "ce14cb8d-4f56-4a04-8acc-8cc71d3e3769",
+  "historyId": "33479371d97f7436df44fe1930a24d37",
+  "testCaseId": "7e76ee3ca1d54693bb3f45038397d3df",
+  "fullName": "Contatos.Domain.Test:Contatos.Domain.Test.ValueObjects.NomeTest.Nome_ToString_DeveRetornarONomeESobrenome()",
+  "labels": [
+    {
+      "name": "thread",
+      "value": ".NET TP Worker"
+    },
+    {
+      "name": "host",
+      "value": "BRO-NT"
+    },
+    {
+      "name": "language",
+      "value": "C#"
+    },
+    {
+      "name": "framework",
+      "value": "xUnit.net"
+    },
+    {
+      "name": "testClass",
+      "value": "Contatos.Domain.Test.ValueObjects.NomeTest"
+    },
+    {
+      "name": "testMethod",
+      "value": "ToString deve retornar o nome completo"
+    },
+    {
+      "name": "package",
+      "value": "Contatos.Domain.Test.ValueObjects.NomeTest"
+    }
+  ],
+  "links": [],
+  "name": "ToString deve retornar o nome completo",
+  "status": "passed",
+  "statusDetails": {
+    "known": false,
+    "muted": false,
+    "flaky": false,
+    "message": ""
+  },
+  "stage": "finished",
+  "steps": [],
+  "attachments": [],
+  "parameters": [],
+  "start": 1727282142908,
+  "stop": 1727282142912
+}

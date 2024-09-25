@@ -52,3 +52,4 @@
 //         await Assert.ThrowsAsync<DomainException>(() => useCase.ExecuteAsync(It.IsAny<Guid>()));
 //     }
 // }
+
