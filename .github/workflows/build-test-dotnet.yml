@@ -31,7 +31,7 @@ jobs:
     - name: ReportGenerator
       uses: danielpalme/ReportGenerator-GitHub-Action@5.3.9
       with:
-        reports: test/results/coverlet/coverage.cobertura.xml
+        reports: test/results/coverlet/**/coverage.cobertura.xml
         targetdir: test/results/coverage-report
         reporttypes: Html;MarkdownSummaryGithub
 
