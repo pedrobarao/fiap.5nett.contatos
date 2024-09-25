@@ -399,5 +399,4 @@ FodyWeavers.xsd
 
 .idea
 
-./test/allure-results
-./test/coverage
+./test/results
