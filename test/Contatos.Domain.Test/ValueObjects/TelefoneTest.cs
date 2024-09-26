@@ -2,7 +2,7 @@
 using Allure.Xunit.Attributes;
 using Contatos.Domain.ValueObjects;
 using FluentAssertions;
-using Test.Commons.Builders.ValueObjects;
+using Test.Commons.Builders.Domain.ValueObjects;
 
 namespace Contatos.Domain.Test.ValueObjects;
 

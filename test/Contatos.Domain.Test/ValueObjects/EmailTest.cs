@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using Test.Commons.Builders.ValueObjects;
+using Test.Commons.Builders.Domain.ValueObjects;
 
 namespace Contatos.Domain.Test.ValueObjects;
 

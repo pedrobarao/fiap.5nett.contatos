@@ -12,7 +12,10 @@ app.UseAppConfig();
 app.Run();
 
 
-[ExcludeFromCodeCoverage]
-public static partial class Program
+namespace Contatos.Api
 {
+    [ExcludeFromCodeCoverage]
+    public static class Program
+    {
+    }
 }

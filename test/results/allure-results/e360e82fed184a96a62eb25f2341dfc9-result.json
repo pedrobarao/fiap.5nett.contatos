@@ -1,0 +1,51 @@
+{
+  "uuid": "1e469872-f969-4f2b-827f-c20aca44350b",
+  "historyId": "024264f9e89d71e4d9fc5f5c1ae5dd3e",
+  "testCaseId": "82dcddb90948ae59fcb4a4b3109996e5",
+  "fullName": "Contatos.Application.Test:Contatos.Application.Test.UseCases.AtualizaContatoUseCaseTest.ExecuteAsync_ContatoValido_DeveAtualizarContatoComSucesso()",
+  "labels": [
+    {
+      "name": "thread",
+      "value": ".NET TP Worker"
+    },
+    {
+      "name": "host",
+      "value": "BRO-NT"
+    },
+    {
+      "name": "language",
+      "value": "C#"
+    },
+    {
+      "name": "framework",
+      "value": "xUnit.net"
+    },
+    {
+      "name": "testClass",
+      "value": "Contatos.Application.Test.UseCases.AtualizaContatoUseCaseTest"
+    },
+    {
+      "name": "testMethod",
+      "value": "Atualizar contato com valores válidos deve atualizar com sucesso"
+    },
+    {
+      "name": "package",
+      "value": "Contatos.Application.Test.UseCases.AtualizaContatoUseCaseTest"
+    }
+  ],
+  "links": [],
+  "name": "Atualizar contato com valores válidos deve atualizar com sucesso",
+  "status": "passed",
+  "statusDetails": {
+    "known": false,
+    "muted": false,
+    "flaky": false,
+    "message": ""
+  },
+  "stage": "finished",
+  "steps": [],
+  "attachments": [],
+  "parameters": [],
+  "start": 1727379279657,
+  "stop": 1727379294469
+}

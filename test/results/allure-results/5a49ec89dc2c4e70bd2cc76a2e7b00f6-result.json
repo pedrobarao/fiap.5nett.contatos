@@ -1,0 +1,51 @@
+{
+  "uuid": "54c5a0a1-16b3-4967-a0cf-d875b8943c35",
+  "historyId": "9962e059ba1be7fcbe785dfbb9f12768",
+  "testCaseId": "d28bc9cfa93d07b5f11e9cb556f55ca9",
+  "fullName": "Contatos.Domain.Test:Contatos.Domain.Test.Entities.ContatoTest.Contato_AtualizarEmail_EmailDeveSerAtualizado()",
+  "labels": [
+    {
+      "name": "thread",
+      "value": ".NET Long Running Task"
+    },
+    {
+      "name": "host",
+      "value": "BRO-NT"
+    },
+    {
+      "name": "language",
+      "value": "C#"
+    },
+    {
+      "name": "framework",
+      "value": "xUnit.net"
+    },
+    {
+      "name": "testClass",
+      "value": "Contatos.Domain.Test.Entities.ContatoTest"
+    },
+    {
+      "name": "testMethod",
+      "value": "Atualizar e-mail do contato deve atualizar o endereço de e-mail"
+    },
+    {
+      "name": "package",
+      "value": "Contatos.Domain.Test.Entities.ContatoTest"
+    }
+  ],
+  "links": [],
+  "name": "Atualizar e-mail do contato deve atualizar o endereço de e-mail",
+  "status": "passed",
+  "statusDetails": {
+    "known": false,
+    "muted": false,
+    "flaky": false,
+    "message": ""
+  },
+  "stage": "finished",
+  "steps": [],
+  "attachments": [],
+  "parameters": [],
+  "start": 1727376739695,
+  "stop": 1727376739809
+}

@@ -1,0 +1,57 @@
+{
+  "uuid": "0cd5e07d-0398-4015-9b96-0ed61eca5517",
+  "historyId": "f5779ca33707f8e5adb9732bdfe94d1a",
+  "testCaseId": "00742edef01b235df4874980e7f9ae88",
+  "fullName": "Contatos.Domain.Test:Contatos.Domain.Test.ValueObjects.NomeTest.Nome_PrimeiroNomeInvalido_DeveEstarInvalido(System.String)",
+  "labels": [
+    {
+      "name": "thread",
+      "value": ".NET Long Running Task"
+    },
+    {
+      "name": "host",
+      "value": "BRO-NT"
+    },
+    {
+      "name": "language",
+      "value": "C#"
+    },
+    {
+      "name": "framework",
+      "value": "xUnit.net"
+    },
+    {
+      "name": "testClass",
+      "value": "Contatos.Domain.Test.ValueObjects.NomeTest"
+    },
+    {
+      "name": "testMethod",
+      "value": "Primeiro nome inválido deve falhar(primeiroNome: null)"
+    },
+    {
+      "name": "package",
+      "value": "Contatos.Domain.Test.ValueObjects.NomeTest"
+    }
+  ],
+  "links": [],
+  "name": "Primeiro nome inválido deve falhar",
+  "status": "passed",
+  "statusDetails": {
+    "known": false,
+    "muted": false,
+    "flaky": false,
+    "message": ""
+  },
+  "stage": "finished",
+  "steps": [],
+  "attachments": [],
+  "parameters": [
+    {
+      "name": "primeiroNome",
+      "value": "null",
+      "excluded": false
+    }
+  ],
+  "start": 1727384230813,
+  "stop": 1727384230911
+}

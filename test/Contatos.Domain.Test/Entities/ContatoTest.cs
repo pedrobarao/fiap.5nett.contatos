@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
-using Test.Commons.Builders.Entities;
-using Test.Commons.Builders.ValueObjects;
+using Test.Commons.Builders.Domain.Entities;
+using Test.Commons.Builders.Domain.ValueObjects;
 
 namespace Contatos.Domain.Test.Entities;
 
@@ -82,7 +82,7 @@ public class ContatoTest
         // Assert
         contato.Nome.Should().Be(expected, "o nome do contato deve ser igual a {0}", expected);
     }
-    
+
     [Fact(DisplayName = "Atualizar telefones do contato deve atualizar a lista de telefones")]
     [Trait("Category", "Contato")]
     public void Contato_AtualizarTelefones_TelefonesDevemSerAtualizados()
@@ -95,9 +95,10 @@ public class ContatoTest
         contato.AtualizarTelefones(expected);
 
         // Assert
-        contato.Telefones.Should().AllSatisfy(e => expected.Contains(e), "todos os telefones devem estar na lista de telefones");
+        contato.Telefones.Should()
+            .AllSatisfy(e => expected.Contains(e), "todos os telefones devem estar na lista de telefones");
     }
-    
+
     [Fact(DisplayName = "Atualizar e-mail do contato deve atualizar o endereço de e-mail")]
     [Trait("Category", "Contato")]
     public void Contato_AtualizarEmail_EmailDeveSerAtualizado()

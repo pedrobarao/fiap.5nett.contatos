@@ -1,0 +1,12 @@
+{
+  "uuid": "a05b1e92-5e68-4a34-9b4b-c1c87303faf3",
+  "name": "Contatos.Application.Test.UseCases.AtualizaContatoUseCaseTest",
+  "children": [
+    "126844db-c65d-42e5-b463-a937200dd68d"
+  ],
+  "befores": [],
+  "afters": [],
+  "links": [],
+  "start": 1727377308591,
+  "stop": 1727377308808
+}

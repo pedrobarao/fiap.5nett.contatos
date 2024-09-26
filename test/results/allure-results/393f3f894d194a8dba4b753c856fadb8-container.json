@@ -1,0 +1,12 @@
+{
+  "uuid": "a697b45f-3548-4a92-a21a-c844d12d058f",
+  "name": "Contatos.Domain.Test.ValueObjects.EmailTest",
+  "children": [
+    "33b54bb6-6c46-4cda-a19d-96a159752d04"
+  ],
+  "befores": [],
+  "afters": [],
+  "links": [],
+  "start": 1727376739822,
+  "stop": 1727376739833
+}

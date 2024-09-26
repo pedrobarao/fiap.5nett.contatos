@@ -1,0 +1,51 @@
+{
+  "uuid": "8852e1c4-94b6-46f0-8452-cae7dfb10dd2",
+  "historyId": "a2537ab29ab0d0d6b8868dc019f1ab3b",
+  "testCaseId": "09d2ae2bd8331e1565885c309650d390",
+  "fullName": "Contatos.Domain.Test:Contatos.Domain.Test.Entities.ContatoTest.Contato_AtualizarNome_NomeDeveSerAtualizado()",
+  "labels": [
+    {
+      "name": "thread",
+      "value": ".NET Long Running Task"
+    },
+    {
+      "name": "host",
+      "value": "BRO-NT"
+    },
+    {
+      "name": "language",
+      "value": "C#"
+    },
+    {
+      "name": "framework",
+      "value": "xUnit.net"
+    },
+    {
+      "name": "testClass",
+      "value": "Contatos.Domain.Test.Entities.ContatoTest"
+    },
+    {
+      "name": "testMethod",
+      "value": "Atualizar nome do contato deve atualizar o nome"
+    },
+    {
+      "name": "package",
+      "value": "Contatos.Domain.Test.Entities.ContatoTest"
+    }
+  ],
+  "links": [],
+  "name": "Atualizar nome do contato deve atualizar o nome",
+  "status": "passed",
+  "statusDetails": {
+    "known": false,
+    "muted": false,
+    "flaky": false,
+    "message": ""
+  },
+  "stage": "finished",
+  "steps": [],
+  "attachments": [],
+  "parameters": [],
+  "start": 1727377486632,
+  "stop": 1727377486672
+}

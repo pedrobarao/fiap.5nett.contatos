@@ -1,0 +1,57 @@
+{
+  "uuid": "056cb54b-6ef7-4d2b-bb47-cb10aef27f7d",
+  "historyId": "f18dbc38e006b9ce675991c4b0ebc943",
+  "testCaseId": "ef6d9ce2e5469e02d4edb587216ceb85",
+  "fullName": "Contatos.Domain.Test:Contatos.Domain.Test.ValueObjects.EmailTest.Email_Valido_DeveEstarValido(System.String)",
+  "labels": [
+    {
+      "name": "thread",
+      "value": ".NET Long Running Task"
+    },
+    {
+      "name": "host",
+      "value": "BRO-NT"
+    },
+    {
+      "name": "language",
+      "value": "C#"
+    },
+    {
+      "name": "framework",
+      "value": "xUnit.net"
+    },
+    {
+      "name": "testClass",
+      "value": "Contatos.Domain.Test.ValueObjects.EmailTest"
+    },
+    {
+      "name": "testMethod",
+      "value": "E-mail válido, deve estar válido(endereco: \"firstname.lastname@domain.com\")"
+    },
+    {
+      "name": "package",
+      "value": "Contatos.Domain.Test.ValueObjects.EmailTest"
+    }
+  ],
+  "links": [],
+  "name": "E-mail válido, deve estar válido",
+  "status": "passed",
+  "statusDetails": {
+    "known": false,
+    "muted": false,
+    "flaky": false,
+    "message": ""
+  },
+  "stage": "finished",
+  "steps": [],
+  "attachments": [],
+  "parameters": [
+    {
+      "name": "endereco",
+      "value": "\"firstname.lastname@domain.com\"",
+      "excluded": false
+    }
+  ],
+  "start": 1727377486694,
+  "stop": 1727377486699
+}
