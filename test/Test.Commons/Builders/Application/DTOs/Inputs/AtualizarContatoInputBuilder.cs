@@ -29,6 +29,32 @@ public class AtualizarContatoInputBuilder
         return this;
     }
 
+    public AtualizarContatoInputBuilder ComNomeInvalido()
+    {
+        _faker.RuleFor(c => c.Nome, "");
+
+        return this;
+    }
+    
+    public AtualizarContatoInputBuilder ComEmailInvalido()
+    {
+        _faker.RuleFor(c => c.Email, "invalido");
+
+        return this;
+    }
+    
+    public AtualizarContatoInputBuilder ComTelefoneInvalido()
+    {
+        var telefones = new TelefoneBuilder()
+            .ComDdd(0)
+            .ComNumero("12345678910")
+            .Build(1);
+        
+        _faker.RuleFor(c => c.Telefones, telefones);
+
+        return this;
+    }
+
     public AtualizarContatoInput Build()
     {
         return _faker.Generate();
