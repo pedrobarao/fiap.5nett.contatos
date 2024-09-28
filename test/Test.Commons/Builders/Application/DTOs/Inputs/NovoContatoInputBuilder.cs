@@ -4,16 +4,15 @@ using Test.Commons.Builders.Domain.ValueObjects;
 
 namespace Test.Commons.Builders.Application.DTOs.Inputs;
 
-public class AtualizarContatoInputBuilder
+public class NovoContatoInputBuilder
 {
-    private readonly Faker<AtualizarContatoInput> _faker = new()
+    private readonly Faker<NovoContatoInput> _faker = new()
     {
         Locale = "pt_BR"
     };
 
-    public AtualizarContatoInputBuilder()
+    public NovoContatoInputBuilder()
     {
-        _faker.RuleFor(c => c.Id, f => f.Random.Guid());
         _faker.RuleFor(c => c.Nome, f => f.Person.FirstName);
         _faker.RuleFor(c => c.Sobrenome, f => f.Person.LastName);
         _faker.RuleFor(c => c.Email, f => f.Person.Email);
@@ -22,32 +21,26 @@ public class AtualizarContatoInputBuilder
         _faker.RuleFor(c => c.Telefones, f => telefones);
     }
 
-    public AtualizarContatoInput Build()
+    public NovoContatoInput Build()
     {
         return _faker.Generate();
     }
 
-    public AtualizarContatoInputBuilder ComIdContato(Guid id)
-    {
-        _faker.RuleFor(c => c.Id, id);
-        return this;
-    }
-
-    public AtualizarContatoInputBuilder ComNomeInvalido()
+    public NovoContatoInputBuilder ComNomeInvalido()
     {
         _faker.RuleFor(c => c.Nome, "");
 
         return this;
     }
 
-    public AtualizarContatoInputBuilder ComEmailInvalido()
+    public NovoContatoInputBuilder ComEmailInvalido()
     {
         _faker.RuleFor(c => c.Email, "invalido");
 
         return this;
     }
 
-    public AtualizarContatoInputBuilder ComTelefoneInvalido()
+    public NovoContatoInputBuilder ComTelefoneInvalido()
     {
         var telefones = new TelefoneBuilder()
             .ComDdd(0)

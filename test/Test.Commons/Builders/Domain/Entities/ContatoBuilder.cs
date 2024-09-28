@@ -22,6 +22,16 @@ public class ContatoBuilder
             ));
     }
 
+    public Contato Build()
+    {
+        return _faker.Generate();
+    }
+
+    public List<Contato> Build(int count)
+    {
+        return _faker.Generate(count);
+    }
+
     public ContatoBuilder ComNomeInvalido()
     {
         var nome = new NomeBuilder()
@@ -58,10 +68,5 @@ public class ContatoBuilder
         ));
 
         return this;
-    }
-
-    public Contato Build()
-    {
-        return _faker.Generate();
     }
 }

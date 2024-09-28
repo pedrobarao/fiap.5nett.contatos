@@ -67,7 +67,7 @@ public class AtualizarContatoUseCaseTest
         _mocker.GetMock<IContatoRepository>().Verify(r => r.Atualizar(It.IsAny<Contato>()), Times.Never);
         _mocker.GetMock<IContatoRepository>().Verify(r => r.UnitOfWork.Commit(), Times.Never);
     }
-    
+
     [Fact(DisplayName = "Atualizar contato com nome inválido deve retornar erro")]
     [Trait("Category", "AtualizarContatoUseCase")]
     public async Task ExecuteAsync_ContatoComNomeInvalido_DeveRetornarErro()
@@ -93,7 +93,7 @@ public class AtualizarContatoUseCaseTest
         _mocker.GetMock<IContatoRepository>().Verify(r => r.Atualizar(It.IsAny<Contato>()), Times.Never);
         _mocker.GetMock<IContatoRepository>().Verify(r => r.UnitOfWork.Commit(), Times.Never);
     }
-    
+
     [Fact(DisplayName = "Atualizar contato com email inválido deve retornar erro")]
     [Trait("Category", "AtualizarContatoUseCase")]
     public async Task ExecuteAsync_ContatoComEmailInvalido_DeveRetornarErro()
@@ -119,7 +119,7 @@ public class AtualizarContatoUseCaseTest
         _mocker.GetMock<IContatoRepository>().Verify(r => r.Atualizar(It.IsAny<Contato>()), Times.Never);
         _mocker.GetMock<IContatoRepository>().Verify(r => r.UnitOfWork.Commit(), Times.Never);
     }
-    
+
     [Fact(DisplayName = "Atualizar contato com telefone inválido deve retornar erro")]
     [Trait("Category", "AtualizarContatoUseCase")]
     public async Task ExecuteAsync_ContatoComTelefoneInvalido_DeveRetornarErro()
