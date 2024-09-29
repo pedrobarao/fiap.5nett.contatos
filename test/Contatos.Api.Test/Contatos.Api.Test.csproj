@@ -10,15 +10,15 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Allure.Xunit" Version="2.12.1"/>
+        <PackageReference Include="Allure.Xunit" Version="2.12.1" />
         <PackageReference Include="coverlet.collector" Version="6.0.2">
-            <PrivateAssets>all</PrivateAssets>
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1"/>
-        <PackageReference Include="Moq" Version="4.20.72"/>
-        <PackageReference Include="Moq.AutoMock" Version="3.5.0"/>
-        <PackageReference Include="ReportGenerator" Version="5.3.9"/>
+        <PackageReference Include="FluentAssertions" Version="6.12.1" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0"/>
+        <PackageReference Include="Moq" Version="4.20.72" />
+        <PackageReference Include="Moq.AutoMock" Version="3.5.0" />
         <PackageReference Include="xunit" Version="2.5.3"/>
         <PackageReference Include="xunit.runner.visualstudio" Version="2.5.3"/>
     </ItemGroup>
@@ -28,21 +28,12 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\src\Commons.Domain\Commons.Domain.csproj"/>
-        <ProjectReference Include="..\..\src\Contatos.Api\Contatos.Api.csproj"/>
-        <ProjectReference Include="..\..\src\Contatos.Application\Contatos.Application.csproj"/>
+      <Compile Remove="UnitTest1.cs" />
     </ItemGroup>
 
     <ItemGroup>
-        <Reference Include="Microsoft.AspNetCore.Mvc.Core">
-            <HintPath>..\..\..\..\..\Program Files\dotnet\shared\Microsoft.AspNetCore.App\8.0.4\Microsoft.AspNetCore.Mvc.Core.dll</HintPath>
-        </Reference>
-    </ItemGroup>
-
-    <ItemGroup>
-        <Content Include="..\allureConfig.json">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
+      <ProjectReference Include="..\..\src\Contatos.Api\Contatos.Api.csproj" />
+      <ProjectReference Include="..\Test.Commons\Test.Commons.csproj" />
     </ItemGroup>
 
 </Project>

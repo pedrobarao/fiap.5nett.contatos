@@ -1,6 +1,7 @@
 ﻿using Bogus;
 using Contatos.Application.DTOs.Outputs;
 using Contatos.Domain.ValueObjects;
+using Test.Commons.Builders.Domain.ValueObjects;
 
 namespace Test.Commons.Builders.Application.DTOs.Outputs;
 
@@ -17,17 +18,27 @@ public class ObterContatoOutputBuilder
         _faker.RuleFor(c => c.Nome, f => f.Person.FirstName);
         _faker.RuleFor(c => c.Sobrenome, f => f.Person.LastName);
         _faker.RuleFor(c => c.Email, f => f.Person.Email);
-        _faker.RuleFor(c => c.Telefones, f => new List<ObterContatoOutput.TelefoneOutput>
+
+        var telefones = new TelefoneBuilder().Build(3);
+        var telefonesOutput = new List<ObterContatoOutput.TelefoneOutput>();
+        foreach (var telefone in telefones)
         {
-            new()
+            telefonesOutput.Add(new ObterContatoOutput.TelefoneOutput
             {
-                Numero = f.Person.Phone,
-                Tipo = f.PickRandom<TipoTelefone>().ToString(),
-                Ddd = f.Random.Short(11, 99)
-            }
-        });
+                Numero = telefone.Numero,
+                Tipo = telefone.Tipo.ToString(),
+                Ddd = telefone.Ddd
+            });
+        }
+        
+        _faker.RuleFor(c => c.Telefones, f => telefonesOutput);
     }
 
+    public ObterContatoOutput Build()
+    {
+        return _faker.Generate();
+    }
+    
     public List<ObterContatoOutput> Build(int count)
     {
         return _faker.Generate(count);

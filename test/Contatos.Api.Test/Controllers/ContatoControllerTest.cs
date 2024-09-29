@@ -1,179 +1,137 @@
-﻿// using Commons.Domain.Communication;
-// using Contatos.Api.Controllers;
-// using Contatos.Application.DTOs.Inputs;
-// using Contatos.Application.DTOs.Outputs;
-// using Contatos.Application.UseCases.Interfaces;
-// using Microsoft.AspNetCore.Http;
-// using Microsoft.AspNetCore.Mvc;
-// using Moq;
-// using Moq.AutoMock;
-//
-// namespace Contatos.Api.Test.Controllers;
-//
-// public class ContatoControllerTests
-// {
-//     private readonly AutoMocker _mocker;
-//
-//     public ContatoControllerTests()
-//     {
-//         _mocker = new AutoMocker();
-//     }
-//
-//     [Fact(DisplayName = "Listar contatos cadastrados deve retornar contatos com sucesso")]
-//     [Trait("Category", "ContatoController")]
-//     public async Task Listar_DeveRetornarContatosComSucesso()
-//     {
-//         // Arrange
-//         var pagedResult = new PagedResult<ObterContatoOutput>(new List<ObterContatoOutput>(), 1, 1, 1, "");
-//         _mocker.GetMock<IListarContatoUseCase>()
-//             .Setup(u => u.ExecuteAsync(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>()))
-//             .ReturnsAsync(pagedResult);
-//         var controller = _mocker.CreateInstance<ContatoController>();
-//
-//         // Act
-//         var result = await controller.Listar();
-//
-//         // Assert
-//         var okResult = Assert.IsType<OkObjectResult>(result);
-//         Assert.Equal(StatusCodes.Status200OK, okResult.StatusCode);
-//         Assert.Equal(pagedResult, okResult.Value);
-//     }
-//
-//     [Fact(DisplayName = "Obter contato cadastrado deve retornar contato com sucesso")]
-//     [Trait("Category", "ContatoController")]
-//     public async Task Obter_ContatoEncontrado_DeveRetornarContatoComSucesso()
-//     {
-//         // Arrange
-//         var contatoOutput = new ObterContatoOutput();
-//         _mocker.GetMock<IObterContatoUseCase>().Setup(u => u.ExecuteAsync(It.IsAny<Guid>()))
-//             .ReturnsAsync(contatoOutput);
-//         var controller = _mocker.CreateInstance<ContatoController>();
-//         // Act
-//         var result = await controller.Obter(Guid.NewGuid());
-//
-//         // Assert
-//         var okResult = Assert.IsType<OkObjectResult>(result);
-//         Assert.Equal(StatusCodes.Status200OK, okResult.StatusCode);
-//         Assert.Equal(contatoOutput, okResult.Value);
-//     }
-//
-//     [Fact(DisplayName = "Atualizar contato com valores válidos deve atualizar contato com sucesso")]
-//     [Trait("Category", "ContatoController")]
-//     public async Task Obter_ContatoNaoExiste_DeveRetornarNotFound()
-//     {
-//         // Arrange
-//         _mocker.GetMock<IObterContatoUseCase>().Setup(u => u.ExecuteAsync(It.IsAny<Guid>())).ReturnsAsync(() => null);
-//         var controller = _mocker.CreateInstance<ContatoController>();
-//         // Act
-//         var result = await controller.Obter(Guid.NewGuid());
-//
-//         // Assert
-//         Assert.IsType<NotFoundResult>(result);
-//     }
-//
-//     [Fact(DisplayName = "Criar contato com valores válidos deve criar contato com sucesso")]
-//     [Trait("Category", "ContatoController")]
-//     public async Task Criar_ContatoValido_DeveCriarContatoComSucesso()
-//     {
-//         // Arrange
-//         var contatoCriadoOutput = new ContatoCriadoOutput { Id = Guid.NewGuid() };
-//         var resultMock = new Result<ContatoCriadoOutput>();
-//         resultMock.SetData(contatoCriadoOutput);
-//         _mocker.GetMock<ICadastrarContatoUseCase>().Setup(u => u.ExecuteAsync(It.IsAny<NovoContatoInput>()))
-//             .ReturnsAsync(resultMock);
-//         var controller = _mocker.CreateInstance<ContatoController>();
-//
-//         // Act
-//         var result = await controller.Criar(new NovoContatoInput());
-//
-//         // Assert
-//         var createdResult = Assert.IsType<CreatedResult>(result);
-//         Assert.Equal(StatusCodes.Status201Created, createdResult.StatusCode);
-//         Assert.Equal(contatoCriadoOutput, createdResult.Value);
-//     }
-//
-//     [Fact(DisplayName = "Criar contato com valores inválidos deve retornar erro")]
-//     [Trait("Category", "ContatoController")]
-//     public async Task Criar_ContatoInvalido_DeveRetornarErro()
-//     {
-//         // Arrange
-//         var resultMock = new Result<ContatoCriadoOutput>();
-//         resultMock.AddError("Erro");
-//         _mocker.GetMock<ICadastrarContatoUseCase>().Setup(u => u.ExecuteAsync(It.IsAny<NovoContatoInput>()))
-//             .ReturnsAsync(resultMock);
-//         var controller = _mocker.CreateInstance<ContatoController>();
-//         // Act
-//         var result = await controller.Criar(new NovoContatoInput());
-//
-//         // Assert
-//         var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
-//         Assert.Equal(StatusCodes.Status400BadRequest, badRequestResult.StatusCode);
-//     }
-//
-//     [Fact(DisplayName = "Atualizar contato com valores válidos deve atualizar contato com sucesso")]
-//     [Trait("Category", "ContatoController")]
-//     public async Task Atualizar_ContatoValido_DeveAtualizarContatoComSucesso()
-//     {
-//         // Arrange
-//         var resultMock = new Result();
-//         _mocker.GetMock<IAtualizarContatoUseCase>().Setup(u => u.ExecuteAsync(It.IsAny<AtualizarContatoInput>()))
-//             .ReturnsAsync(resultMock);
-//         var id = Guid.NewGuid();
-//         var controller = _mocker.CreateInstance<ContatoController>();
-//         // Act
-//         var result = await controller.Atualizar(id, new AtualizarContatoInput { Id = id });
-//
-//         // Assert
-//         var okResult = Assert.IsType<OkObjectResult>(result);
-//         Assert.Equal(StatusCodes.Status200OK, okResult.StatusCode);
-//     }
-//
-//     [Fact(DisplayName = "Atualizar contato com id de rota diferente do id de input deve retornar erro")]
-//     [Trait("Category", "ContatoController")]
-//     public async Task Atualizar_IdRotaDiferenteIdInput_DeveRetornarErro()
-//     {
-//         // Arrange
-//         var controller = _mocker.CreateInstance<ContatoController>();
-//
-//         // Act
-//         var result = await controller.Atualizar(Guid.NewGuid(), new AtualizarContatoInput { Id = Guid.NewGuid() });
-//
-//         // Assert
-//         var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
-//         Assert.Equal(StatusCodes.Status400BadRequest, badRequestResult.StatusCode);
-//     }
-//
-//     [Fact(DisplayName = "Atualizar contato com valores inválidos deve retornar erro")]
-//     [Trait("Category", "ContatoController")]
-//     public async Task Atualizar_ContatoInvalido_DeveRetornarErro()
-//     {
-//         // Arrange
-//         var resultMock = new Result();
-//         resultMock.AddError("Erro");
-//         _mocker.GetMock<IAtualizarContatoUseCase>().Setup(u => u.ExecuteAsync(It.IsAny<AtualizarContatoInput>()))
-//             .ReturnsAsync(resultMock);
-//         var controller = _mocker.CreateInstance<ContatoController>();
-//         // Act
-//         var result = await controller.Atualizar(Guid.NewGuid(), new AtualizarContatoInput { Id = Guid.NewGuid() });
-//
-//         // Assert
-//         var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
-//         Assert.Equal(StatusCodes.Status400BadRequest, badRequestResult.StatusCode);
-//     }
-//
-//     [Fact(DisplayName = "Excluir contato deve excluir com sucesso")]
-//     [Trait("Category", "ContatoController")]
-//     public async Task Excluir_ContatoValido_DeveExcluirContatoComSucesso()
-//     {
-//         // Arrange
-//         var controller = _mocker.CreateInstance<ContatoController>();
-//
-//         // Act
-//         var result = await controller.Excluir(It.IsAny<Guid>());
-//
-//         // Assert
-//         var noContentResult = Assert.IsType<NoContentResult>(result);
-//         Assert.Equal(StatusCodes.Status204NoContent, noContentResult.StatusCode);
-//     }
-// }
+﻿using Commons.Domain.Communication;
+using Contatos.Api.Controllers;
+using Contatos.Application.DTOs.Outputs;
+using Contatos.Application.UseCases.Interfaces;
+using FluentAssertions;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Moq;
+using Moq.AutoMock;
+using Test.Commons.Builders.Application.DTOs.Outputs;
 
+namespace Contatos.Api.Test.Controllers;
+
+public class ContatoControllerTest
+{
+    private readonly AutoMocker _mocker;
+    private readonly ContatoController _controller;
+
+    public ContatoControllerTest()
+    {
+        _mocker = new AutoMocker();
+        _controller = _mocker.CreateInstance<ContatoController>();
+    }
+
+    [Fact(DisplayName = "Listar contatos cadastrados deve retornar Http 200 com a lista de contatos")]
+    [Trait("Category", "ContatoController")]
+    public async Task Listar_ContatosCadastrados_DeveRetornarListaContatosEHttp200()
+    {
+        // Arrange
+        var output = new ObterContatoOutputBuilder().Build(3);
+        var pagedResult = new PagedResult<ObterContatoOutput>(output,
+            It.IsAny<int>(),
+            It.IsAny<int>(),
+            It.IsAny<int>(),
+            It.IsAny<string>());
+
+        _mocker.GetMock<IListarContatoUseCase>()
+            .Setup(u => u.ExecuteAsync(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>()))
+            .ReturnsAsync(pagedResult);
+
+        // Act
+        var result = await _controller.Listar();
+
+        // Assert
+        result.Should()
+            .BeOfType<OkObjectResult>()
+            .Which
+            .StatusCode
+            .Should()
+            .Be(StatusCodes.Status200OK, "deve retornar Http 200");
+
+        result.As<OkObjectResult>()
+            .Value
+            .Should()
+            .Be(pagedResult, "deve retornar a lista de contatos");
+    }
+
+    [Fact(DisplayName = "Listar contatos não encontrados deve retornar Http 200 com a lista lista vazia")]
+    [Trait("Category", "ContatoController")]
+    public async Task Listar_ContatosNaoEncontrados_DeveRetornarListaVaziaHttp200()
+    {
+        // Arrange
+        var pagedResult = new PagedResult<ObterContatoOutput>([],
+            0,
+            0,
+            0,
+            It.IsAny<string>());
+
+        _mocker.GetMock<IListarContatoUseCase>()
+            .Setup(u => u.ExecuteAsync(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>()))
+            .ReturnsAsync(pagedResult);
+
+        // Act
+        var result = await _controller.Listar();
+
+        // Assert
+        result.Should()
+            .BeOfType<OkObjectResult>()
+            .Which
+            .StatusCode
+            .Should()
+            .Be(StatusCodes.Status200OK, "deve retornar Http 200");
+
+        result.As<OkObjectResult>()
+            .Value
+            .Should()
+            .Be(pagedResult, "deve retornar a lista vazia");
+    }
+    
+    [Fact(DisplayName = "Obter contato por id deve retornar o contato e Http 200")]
+    [Trait("Category", "ContatoController")]
+    public async Task Obter_ContatoExisteNaBaseDeDados_DeveRetornarContatoEHttp200()
+    {
+        // Arrange
+        var output = new ObterContatoOutputBuilder().Build();
+        _mocker.GetMock<IObterContatoUseCase>()
+            .Setup(u => u.ExecuteAsync(It.IsAny<Guid>()))
+            .ReturnsAsync(output);
+
+        // Act
+        var result = await _controller.Obter(It.IsAny<Guid>());
+
+        // Assert
+        result.Should()
+            .BeOfType<OkObjectResult>()
+            .Which
+            .StatusCode
+            .Should()
+            .Be(StatusCodes.Status200OK, "deve retornar Http 200");
+
+        result.As<OkObjectResult>()
+            .Value
+            .Should()
+            .Be(output, "deve retornar a o contato");
+    }
+    
+    [Fact(DisplayName = "Obter contato por id não encontrado deve retornar Http 404")]
+    [Trait("Category", "ContatoController")]
+    public async Task Obter_ContatoNaoExisteNaBaseDeDados_DeveRetornarHttp404()
+    {
+        // Arrange
+        _mocker.GetMock<IObterContatoUseCase>()
+            .Setup(u => u.ExecuteAsync(It.IsAny<Guid>()))
+            .ReturnsAsync(() => null);
+
+        // Act
+        var result = await _controller.Obter(It.IsAny<Guid>());
+
+        // Assert
+        result.Should()
+            .BeOfType<NotFoundResult>()
+            .Which
+            .StatusCode
+            .Should()
+            .Be(StatusCodes.Status404NotFound, "deve retornar Http 404");
+    }
+}

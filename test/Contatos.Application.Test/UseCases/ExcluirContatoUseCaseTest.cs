@@ -1,5 +1,6 @@
 ﻿using Commons.Domain.DomainObjects;
 using Contatos.Application.UseCases;
+using Contatos.Application.UseCases.Interfaces;
 using Contatos.Domain.Entities;
 using Contatos.Domain.Repositories;
 using FluentAssertions;
@@ -12,7 +13,7 @@ namespace Contatos.Application.Test.UseCases;
 public class ExcluirContatoUseCaseTest
 {
     private readonly AutoMocker _mocker;
-    private readonly ExcluirContatoUseCase _useCase;
+    private readonly IExcluirContatoUseCase _useCase;
 
     public ExcluirContatoUseCaseTest()
     {

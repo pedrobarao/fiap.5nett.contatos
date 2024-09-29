@@ -1,5 +1,6 @@
 ﻿using Commons.Domain.DomainObjects;
 using Contatos.Application.UseCases;
+using Contatos.Application.UseCases.Interfaces;
 using Contatos.Domain.Entities;
 using Contatos.Domain.Repositories;
 using FluentAssertions;
@@ -13,7 +14,7 @@ namespace Contatos.Application.Test.UseCases;
 public class AtualizarContatoUseCaseTest
 {
     private readonly AutoMocker _mocker;
-    private readonly AtualizarContatoUseCase _useCase;
+    private readonly IAtualizarContatoUseCase _useCase;
 
     public AtualizarContatoUseCaseTest()
     {

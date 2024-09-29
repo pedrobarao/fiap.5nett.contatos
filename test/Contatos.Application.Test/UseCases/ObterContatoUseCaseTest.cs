@@ -1,5 +1,6 @@
 ﻿using Contatos.Application.DTOs.Outputs;
 using Contatos.Application.UseCases;
+using Contatos.Application.UseCases.Interfaces;
 using Contatos.Domain.Repositories;
 using FluentAssertions;
 using Moq;
@@ -11,7 +12,7 @@ namespace Contatos.Application.Test.UseCases;
 public class ObterContatoUseCaseTest
 {
     private readonly AutoMocker _mocker;
-    private readonly ObterContatoUseCase _useCase;
+    private readonly IObterContatoUseCase _useCase;
 
     public ObterContatoUseCaseTest()
     {
