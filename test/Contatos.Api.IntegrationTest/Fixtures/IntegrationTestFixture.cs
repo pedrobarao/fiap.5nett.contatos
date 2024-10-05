@@ -3,7 +3,6 @@ using Contatos.Domain.Entities;
 using Contatos.Infra.Data;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
-using Test.Commons.Builders.Domain.Entities;
 
 namespace Contatos.Api.IntegrationTest.Fixtures;
 
@@ -17,14 +16,14 @@ public class IntegrationTestCollection : ICollectionFixture<IntegrationTestFixtu
 
 public class IntegrationTestFixture : IAsyncLifetime
 {
-    private readonly CustomWebApplicationFactory<Program> _webApplication;
     private readonly IServiceScope _scope;
+    private readonly CustomWebApplicationFactory<Program> _webApplication;
     public readonly HttpClient Client;
 
     public IntegrationTestFixture()
     {
         _webApplication = new CustomWebApplicationFactory<Program>();
-        
+
         _scope = _webApplication.Services.CreateScope();
 
         Client = _webApplication.CreateClient(new WebApplicationFactoryClientOptions
@@ -44,9 +43,9 @@ public class IntegrationTestFixture : IAsyncLifetime
     public Task DisposeAsync()
     {
         _webApplication?.Dispose();
-        _scope?.Dispose();
-        Client?.Dispose();
-        
+        _scope.Dispose();
+        Client.Dispose();
+
         return Task.CompletedTask;
     }
 
@@ -55,7 +54,7 @@ public class IntegrationTestFixture : IAsyncLifetime
         var scopedServices = _scope.ServiceProvider;
         return scopedServices.GetRequiredService<ContatoDbContext>();
     }
-    
+
     public Contato ObterContatoValido()
     {
         var db = GetDbContext();

@@ -27,12 +27,12 @@
         <Compile Remove="Migrations\20240809225623_BaseInicial.Designer.cs"/>
         <Compile Remove="Migrations\ContatoDbContextModelSnapshot.cs"/>
         <Compile Remove="Extensions\**"/>
-        <Compile Remove="Migrations\20240813014048_BaseInicial.cs" />
-        <Compile Remove="Migrations\20240813014048_BaseInicial.Designer.cs" />
-        <Compile Remove="Migrations\20241004171023_Initial.cs" />
-        <Compile Remove="Migrations\20241004171023_Initial.Designer.cs" />
-        <Compile Remove="Migrations\20241004171957_Initial.cs" />
-        <Compile Remove="Migrations\20241004171957_Initial.Designer.cs" />
+        <Compile Remove="Migrations\20240813014048_BaseInicial.cs"/>
+        <Compile Remove="Migrations\20240813014048_BaseInicial.Designer.cs"/>
+        <Compile Remove="Migrations\20241004171023_Initial.cs"/>
+        <Compile Remove="Migrations\20241004171023_Initial.Designer.cs"/>
+        <Compile Remove="Migrations\20241004171957_Initial.cs"/>
+        <Compile Remove="Migrations\20241004171957_Initial.Designer.cs"/>
     </ItemGroup>
 
     <ItemGroup>

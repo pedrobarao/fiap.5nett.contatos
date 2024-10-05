@@ -23,17 +23,17 @@ public class ContatoControllerIntegrationTest : IClassFixture<IntegrationTestFix
         // Assert
         result.StatusCode.Should().Be(HttpStatusCode.OK, "deve retornar Http 200");
     }
-    
+
     [Fact(DisplayName = "Obter contato por id deve retornar Http 200")]
     [Trait("Category", "Integration Test - ContatoController")]
     public async Task Obter_ContatoPorId_DeveRetornarHttp200()
     {
         // Arrange
         var contato = _fixture.ObterContatoValido();
-        
+
         // Act
         var result = await _fixture.Client.GetAsync($"/api/v1/contatos/{contato.Id}");
-    
+
         // Assert
         result.StatusCode.Should().Be(HttpStatusCode.OK, "deve retornar Http 200");
     }

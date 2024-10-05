@@ -2,9 +2,7 @@
 using Contatos.Infra.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Contatos.Api.IntegrationTest.Config;
 
@@ -34,20 +32,20 @@ public class CustomWebApplicationFactory<TProgram>
             services.Remove(dbConnectionDescriptor!);
 
             // SQLite In Memory. O Dapper só funciona com o SQLite In Memory
-            services.AddSingleton<DbConnection>(container =>
-            {
-                var connection = new SqliteConnection("DataSource=:memory:");
-                connection.Open();
-            
-                return connection;
-            });
+            // services.AddSingleton<DbConnection>(container =>
+            // {
+            //     var connection = new SqliteConnection("DataSource=:memory:");
+            //     connection.Open();
+            //
+            //     return connection;
+            // });
+            //
+            // services.AddDbContext<ContatoDbContext>((container, options) =>
+            // {
+            //     var connection = container.GetRequiredService<DbConnection>();
+            //     options.UseSqlite(connection);
+            // });
 
-            services.AddDbContext<ContatoDbContext>((container, options) =>
-            {
-                var connection = container.GetRequiredService<DbConnection>();
-                options.UseSqlite(connection);
-            });
-            
             // EF In Memory
             // services.AddDbContext<ContatoDbContext>(options =>
             // {
