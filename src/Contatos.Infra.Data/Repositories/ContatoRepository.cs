@@ -24,14 +24,13 @@ public sealed class ContatoRepository(ContatoDbContext context) : IContatoReposi
 
     public async Task<PagedResult<Contato>> ObterContatosPaginados(int pageSize, int pageIndex, string? query = null)
     {
-        const string sql = @"SELECT ""Contatos"".""Id"",
-                                    ""Contatos"".""PrimeiroNome"",
-                                    ""Contatos"".""Sobrenome"",
-                                    ""Contatos"".""Email"" AS ""Endereco"",
-                                    ""Telefones"".""ContatoId"",
-                                    ""Telefones"".""Ddd"",
-                                    ""Telefones"".""Numero"",
-                                    ""Telefones"".""Tipo""
+        const string sql = @$"SELECT ""Contatos"".""Id"" AS ""{nameof(Contato.Id)}"",
+                                    ""Contatos"".""PrimeiroNome"" AS ""{nameof(Nome.PrimeiroNome)}"",
+                                    ""Contatos"".""Sobrenome"" AS ""{nameof(Nome.Sobrenome)}"",
+                                    ""Contatos"".""Email"" AS ""{nameof(Email.Endereco)}"",
+                                    ""Telefones"".""Ddd"" AS ""{nameof(Telefone.Ddd)}"",
+                                    ""Telefones"".""Numero"" AS ""{nameof(Telefone.Numero)}"",
+                                    ""Telefones"".""Tipo"" AS ""{nameof(Telefone.Tipo)}""
                                FROM ""Contatos"" AS ""Contatos""
                                INNER JOIN ""Telefones"" AS ""Telefones"" ON ""Contatos"".""Id"" = ""Telefones"".""ContatoId""
                               WHERE (@query IS NULL OR UPPER(""PrimeiroNome"") LIKE '%' || @query || '%')
@@ -65,7 +64,7 @@ public sealed class ContatoRepository(ContatoDbContext context) : IContatoReposi
 
                     return contatoEntry;
                 }, queryParams,
-                splitOn: "Id,PrimeiroNome,Endereco,ContatoId");
+                splitOn: "Id,PrimeiroNome,Endereco,Ddd");
 
         var totalItems = await context.Database.GetDbConnection()
             .QueryFirstOrDefaultAsync<int>(count, queryParams);

@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System.Diagnostics.CodeAnalysis;
+using FluentAssertions;
 using Test.Commons.Builders.Domain.ValueObjects;
 
 namespace Contatos.Domain.Test.ValueObjects;
@@ -6,7 +7,8 @@ namespace Contatos.Domain.Test.ValueObjects;
 public class EmailTest
 {
     [Theory(DisplayName = "E-mail válido, deve estar válido")]
-    [Trait("Category", "Email")]
+    [Trait("Category", "Unit Test - Email")]
+    [SuppressMessage("Usage", "xUnit1012:Null should only be used for nullable parameters")]
     [InlineData("")]
     [InlineData(null)]
     [InlineData("lorem@ipsum.com")]
@@ -32,7 +34,7 @@ public class EmailTest
     }
 
     [Theory(DisplayName = "E-mail inválido deve estar inválido")]
-    [Trait("Category", "Email")]
+    [Trait("Category", "Unit Test - Email")]
     [InlineData("plainaddress")]
     [InlineData("@missingusername.com")]
     [InlineData("username@.com")]
@@ -49,7 +51,7 @@ public class EmailTest
     }
 
     [Fact(DisplayName = "ToString deve retornar o endereço de email")]
-    [Trait("Category", "Email")]
+    [Trait("Category", "Unit Test - Email")]
     public void Email_ToString_DeveRetornarEnderecoEmail()
     {
         // Arrange

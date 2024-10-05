@@ -1,6 +1,5 @@
 ﻿using Bogus;
 using Contatos.Application.DTOs.Outputs;
-using Test.Commons.Builders.Domain.ValueObjects;
 
 namespace Test.Commons.Builders.Application.DTOs.Outputs;
 

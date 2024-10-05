@@ -23,7 +23,7 @@ public class ListarContatoUseCaseTest
     }
 
     [Fact(DisplayName = "Listar contados, deve retornar lista de contatos")]
-    [Trait("Category", "ListarContatoUseCase")]
+    [Trait("Category", "Unit Test - ListarContatoUseCase")]
     public async Task ExecuteAsync_ListarContatos_DeveRetornarListaDeContatos()
     {
         // Arrange
@@ -59,7 +59,7 @@ public class ListarContatoUseCaseTest
     }
 
     [Fact(DisplayName = "Listar contados que não existem, deve retornar lista vazia")]
-    [Trait("Category", "ListarContatoUseCase")]
+    [Trait("Category", "Unit Test - ListarContatoUseCase")]
     public async Task ExecuteAsync_ListarContatosQuNaoExistem_DeveRetornarListaVazia()
     {
         // Arrange

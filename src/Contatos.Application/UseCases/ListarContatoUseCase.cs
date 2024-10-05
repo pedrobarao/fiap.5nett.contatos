@@ -11,7 +11,15 @@ public class ListarContatoUseCase(IContatoRepository contatoRepository)
 {
     public async Task<PagedResult<ObterContatoOutput>> ExecuteAsync(int pageSize, int pageIndex, string? query = null)
     {
-        var contatosPaginados = await contatoRepository.ObterContatosPaginados(pageSize, pageIndex, query);
-        return ContatoMapping.ToPagedContatoResponse(contatosPaginados);
+        try
+        {
+            var contatosPaginados = await contatoRepository.ObterContatosPaginados(pageSize, pageIndex, query);
+            return ContatoMapping.ToPagedContatoResponse(contatosPaginados);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
     }
 }

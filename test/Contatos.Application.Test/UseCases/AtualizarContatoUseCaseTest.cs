@@ -26,7 +26,7 @@ public class AtualizarContatoUseCaseTest
     }
 
     [Fact(DisplayName = "Atualizar contato com valores válidos deve atualizar com sucesso")]
-    [Trait("Category", "AtualizarContatoUseCase")]
+    [Trait("Category", "Unit Test - AtualizarContatoUseCase")]
     public async Task ExecuteAsync_ContatoValido_DeveAtualizarContatoComSucesso()
     {
         // Arrange
@@ -51,7 +51,7 @@ public class AtualizarContatoUseCaseTest
     }
 
     [Fact(DisplayName = "Atualizar contato que não existe deve retornar exceção de domínio")]
-    [Trait("Category", "AtualizarContatoUseCase")]
+    [Trait("Category", "Unit Test - AtualizarContatoUseCase")]
     public async Task ExecuteAsync_COntatoNaoExiste_DeveRetornarErro()
     {
         // Arrange
@@ -70,7 +70,7 @@ public class AtualizarContatoUseCaseTest
     }
 
     [Fact(DisplayName = "Atualizar contato com nome inválido deve retornar erro")]
-    [Trait("Category", "AtualizarContatoUseCase")]
+    [Trait("Category", "Unit Test - AtualizarContatoUseCase")]
     public async Task ExecuteAsync_ContatoComNomeInvalido_DeveRetornarErro()
     {
         // Arrange
@@ -96,7 +96,7 @@ public class AtualizarContatoUseCaseTest
     }
 
     [Fact(DisplayName = "Atualizar contato com email inválido deve retornar erro")]
-    [Trait("Category", "AtualizarContatoUseCase")]
+    [Trait("Category", "Unit Test - AtualizarContatoUseCase")]
     public async Task ExecuteAsync_ContatoComEmailInvalido_DeveRetornarErro()
     {
         // Arrange
@@ -122,7 +122,7 @@ public class AtualizarContatoUseCaseTest
     }
 
     [Fact(DisplayName = "Atualizar contato com telefone inválido deve retornar erro")]
-    [Trait("Category", "AtualizarContatoUseCase")]
+    [Trait("Category", "Unit Test - AtualizarContatoUseCase")]
     public async Task ExecuteAsync_ContatoComTelefoneInvalido_DeveRetornarErro()
     {
         // Arrange

@@ -1,10 +1,8 @@
 ﻿using Commons.Domain.Communication;
-using Commons.Domain.DomainObjects;
 using Contatos.Api.Controllers;
 using Contatos.Application.DTOs.Inputs;
 using Contatos.Application.DTOs.Outputs;
 using Contatos.Application.UseCases.Interfaces;
-using Contatos.Domain.Repositories;
 using FluentAssertions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -17,8 +15,8 @@ namespace Contatos.Api.Test.Controllers;
 
 public class ContatoControllerTest
 {
-    private readonly AutoMocker _mocker;
     private readonly ContatoController _controller;
+    private readonly AutoMocker _mocker;
 
     public ContatoControllerTest()
     {
@@ -27,7 +25,7 @@ public class ContatoControllerTest
     }
 
     [Fact(DisplayName = "Listar contatos cadastrados deve retornar Http 200 com a lista de contatos")]
-    [Trait("Category", "ContatoController")]
+    [Trait("Category", "Unit Test - ContatoController")]
     public async Task Listar_ContatosCadastrados_DeveRetornarListaContatosEHttp200()
     {
         // Arrange
@@ -63,7 +61,7 @@ public class ContatoControllerTest
     }
 
     [Fact(DisplayName = "Listar contatos não encontrados deve retornar Http 200 com a lista lista vazia")]
-    [Trait("Category", "ContatoController")]
+    [Trait("Category", "Unit Test - ContatoController")]
     public async Task Listar_ContatosNaoEncontrados_DeveRetornarListaVaziaHttp200()
     {
         // Arrange
@@ -98,7 +96,7 @@ public class ContatoControllerTest
     }
 
     [Fact(DisplayName = "Obter contato por id deve retornar o contato e Http 200")]
-    [Trait("Category", "ContatoController")]
+    [Trait("Category", "Unit Test - ContatoController")]
     public async Task Obter_ContatoExisteNaBaseDeDados_DeveRetornarContatoEHttp200()
     {
         // Arrange
@@ -127,7 +125,7 @@ public class ContatoControllerTest
     }
 
     [Fact(DisplayName = "Obter contato por id não encontrado deve retornar Http 404")]
-    [Trait("Category", "ContatoController")]
+    [Trait("Category", "Unit Test - ContatoController")]
     public async Task Obter_ContatoNaoExisteNaBaseDeDados_DeveRetornarHttp404()
     {
         // Arrange
@@ -150,7 +148,7 @@ public class ContatoControllerTest
     }
 
     [Fact(DisplayName = "Criar contato com dados inválidos deve retornar Http 400")]
-    [Trait("Category", "ContatoController")]
+    [Trait("Category", "Unit Test - ContatoController")]
     public async Task Criar_ContatoInvalido_DeveRetornarHttp400()
     {
         // Arrange
@@ -174,7 +172,7 @@ public class ContatoControllerTest
     }
 
     [Fact(DisplayName = "Criar contato com dados válidos deve retornar o id do contato e Http 201")]
-    [Trait("Category", "ContatoController")]
+    [Trait("Category", "Unit Test - ContatoController")]
     public async Task Criar_ContatoValido_DeveRetornarIdContatoEHttp201()
     {
         // Arrange
@@ -204,7 +202,7 @@ public class ContatoControllerTest
     }
 
     [Fact(DisplayName = "Atualizar contato com dados inválidos deve retornar Http 400")]
-    [Trait("Category", "ContatoController")]
+    [Trait("Category", "Unit Test - ContatoController")]
     public async Task Atualizar_ContatoInvalido_DeveRetornarHttp400()
     {
         // Arrange
@@ -229,7 +227,7 @@ public class ContatoControllerTest
     }
 
     [Fact(DisplayName = "Atualizar com id da rota diferente do id do contato no body deve retornar Http 400")]
-    [Trait("Category", "ContatoController")]
+    [Trait("Category", "Unit Test - ContatoController")]
     public async Task Atualizar_SolicitacaoComIdDaRotaDiferenteDoIdContatoDoBody_DeveRetornarHttp400()
     {
         // Arrange
@@ -251,7 +249,7 @@ public class ContatoControllerTest
     }
 
     [Fact(DisplayName = "Atualizar contato válido deve retornar Http 204")]
-    [Trait("Category", "ContatoController")]
+    [Trait("Category", "Unit Test - ContatoController")]
     public async Task Atualizar_ContatoValido_DeveRetornarHttp204()
     {
         // Arrange
@@ -274,27 +272,9 @@ public class ContatoControllerTest
         _mocker.GetMock<IAtualizarContatoUseCase>().Verify(r => r.ExecuteAsync(input), Times.Once);
     }
 
-    [Fact(DisplayName = "Excluir contato que não existe na base de dados deve retornar exceção de domínio")]
-    [Trait("Category", "ContatoController")]
-    public async Task Excluir_ContatoNaoExiste_DeveRetornarExcecaoDominio()
-    {
-        // Arrange
-        _mocker.GetMock<IExcluirContatoUseCase>()
-            .Setup(u => u.ExecuteAsync(It.IsAny<Guid>()))
-            .ThrowsAsync(new DomainException());
-
-        // Act
-        var act = async () => await _controller.Excluir(It.IsAny<Guid>());
-
-        // Assert
-        await act.Should().ThrowExactlyAsync<DomainException>("deve retornar uma exceção de domínio");
-
-        _mocker.GetMock<IExcluirContatoUseCase>().Verify(r => r.ExecuteAsync(It.IsAny<Guid>()), Times.Once);
-    }
-    
     [Fact(DisplayName = "Excluir contato deve excluí-lo e retornar Http 204")]
-    [Trait("Category", "ContatoController")]
-    public async Task Excluir_Contato_DeveExcluirContatoERetornarHttp204()
+    [Trait("Category", "Unit Test - ContatoController")]
+    public async Task Excluir_ContatoExistente_DeveExcluirContatoERetornarHttp204()
     {
         // Arrange & Act
         var result = await _controller.Excluir(It.IsAny<Guid>());

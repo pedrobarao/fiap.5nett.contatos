@@ -1,6 +1,5 @@
 ﻿using Bogus;
 using Contatos.Application.DTOs.Outputs;
-using Contatos.Domain.ValueObjects;
 using Test.Commons.Builders.Domain.ValueObjects;
 
 namespace Test.Commons.Builders.Application.DTOs.Outputs;
@@ -22,15 +21,13 @@ public class ObterContatoOutputBuilder
         var telefones = new TelefoneBuilder().Build(3);
         var telefonesOutput = new List<ObterContatoOutput.TelefoneOutput>();
         foreach (var telefone in telefones)
-        {
             telefonesOutput.Add(new ObterContatoOutput.TelefoneOutput
             {
                 Numero = telefone.Numero,
                 Tipo = telefone.Tipo.ToString(),
                 Ddd = telefone.Ddd
             });
-        }
-        
+
         _faker.RuleFor(c => c.Telefones, f => telefonesOutput);
     }
 
@@ -38,7 +35,7 @@ public class ObterContatoOutputBuilder
     {
         return _faker.Generate();
     }
-    
+
     public List<ObterContatoOutput> Build(int count)
     {
         return _faker.Generate(count);

@@ -25,7 +25,7 @@ public class CadastrarContatoUseCaseTest
     }
 
     [Fact(DisplayName = "Cadastrar contato com valores válidos deve criar o contato com sucesso")]
-    [Trait("Category", "CadastrarContatoUseCase")]
+    [Trait("Category", "Unit Test - CadastrarContatoUseCase")]
     public async Task ExecuteAsync_ContatoValido_DeveCriarContatoComSucesso()
     {
         // Arrange
@@ -43,7 +43,7 @@ public class CadastrarContatoUseCaseTest
     }
 
     [Fact(DisplayName = "Criar contato com nome inválido deve retornar erro")]
-    [Trait("Category", "CadastrarContatoUseCase")]
+    [Trait("Category", "Unit Test - CadastrarContatoUseCase")]
     public async Task ExecuteAsync_ContatoComNomeInvalido_DeveRetornarErro()
     {
         // Arrange
@@ -61,7 +61,7 @@ public class CadastrarContatoUseCaseTest
     }
 
     [Fact(DisplayName = "Criar contato com email inválido deve retornar erro")]
-    [Trait("Category", "CadastrarContatoUseCase")]
+    [Trait("Category", "Unit Test - CadastrarContatoUseCase")]
     public async Task ExecuteAsync_ContatoComEmailInvalido_DeveRetornarErro()
     {
         // Arrange
@@ -79,7 +79,7 @@ public class CadastrarContatoUseCaseTest
     }
 
     [Fact(DisplayName = "Criar contato com telefone inválido deve retornar erro")]
-    [Trait("Category", "CadastrarContatoUseCase")]
+    [Trait("Category", "Unit Test - CadastrarContatoUseCase")]
     public async Task ExecuteAsync_ContatoComTelefoneInvalido_DeveRetornarErro()
     {
         // Arrange

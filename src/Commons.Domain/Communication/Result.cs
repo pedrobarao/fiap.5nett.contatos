@@ -20,15 +20,12 @@ public class Result
 
     public static Result Fail(string? error = null)
     {
-        if (string.IsNullOrEmpty(error))
-        {
-            error = "Erro ao processar a requisição.";
-        }
+        if (string.IsNullOrEmpty(error)) error = "Erro ao processar a requisição.";
 
         return new Result(error);
     }
-    
-    public new static Result Success()
+
+    public static Result Success()
     {
         return new Result();
     }
@@ -77,15 +74,12 @@ public class Result<TData> : Result
 
     public new static Result<TData> Fail(string? error = null)
     {
-        if (string.IsNullOrEmpty(error))
-        {
-            error = "Erro ao processar a requisição.";
-        }
+        if (string.IsNullOrEmpty(error)) error = "Erro ao processar a requisição.";
 
         return new Result<TData>(default!, error);
     }
 
-    public new static Result<TData> Success(TData data)
+    public static Result<TData> Success(TData data)
     {
         return new Result<TData>(data);
     }

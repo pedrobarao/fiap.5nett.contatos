@@ -21,7 +21,7 @@ public class ObterContatoUseCaseTest
     }
 
     [Fact(DisplayName = "Obter contato, deve retornar o contato conforme o Id informado")]
-    [Trait("Category", "ListarContatoUseCase")]
+    [Trait("Category", "Unit Test - ListarContatoUseCase")]
     public async Task ExecuteAsync_ObterContato_DeveRetornarContato()
     {
         // Arrange
@@ -51,7 +51,7 @@ public class ObterContatoUseCaseTest
     }
 
     [Fact(DisplayName = "Obter contato que não existe deve retornar null")]
-    [Trait("Category", "ListarContatoUseCase")]
+    [Trait("Category", "Unit Test - ListarContatoUseCase")]
     public async Task ExecuteAsync_ObterContatoNaoExiste_DeveRetornarNull()
     {
         // Arrange

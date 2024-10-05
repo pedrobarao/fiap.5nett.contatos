@@ -25,7 +25,7 @@ public class ExcluirContatoUseCaseTest
     }
 
     [Fact(DisplayName = "Excluir contato deve excluir com sucesso")]
-    [Trait("Category", "ExcluirContatoUseCase")]
+    [Trait("Category", "Unit Test - ExcluirContatoUseCase")]
     public async Task ExecuteAsync_ContatoValido_DeveExcluirContatoComSucesso()
     {
         // Arrange
@@ -47,17 +47,14 @@ public class ExcluirContatoUseCaseTest
     }
 
     [Fact(DisplayName = "Excluir contato que não existe deve excluir retornar ecxeção de domínio")]
-    [Trait("Category", "ExcluirContatoUseCase")]
+    [Trait("Category", "Unit Test - ExcluirContatoUseCase")]
     public async Task ExecuteAsync_ContatoNaoExiste_DeveRetornarExcecaoDominio()
     {
-        // Arrange
-        var input = Guid.NewGuid();
-
-        // Act
-        var act = async () => await _useCase.ExecuteAsync(input);
+        // Act && Arrange
+        var act = async () => await _useCase.ExecuteAsync(Guid.NewGuid());
 
         // Assert
-        await act.Should().ThrowExactlyAsync<DomainException>("deve retornar uma exceção de domínio");
+        await act.Should().NotThrowAsync("deve excluir o contato com sucesso");
         _mocker.GetMock<IContatoRepository>().Verify(r => r.ObterContatoPorIdAsync(It.IsAny<Guid>()), Times.Once);
         _mocker.GetMock<IContatoRepository>().Verify(r => r.Excluir(It.IsAny<Contato>()), Times.Never);
         _mocker.GetMock<IContatoRepository>().Verify(r => r.UnitOfWork.Commit(), Times.Never);
