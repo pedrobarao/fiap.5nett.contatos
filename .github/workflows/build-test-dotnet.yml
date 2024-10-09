@@ -20,6 +20,22 @@ jobs:
     name: Build and Test
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_USER: contatos
+          POSTGRES_PASSWORD: contatos
+          POSTGRES_DB: contatos
+        ports:
+          - 5432:5432
+        # Espera que o PostgreSQL esteja pronto antes de seguir para os passos seguintes.
+        options: >-
+          --health-cmd="pg_isready -U postgres"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
     steps:
     - uses: actions/checkout@v4
     
