@@ -1,8 +1,10 @@
-﻿using System.Reflection;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Reflection;
 using Microsoft.OpenApi.Models;
 
 namespace Contatos.Api.Config;
 
+[ExcludeFromCodeCoverage]
 public static class SwaggerConfig
 {
     public static IServiceCollection AddSwaggerConfig(this IServiceCollection services)
