@@ -59,7 +59,7 @@ dotnet test --collect:"XPlat Code Coverage" --results-directory ./test/results/c
 ```
 O relatório de cobertura de testes estará disponível na pasta `test/results/coverage-report/index.html`.
 Além disso, o relatório de cobertura de testes é executado automaticamente no pipeline de CI/CD a cada integração com a branch principal `(main)` e pode ser visualizado no [GitHub Pages](https://pedrobarao.github.io/fiap.5nett.contatos/) do projeto.
-
+![assets/report-coverage.png](assets/report-coverage.png)
 ## Executando a aplicação ✔️
 
 ### Requisitos
