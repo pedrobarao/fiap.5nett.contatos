@@ -76,9 +76,9 @@ public class ContatoController(
     /// </summary>
     /// <param name="id">Id do contato (obrigatório).</param>
     /// <param name="input">Dados do contato.</param>
-    /// <response code="200">Contato atualizado com sucesso.</response>
+    /// <response code="204">Contato atualizado com sucesso.</response>
     /// <response code="400">O contato enviado é inválido.</response>
-    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [Produces("application/json")]
     [HttpPut("{id}")]

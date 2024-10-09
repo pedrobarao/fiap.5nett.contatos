@@ -37,7 +37,9 @@ public class ContatoMapping : IEntityTypeConfiguration<Contato>
 
         builder.OwnsMany(c => c.Telefones, tf =>
         {
-            tf.HasKey("Ddd", "Numero", "Tipo");
+            tf.WithOwner().HasForeignKey("ContatoId");
+            
+            tf.HasKey("ContatoId", "Ddd", "Numero", "Tipo");
 
             tf.Property(c => c.Ddd)
                 .IsRequired()

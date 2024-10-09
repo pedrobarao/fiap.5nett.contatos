@@ -3,6 +3,7 @@ using Contatos.Domain.Entities;
 using Contatos.Infra.Data;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
+using Test.Commons.Builders.Domain.Entities;
 
 namespace Contatos.Api.IntegrationTest.Fixtures;
 
@@ -55,9 +56,14 @@ public class IntegrationTestFixture : IAsyncLifetime
         return scopedServices.GetRequiredService<ContatoDbContext>();
     }
 
-    public Contato ObterContatoValido()
+    public Contato ObterContatoValidoDb()
     {
         var db = GetDbContext();
         return db.Contatos.FirstOrDefault()!;
+    }
+    
+    public Contato GerarContatoValido()
+    {
+        return new ContatoBuilder().Build();
     }
 }
