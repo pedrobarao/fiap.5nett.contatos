@@ -1,5 +1,6 @@
-﻿using FluentAssertions;
-using Test.Commons.Builders.ValueObjects;
+﻿using System.Diagnostics.CodeAnalysis;
+using FluentAssertions;
+using Test.Commons.Builders.Domain.ValueObjects;
 
 namespace Contatos.Domain.Test.ValueObjects;
 
@@ -8,7 +9,8 @@ public class NomeTest
     [Theory(DisplayName = "Primeiro nome inválido deve falhar")]
     [InlineData(null)]
     [InlineData("")]
-    [Trait("Category", "Nome")]
+    [Trait("Category", "Unit Test - Nome")]
+    [SuppressMessage("Usage", "xUnit1012:Null should only be used for nullable parameters")]
     public void Nome_PrimeiroNomeInvalido_DeveEstarInvalido(string primeiroNome)
     {
         // Arrange
@@ -24,7 +26,7 @@ public class NomeTest
     }
 
     [Fact(DisplayName = "Sobrenome nulo ou vazio deve passar")]
-    [Trait("Category", "Nome")]
+    [Trait("Category", "Unit Test - Nome")]
     public void Nome_SobrenomeNuloOuVazio_DeveEstarValido()
     {
         // Arrange
@@ -46,7 +48,7 @@ public class NomeTest
     }
 
     [Fact(DisplayName = "ToString deve retornar o nome completo")]
-    [Trait("Category", "Nome")]
+    [Trait("Category", "Unit Test - Nome")]
     public void Nome_ToString_DeveRetornarONomeESobrenome()
     {
         // Arrange

@@ -2,7 +2,7 @@
 using Allure.Xunit.Attributes;
 using Contatos.Domain.ValueObjects;
 using FluentAssertions;
-using Test.Commons.Builders.ValueObjects;
+using Test.Commons.Builders.Domain.ValueObjects;
 
 namespace Contatos.Domain.Test.ValueObjects;
 
@@ -10,7 +10,6 @@ namespace Contatos.Domain.Test.ValueObjects;
 [AllureFeature("Labels API")]
 public class TelefoneTest
 {
-    [AllureTag("smoke")]
     [Theory(DisplayName = "Telefone com DDD inválido deve estar inválido")]
     [InlineData(null)]
     [InlineData((short)0)]
@@ -24,7 +23,7 @@ public class TelefoneTest
     [InlineData((short)8)]
     [InlineData((short)9)]
     [InlineData((short)10)]
-    [Trait("Category", "Telefone")]
+    [Trait("Category", "Unit Test - Telefone")]
     [SuppressMessage("Usage", "xUnit1012:Null should not be used for value type parameters")]
     public void Telefone_DddInvalido_DeveEstarInvalido(short ddd)
     {
@@ -48,7 +47,7 @@ public class TelefoneTest
     [InlineData((short)71)]
     [InlineData((short)81)]
     [InlineData((short)91)]
-    [Trait("Category", "Telefone")]
+    [Trait("Category", "Unit Test - Telefone")]
     public void Telefone_DddValido_DeveEstarValido(short ddd)
     {
         // Arrange
@@ -62,6 +61,7 @@ public class TelefoneTest
     }
 
     [Theory(DisplayName = "Telefone com número residencial e comercial inválido, deve estar inválido")]
+    [SuppressMessage("Usage", "xUnit1012:Null should only be used for nullable parameters")]
     [InlineData(null)]
     [InlineData("3212")]
     [InlineData("1011")]
@@ -69,7 +69,7 @@ public class TelefoneTest
     [InlineData("932121011")]
     [InlineData("9321210111")]
     [InlineData("93212101111")]
-    [Trait("Category", "Telefone")]
+    [Trait("Category", "Unit Test - Telefone")]
     public void Telefone_NumeroResidencialEComercialInvalido_DeveEstarInvalido(string numero)
     {
         // Arrange
@@ -98,7 +98,7 @@ public class TelefoneTest
     [InlineData("32125867")]
     [InlineData("21258674")]
     [InlineData("12586732")]
-    [Trait("Category", "Telefone")]
+    [Trait("Category", "Unit Test - Telefone")]
     public void Telefone_NumeroResidencialEComercialValido_DeveEstarValido(string numero)
     {
         // Arrange
@@ -124,7 +124,7 @@ public class TelefoneTest
     }
 
     [Fact(DisplayName = "ToString deve retornar o número do telefone com DDD")]
-    [Trait("Category", "Telefone")]
+    [Trait("Category", "Unit Test - Telefone")]
     public void Telefone_ToString_DeveRetornarONumeroComDdd()
     {
         // Arrange

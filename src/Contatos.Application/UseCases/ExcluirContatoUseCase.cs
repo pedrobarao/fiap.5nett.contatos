@@ -1,5 +1,4 @@
-﻿using Commons.Domain.DomainObjects;
-using Contatos.Application.UseCases.Interfaces;
+﻿using Contatos.Application.UseCases.Interfaces;
 using Contatos.Domain.Repositories;
 
 namespace Contatos.Application.UseCases;
@@ -10,7 +9,7 @@ public class ExcluirContatoUseCase(IContatoRepository contatoRepository) : IExcl
     {
         var contato = await contatoRepository.ObterContatoPorIdAsync(id);
 
-        if (contato is null) throw new DomainException("Contato inválido");
+        if (contato is null) return;
 
         contatoRepository.Excluir(contato);
         await contatoRepository.UnitOfWork.Commit();

@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using System.Text.RegularExpressions;
 using Commons.Domain.Communication;
 using Infra.CrossCutting.Utils;
 

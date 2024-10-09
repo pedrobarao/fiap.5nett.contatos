@@ -38,12 +38,12 @@ public class ContatoMapping : IEntityTypeConfiguration<Contato>
         builder.OwnsMany(c => c.Telefones, tf =>
         {
             tf.WithOwner().HasForeignKey("ContatoId");
-
+            
             tf.HasKey("ContatoId", "Ddd", "Numero", "Tipo");
 
             tf.Property(c => c.Ddd)
                 .IsRequired()
-                .HasColumnType("varchar(3)");
+                .HasColumnType("int");
 
             tf.Property(c => c.Numero)
                 .IsRequired()

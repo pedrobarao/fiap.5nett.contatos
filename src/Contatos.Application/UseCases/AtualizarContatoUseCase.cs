@@ -35,8 +35,17 @@ public class AtualizarContatoUseCase(IContatoRepository contatoRepository) : IAt
             return _result;
         }
 
-        contatoRepository.Atualizar(contato);
-        await contatoRepository.UnitOfWork.Commit();
-        return _result;
+        try
+        {
+            contatoRepository.Atualizar(contato);
+            await contatoRepository.UnitOfWork.Commit();
+            return _result;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+        
     }
 }

@@ -16,4 +16,8 @@
         <PackageReference Include="Bogus" Version="35.6.1"/>
     </ItemGroup>
 
+    <ItemGroup>
+        <Folder Include="Builders\Domain\"/>
+    </ItemGroup>
+
 </Project>

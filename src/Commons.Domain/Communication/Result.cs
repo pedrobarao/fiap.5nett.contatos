@@ -18,9 +18,16 @@ public class Result
         return new Result();
     }
 
-    public static Result Fail(string error)
+    public static Result Fail(string? error = null)
     {
+        if (string.IsNullOrEmpty(error)) error = "Erro ao processar a requisição.";
+
         return new Result(error);
+    }
+
+    public static Result Success()
+    {
+        return new Result();
     }
 
     public void AddError(string error)
@@ -65,9 +72,16 @@ public class Result<TData> : Result
         return new Result<TData>(data);
     }
 
-    public new static Result<TData> Fail(string error)
+    public new static Result<TData> Fail(string? error = null)
     {
+        if (string.IsNullOrEmpty(error)) error = "Erro ao processar a requisição.";
+
         return new Result<TData>(default!, error);
+    }
+
+    public static Result<TData> Success(TData data)
+    {
+        return new Result<TData>(data);
     }
 
     public void SetData(TData data)
