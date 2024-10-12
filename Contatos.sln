@@ -32,6 +32,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deploy", "deploy", "{3A1B411B-ECE7-4409-B28D-A40B6E650E26}"
 	ProjectSection(SolutionItems) = preProject
 		deploy\docker-compose.yaml = deploy\docker-compose.yaml
+		deploy\prometheus.yml = deploy\prometheus.yml
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commons.Domain", "src\Commons.Domain\Commons.Domain.csproj", "{E2D01946-3508-4ACE-851C-1DA0718789A1}"

@@ -39,6 +39,8 @@ public static class AppConfig
         app.ApplyMigrations();
 
         app.UseHealthCheck();
+        
+        app.AddPrometheusConfig();
 
         return app;
     }
