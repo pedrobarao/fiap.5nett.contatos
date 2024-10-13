@@ -32,7 +32,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deploy", "deploy", "{3A1B411B-ECE7-4409-B28D-A40B6E650E26}"
 	ProjectSection(SolutionItems) = preProject
 		deploy\docker-compose.yaml = deploy\docker-compose.yaml
-		deploy\prometheus.yml = deploy\prometheus.yml
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commons.Domain", "src\Commons.Domain\Commons.Domain.csproj", "{E2D01946-3508-4ACE-851C-1DA0718789A1}"
@@ -48,6 +47,18 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contatos.Api.Test", "test\Contatos.Api.Test\Contatos.Api.Test.csproj", "{3960B238-C1C0-4544-B922-5131312AAA5F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contatos.Api.IntegrationTest", "test\Contatos.Api.IntegrationTest\Contatos.Api.IntegrationTest.csproj", "{9ABF96BF-F000-48DE-A9F1-C709A5D4D707}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "grafana", "grafana", "{7E443BA4-064A-4062-8EF3-BB1B5F22E20D}"
+	ProjectSection(SolutionItems) = preProject
+		deploy\grafana\dashboard.yml = deploy\grafana\dashboard.yml
+		deploy\grafana\my_dashboard.json = deploy\grafana\my_dashboard.json
+		deploy\grafana\datasources.yml = deploy\grafana\datasources.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "prometheus", "prometheus", "{8063DDB4-1894-4971-A5B1-AD08EC8BACC9}"
+	ProjectSection(SolutionItems) = preProject
+		deploy\prometheus\prometheus.yml = deploy\prometheus\prometheus.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,6 +84,8 @@ Global
 		{CA08CA93-6BA0-431A-9C45-ABCEE99B2F92} = {AF39669D-4AEE-4390-952C-02DBBD3347A1}
 		{3960B238-C1C0-4544-B922-5131312AAA5F} = {AF39669D-4AEE-4390-952C-02DBBD3347A1}
 		{9ABF96BF-F000-48DE-A9F1-C709A5D4D707} = {164A1157-BED3-4CA5-8869-B40E1F141B77}
+		{7E443BA4-064A-4062-8EF3-BB1B5F22E20D} = {3A1B411B-ECE7-4409-B28D-A40B6E650E26}
+		{8063DDB4-1894-4971-A5B1-AD08EC8BACC9} = {3A1B411B-ECE7-4409-B28D-A40B6E650E26}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{3ECDA731-3BA8-4434-968D-081ABD0C6178}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
