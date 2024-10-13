@@ -4,7 +4,7 @@ services:
   contatos-api:
     container_name: contatos-api
     depends_on:
-      - postgres
+      - contatos-db
       - prometheus
     build:
       context: ../
@@ -14,7 +14,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
 
-  postgres:
+  contatos-db:
     image: postgres:latest
     container_name: contatos-db
     environment:
@@ -41,7 +41,7 @@ services:
       - "3000:3000"
     environment:
       - GF_SECURITY_ADMIN_USER=admin
-      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_SECURITY_ADMIN_PASSWORD=root
     volumes:
       - grafana_data:/var/lib/grafana
     depends_on:

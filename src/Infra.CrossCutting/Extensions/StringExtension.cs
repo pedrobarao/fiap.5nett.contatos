@@ -1,6 +1,6 @@
 ﻿namespace Infra.CrossCutting.Utils;
 
-public static class StringUtil
+public static class StringExtension
 {
     public static string JustNumbers(string input)
     {

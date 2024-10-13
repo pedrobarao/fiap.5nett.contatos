@@ -14,7 +14,7 @@ public record Telefone
     public Telefone(short ddd, string numero, TipoTelefone tipo)
     {
         Ddd = ddd;
-        Numero = StringUtil.JustNumbers(numero);
+        Numero = StringExtension.JustNumbers(numero);
         Tipo = tipo;
     }
 
@@ -43,7 +43,7 @@ public record Telefone
     public static bool ValidarNumero(string numero, TipoTelefone tipo)
     {
         if (string.IsNullOrEmpty(numero)) return false;
-        numero = StringUtil.JustNumbers(numero);
+        numero = StringExtension.JustNumbers(numero);
         if (numero.Length != 8 && numero.Length != 9) return false;
 
         if (tipo == TipoTelefone.Celular) return numero.Length == 9 && numero.StartsWith('9');

@@ -76,7 +76,7 @@ Além disso, o relatório de cobertura de testes é executado automaticamente no
 
 2 - Na raíz do projeto execute o seguinte comando:
 ```bash
-docker compose -f .\deploy\docker-compose.yaml -p contatos up -d --build
+docker compose -f .\deploy\docker-compose.yaml -p tech-challenge up -d --build
 ```
 Esse comando irá fazer o build da aplicação e subir o container com a aplicação e recursos necessários.
 
