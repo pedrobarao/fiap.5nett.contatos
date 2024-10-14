@@ -26,7 +26,7 @@
         "type": "prometheus",
         "uid": "PBFA97CFB590B2093"
       },
-      "description": "Quantidade de tempo em que a API de Contatos está ativa",
+      "description": "Indica o tempo de início do processo da aplicação.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -53,6 +53,13 @@
         "y": 0
       },
       "id": 7,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "Prometheus",
+          "url": "http://localhost:9090/"
+        }
+      ],
       "options": {
         "colorMode": "value",
         "graphMode": "none",
@@ -94,7 +101,7 @@
         "type": "prometheus",
         "uid": "PBFA97CFB590B2093"
       },
-      "description": "",
+      "description": "Quantidade de erros da aplicação nos últimos 5 minutos ",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -136,6 +143,13 @@
         "y": 0
       },
       "id": 12,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "Prometheus",
+          "url": "http://localhost:9090/"
+        }
+      ],
       "options": {
         "colorMode": "value",
         "graphMode": "none",
@@ -161,7 +175,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "code",
-          "expr": "sum(increase(nome_da_metrica{code=\"500\"}[30s]))",
+          "expr": "sum(increase(nome_da_metrica{code=\"500\"}[5m]))",
           "instant": false,
           "legendFormat": "__auto",
           "range": true,
@@ -177,6 +191,7 @@
         "type": "prometheus",
         "uid": "PBFA97CFB590B2093"
       },
+      "description": "Consumo de CPU pela aplicação",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -219,6 +234,13 @@
         "y": 0
       },
       "id": 10,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "Prometheus",
+          "url": "http://localhost:9090/"
+        }
+      ],
       "options": {
         "minVizHeight": 75,
         "minVizWidth": 75,
@@ -259,7 +281,7 @@
         "type": "prometheus",
         "uid": "PBFA97CFB590B2093"
       },
-      "description": "",
+      "description": "Quantidade de memória RAM consumida pela aplicação",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -288,6 +310,13 @@
         "y": 0
       },
       "id": 11,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "Prometheus",
+          "url": "http://localhost:9090/"
+        }
+      ],
       "options": {
         "colorMode": "value",
         "graphMode": "none",
@@ -415,6 +444,13 @@
         "y": 10
       },
       "id": 1,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "Prometheus",
+          "url": "http://localhost:9090/"
+        }
+      ],
       "options": {
         "legend": {
           "calcs": [],
@@ -454,7 +490,7 @@
         "type": "prometheus",
         "uid": "PBFA97CFB590B2093"
       },
-      "description": "Métrica de latência que coleta o tempo de resposta das requisições HTTP",
+      "description": "Quantidade de memória RAM consumida pela aplicação",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -635,6 +671,13 @@
         "y": 18
       },
       "id": 4,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "Prometheus",
+          "url": "http://localhost:9090/"
+        }
+      ],
       "options": {
         "legend": {
           "calcs": [],
@@ -791,6 +834,13 @@
         "y": 18
       },
       "id": 5,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "Prometheus",
+          "url": "http://localhost:9090/"
+        }
+      ],
       "options": {
         "legend": {
           "calcs": [],
