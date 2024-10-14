@@ -51,13 +51,17 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "grafana", "grafana", "{7E443BA4-064A-4062-8EF3-BB1B5F22E20D}"
 	ProjectSection(SolutionItems) = preProject
 		deploy\grafana\dashboard.yml = deploy\grafana\dashboard.yml
-		deploy\grafana\my_dashboard.json = deploy\grafana\my_dashboard.json
 		deploy\grafana\datasources.yml = deploy\grafana\datasources.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "prometheus", "prometheus", "{8063DDB4-1894-4971-A5B1-AD08EC8BACC9}"
 	ProjectSection(SolutionItems) = preProject
 		deploy\prometheus\prometheus.yml = deploy\prometheus\prometheus.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dashboards", "dashboards", "{EF4E6105-412B-491F-889E-4D97769196A7}"
+	ProjectSection(SolutionItems) = preProject
+		deploy\grafana\dashboards\contatosapi-dashboard.json = deploy\grafana\dashboards\contatosapi-dashboard.json
 	EndProjectSection
 EndProject
 Global
@@ -86,6 +90,7 @@ Global
 		{9ABF96BF-F000-48DE-A9F1-C709A5D4D707} = {164A1157-BED3-4CA5-8869-B40E1F141B77}
 		{7E443BA4-064A-4062-8EF3-BB1B5F22E20D} = {3A1B411B-ECE7-4409-B28D-A40B6E650E26}
 		{8063DDB4-1894-4971-A5B1-AD08EC8BACC9} = {3A1B411B-ECE7-4409-B28D-A40B6E650E26}
+		{EF4E6105-412B-491F-889E-4D97769196A7} = {7E443BA4-064A-4062-8EF3-BB1B5F22E20D}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{3ECDA731-3BA8-4434-968D-081ABD0C6178}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
