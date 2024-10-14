@@ -94,6 +94,89 @@
         "type": "prometheus",
         "uid": "PBFA97CFB590B2093"
       },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "fieldMinMax": false,
+          "mappings": [],
+          "min": 0,
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 5
+              },
+              {
+                "color": "#EAB839",
+                "value": 10
+              },
+              {
+                "color": "red",
+                "value": 15
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 4,
+        "x": 4,
+        "y": 0
+      },
+      "id": 12,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "code",
+          "expr": "sum(increase(nome_da_metrica{code=\"500\"}[30s]))",
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Errors",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "default": true,
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -132,7 +215,7 @@
       "gridPos": {
         "h": 9,
         "w": 4,
-        "x": 4,
+        "x": 8,
         "y": 0
       },
       "id": 10,
@@ -201,7 +284,7 @@
       "gridPos": {
         "h": 9,
         "w": 4,
-        "x": 8,
+        "x": 12,
         "y": 0
       },
       "id": 11,
@@ -258,7 +341,7 @@
         "type": "prometheus",
         "uid": "PBFA97CFB590B2093"
       },
-      "description": "Utilização de CPU da API de Contatos",
+      "description": "Uso de CPU pela aplicação",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -644,7 +727,7 @@
         "type": "prometheus",
         "uid": "PBFA97CFB590B2093"
       },
-      "description": "Latência média por endpoint da API de Contatos",
+      "description": "Latência das requisições",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -811,7 +894,7 @@
           "useBackend": false
         }
       ],
-      "title": "Latência média por endpoint",
+      "title": "Latência das requisições",
       "type": "timeseries"
     }
   ],

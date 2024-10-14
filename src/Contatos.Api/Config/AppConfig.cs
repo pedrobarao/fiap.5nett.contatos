@@ -42,6 +42,8 @@ public static class AppConfig
         
         app.AddPrometheusConfig();
 
+        app.UseMiddleware<ErrorHandlingMiddleware>();
+
         return app;
     }
 }
