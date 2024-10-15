@@ -19,7 +19,7 @@ public static class MigrationExtensions
                     TimeSpan.FromSeconds(10),
                     TimeSpan.FromSeconds(15)
                 },
-                onRetry: (exception, timeSpan, retryCount, context) =>
+                (exception, timeSpan, retryCount, context) =>
                 {
                     Console.WriteLine(
                         $"Tentativa {retryCount} falhou: {exception.Message}. Aguardando {timeSpan} antes da próxima tentativa.");

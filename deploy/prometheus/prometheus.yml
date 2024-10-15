@@ -5,8 +5,8 @@ scrape_configs:
   - job_name: 'contatos-api'
     metrics_path: '/metrics'
     static_configs:
-      - targets: ['contatos-api:8080']
-        
+      - targets: [ 'contatos-api:8080' ]
+
   - job_name: 'contatos-api-health'
     metrics_path: '/metrics/health'
     static_configs:

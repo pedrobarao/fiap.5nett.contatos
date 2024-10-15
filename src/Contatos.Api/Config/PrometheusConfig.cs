@@ -8,9 +8,9 @@ public static class PrometheusConfig
 {
     public static WebApplication AddPrometheusConfig(this WebApplication app)
     {
-        app.UseMetricServer("/metrics");
+        app.UseMetricServer();
         app.UseHttpMetrics();
-        
+
         return app;
     }
 }

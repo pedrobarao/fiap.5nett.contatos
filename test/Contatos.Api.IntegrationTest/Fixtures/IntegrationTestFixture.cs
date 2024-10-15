@@ -61,7 +61,7 @@ public class IntegrationTestFixture : IAsyncLifetime
         var db = GetDbContext();
         return db.Contatos.FirstOrDefault()!;
     }
-    
+
     public Contato GerarContatoValido()
     {
         return new ContatoBuilder().Build();
