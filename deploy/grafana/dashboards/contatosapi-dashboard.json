@@ -105,97 +105,6 @@
         "type": "prometheus",
         "uid": "PBFA97CFB590B2093"
       },
-      "description": "Quantidade de erros da aplicação nas últimas 6 horas",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 0,
-          "fieldMinMax": false,
-          "mappings": [],
-          "min": 0,
-          "noValue": "0",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "yellow",
-                "value": 5
-              },
-              {
-                "color": "#EAB839",
-                "value": 10
-              },
-              {
-                "color": "red",
-                "value": 15
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 9,
-        "w": 4,
-        "x": 4,
-        "y": 0
-      },
-      "id": 12,
-      "links": [
-        {
-          "targetBlank": true,
-          "title": "Prometheus",
-          "url": "http://localhost:9090/"
-        }
-      ],
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "11.2.2",
-      "targets": [
-        {
-          "datasource": {
-            "name": "Prometheus",
-            "type": "prometheus"
-          },
-          "editorMode": "code",
-          "expr": "sum(increase(http_requests_received_total{code=\"500\"}[6h]))",
-          "instant": false,
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Errors",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "default": true,
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
       "description": "Status da aplicação (Unhealthy, Degraded, Healthy)",
       "fieldConfig": {
         "defaults": {
@@ -244,7 +153,7 @@
       "gridPos": {
         "h": 9,
         "w": 4,
-        "x": 8,
+        "x": 4,
         "y": 0
       },
       "id": 13,
@@ -282,7 +191,7 @@
           "disableTextWrap": false,
           "editorMode": "code",
           "exemplar": false,
-          "expr": "last_over_time(healthcheck{job=\"contatos-api-health\", healthcheck=\"Liveness\"}[1m])",
+          "expr": "healthcheck{job=\"contatos-api-health\", healthcheck=\"Liveness\"}",
           "format": "time_series",
           "fullMetaSearch": false,
           "hide": false,
@@ -351,7 +260,7 @@
       "gridPos": {
         "h": 9,
         "w": 4,
-        "x": 12,
+        "x": 8,
         "y": 0
       },
       "id": 14,
@@ -389,7 +298,7 @@
           "disableTextWrap": false,
           "editorMode": "code",
           "exemplar": false,
-          "expr": "last_over_time(healthcheck{job=\"contatos-api-health\", healthcheck=\"Liveness\"}[1m])",
+          "expr": "healthcheck{job=\"contatos-api\", healthcheck=\"npgsql\"}",
           "format": "time_series",
           "fullMetaSearch": false,
           "hide": false,
@@ -449,7 +358,7 @@
       "gridPos": {
         "h": 9,
         "w": 4,
-        "x": 16,
+        "x": 12,
         "y": 0
       },
       "id": 10,
@@ -525,7 +434,7 @@
       "gridPos": {
         "h": 9,
         "w": 4,
-        "x": 20,
+        "x": 16,
         "y": 0
       },
       "id": 11,
@@ -1167,7 +1076,7 @@
       "type": "timeseries"
     }
   ],
-  "refresh": "auto",
+  "refresh": "5s",
   "schemaVersion": 39,
   "tags": [],
   "templating": {
