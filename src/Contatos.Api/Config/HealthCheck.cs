@@ -39,6 +39,7 @@ public static class HealthCheckConfig
             Predicate = check => check.Tags.Contains(ReadinessTag)
         });
 
+        app.UseHealthChecksPrometheusExporter("/metrics/health");
         app.MapHealthChecksUI();
 
         return app;

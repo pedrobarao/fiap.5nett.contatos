@@ -24,7 +24,7 @@
       "datasource": {
         "default": true,
         "type": "prometheus",
-        "name": "Prometheus"
+        "uid": "PBFA97CFB590B2093"
       },
       "description": "Indica o tempo de início do processo da aplicação.",
       "fieldConfig": {
@@ -81,15 +81,19 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
-            "name": "Prometheus"
+            "name": "Prometheus",
+            "type": "prometheus"
           },
-          "editorMode": "code",
-          "expr": "time() - process_start_time_seconds",
+          "disableTextWrap": false,
+          "editorMode": "builder",
+          "expr": "time() - process_start_time_seconds{job=\"contatos-api\"}",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
           "instant": false,
           "legendFormat": "__auto",
           "range": true,
-          "refId": "A"
+          "refId": "A",
+          "useBackend": false
         }
       ],
       "title": "Up Time",
@@ -99,14 +103,15 @@
       "datasource": {
         "default": true,
         "type": "prometheus",
-        "name": "Prometheus"
+        "uid": "PBFA97CFB590B2093"
       },
-      "description": "Quantidade de erros da aplicação nos últimos 5 minutos ",
+      "description": "Quantidade de erros da aplicação nas últimas 6 horas",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "thresholds"
           },
+          "decimals": 0,
           "fieldMinMax": false,
           "mappings": [],
           "min": 0,
@@ -132,7 +137,7 @@
               }
             ]
           },
-          "unit": "decbytes"
+          "unit": "none"
         },
         "overrides": []
       },
@@ -171,11 +176,11 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
-            "name": "Prometheus"
+            "name": "Prometheus",
+            "type": "prometheus"
           },
           "editorMode": "code",
-          "expr": "sum(increase(nome_da_metrica{code=\"500\"}[5m]))",
+          "expr": "sum(increase(http_requests_received_total{code=\"500\"}[6h]))",
           "instant": false,
           "legendFormat": "__auto",
           "range": true,
@@ -189,7 +194,221 @@
       "datasource": {
         "default": true,
         "type": "prometheus",
-        "name": "Prometheus"
+        "uid": "PBFA97CFB590B2093"
+      },
+      "description": "Status da aplicação (Unhealthy, Degraded, Healthy)",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 0,
+          "fieldMinMax": false,
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "red",
+                  "index": 0,
+                  "text": "Unhealthy"
+                },
+                "1": {
+                  "color": "orange",
+                  "index": 1,
+                  "text": "Degraded"
+                },
+                "2": {
+                  "color": "green",
+                  "index": 2,
+                  "text": "Healthy"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "min": 0,
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "purple",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 4,
+        "x": 8,
+        "y": 0
+      },
+      "id": 13,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "Prometheus",
+          "url": "http://localhost:8080/health/live"
+        }
+      ],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "last_over_time(healthcheck{job=\"contatos-api-health\", healthcheck=\"Liveness\"}[1m])",
+          "format": "time_series",
+          "fullMetaSearch": false,
+          "hide": false,
+          "includeNullMetadata": true,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Liveness",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "default": true,
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "description": "Indica se a aplicação está pronta para receber requições (Unhealthy, Degraded, Healthy)",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 0,
+          "fieldMinMax": false,
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "red",
+                  "index": 0,
+                  "text": "Unhealthy"
+                },
+                "1": {
+                  "color": "orange",
+                  "index": 1,
+                  "text": "Degraded"
+                },
+                "2": {
+                  "color": "green",
+                  "index": 2,
+                  "text": "Healthy"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "min": 0,
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "purple",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 4,
+        "x": 12,
+        "y": 0
+      },
+      "id": 14,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "Prometheus",
+          "url": "http://localhost:8080/health/ready"
+        }
+      ],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "last_over_time(healthcheck{job=\"contatos-api-health\", healthcheck=\"Liveness\"}[1m])",
+          "format": "time_series",
+          "fullMetaSearch": false,
+          "hide": false,
+          "includeNullMetadata": true,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Readiness",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "default": true,
+        "name": "Prometheus",
+        "type": "prometheus"
       },
       "description": "Consumo de CPU pela aplicação",
       "fieldConfig": {
@@ -230,7 +449,7 @@
       "gridPos": {
         "h": 9,
         "w": 4,
-        "x": 8,
+        "x": 16,
         "y": 0
       },
       "id": 10,
@@ -261,8 +480,8 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
-            "name": "Prometheus"
+            "name": "Prometheus",
+            "type": "prometheus"
           },
           "editorMode": "code",
           "expr": "system_runtime_cpu_usage{job=\"contatos-api\"}",
@@ -278,8 +497,8 @@
     {
       "datasource": {
         "default": true,
-        "type": "prometheus",
-        "name": "Prometheus"
+        "name": "Prometheus",
+        "type": "prometheus"
       },
       "description": "Quantidade de memória RAM consumida pela aplicação",
       "fieldConfig": {
@@ -306,7 +525,7 @@
       "gridPos": {
         "h": 9,
         "w": 4,
-        "x": 12,
+        "x": 20,
         "y": 0
       },
       "id": 11,
@@ -338,8 +557,8 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
-            "name": "Prometheus"
+            "name": "Prometheus",
+            "type": "prometheus"
           },
           "editorMode": "code",
           "expr": "process_working_set_bytes{job=\"contatos-api\"}",
@@ -367,8 +586,8 @@
     {
       "datasource": {
         "default": true,
-        "type": "prometheus",
-        "name": "Prometheus"
+        "name": "Prometheus",
+        "type": "prometheus"
       },
       "description": "Uso de CPU pela aplicação",
       "fieldConfig": {
@@ -487,8 +706,8 @@
     {
       "datasource": {
         "default": true,
-        "type": "prometheus",
-        "name": "Prometheus"
+        "name": "Prometheus",
+        "type": "prometheus"
       },
       "description": "Quantidade de memória RAM consumida pela aplicação",
       "fieldConfig": {
@@ -580,8 +799,8 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
-            "name": "Prometheus"
+            "name": "Prometheus",
+            "type": "prometheus"
           },
           "disableTextWrap": false,
           "editorMode": "code",
@@ -602,7 +821,7 @@
       "datasource": {
         "default": true,
         "type": "prometheus",
-        "name": "Prometheus"
+        "uid": "PBFA97CFB590B2093"
       },
       "description": "Contagem total de requisições HTTP recebidas, agrupadas por código de status.",
       "fieldConfig": {
@@ -767,8 +986,8 @@
     {
       "datasource": {
         "default": true,
-        "type": "prometheus",
-        "name": "Prometheus"
+        "name": "Prometheus",
+        "type": "prometheus"
       },
       "description": "Latência das requisições",
       "fieldConfig": {
@@ -856,8 +1075,8 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
-            "name": "Prometheus"
+            "name": "Prometheus",
+            "type": "prometheus"
           },
           "disableTextWrap": false,
           "editorMode": "code",
@@ -873,8 +1092,8 @@
         },
         {
           "datasource": {
-            "type": "prometheus",
-            "name": "Prometheus"
+            "name": "Prometheus",
+            "type": "prometheus"
           },
           "disableTextWrap": false,
           "editorMode": "code",
@@ -891,8 +1110,8 @@
         },
         {
           "datasource": {
-            "type": "prometheus",
-            "name": "Prometheus"
+            "name": "Prometheus",
+            "type": "prometheus"
           },
           "disableTextWrap": false,
           "editorMode": "code",
@@ -909,8 +1128,8 @@
         },
         {
           "datasource": {
-            "type": "prometheus",
-            "name": "Prometheus"
+            "name": "Prometheus",
+            "type": "prometheus"
           },
           "disableTextWrap": false,
           "editorMode": "code",
@@ -927,8 +1146,8 @@
         },
         {
           "datasource": {
-            "type": "prometheus",
-            "name": "Prometheus"
+            "name": "Prometheus",
+            "type": "prometheus"
           },
           "disableTextWrap": false,
           "editorMode": "code",
@@ -948,7 +1167,7 @@
       "type": "timeseries"
     }
   ],
-  "refresh": "5s",
+  "refresh": "auto",
   "schemaVersion": 39,
   "tags": [],
   "templating": {
@@ -962,6 +1181,6 @@
   "timezone": "browser",
   "title": "Contatos API",
   "uid": "fe0r13dlt2z9ca",
-  "version": 17,
+  "version": 1,
   "weekStart": ""
 }

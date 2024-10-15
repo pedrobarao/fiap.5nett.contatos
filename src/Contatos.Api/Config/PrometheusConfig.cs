@@ -8,6 +8,7 @@ public static class PrometheusConfig
     {
         app.UseMetricServer("/metrics");
         app.UseHttpMetrics();
+        
         return app;
     }
 }
