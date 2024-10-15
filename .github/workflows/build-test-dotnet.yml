@@ -3,8 +3,6 @@ name: .NET Build and Test
 on:
   push:
     branches: [ "main" ]
-  #pull_request:
-  #  branches: [ "main" ]
 
 permissions:
   contents: read
@@ -29,7 +27,6 @@ jobs:
           POSTGRES_DB: contatos
         ports:
           - 5432:5432
-        # Espera que o PostgreSQL esteja pronto antes de seguir para os passos seguintes.
         options: >-
           --health-cmd="pg_isready -U postgres"
           --health-interval=10s
@@ -58,22 +55,9 @@ jobs:
         reports: test/results/coverlet/**/coverage.cobertura.xml
         targetdir: test/results/coverage-report
         reporttypes: Html;MarkdownSummaryGithub
-
-    - name: Upload coverage report artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: CoverageReport # Artifact name        
-        path: test/results/coverage-report # Directory containing files to upload
-    
-    - name: Add comment to PR # Only applicable if 'MarkdownSummaryGithub' or one of the other Markdown report types is generated
-      if: github.event_name == 'pull_request'
-      run: gh pr comment $PR_NUMBER --body-file test/results/coverage-report/SummaryGithub.md # Adjust path and filename if necessary
-      env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        PR_NUMBER: ${{ github.event.number }}
         
-    - name: Publish coverage in build summary # Only applicable if 'MarkdownSummaryGithub' or one of the other Markdown report types is generated
-      run: cat test/results/coverage-report/SummaryGithub.md >> $GITHUB_STEP_SUMMARY # Adjust path and filename if necessary
+    - name: Publish coverage in build summary 
+      run: cat test/results/coverage-report/SummaryGithub.md >> $GITHUB_STEP_SUMMARY
       shell: bash
 
     - name: Setup Pages
