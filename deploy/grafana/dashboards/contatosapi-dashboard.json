@@ -24,7 +24,7 @@
       "datasource": {
         "default": true,
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "name": "Prometheus"
       },
       "description": "Indica o tempo de início do processo da aplicação.",
       "fieldConfig": {
@@ -82,7 +82,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "name": "Prometheus"
           },
           "editorMode": "code",
           "expr": "time() - process_start_time_seconds",
@@ -99,7 +99,7 @@
       "datasource": {
         "default": true,
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "name": "Prometheus"
       },
       "description": "Quantidade de erros da aplicação nos últimos 5 minutos ",
       "fieldConfig": {
@@ -172,7 +172,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "name": "Prometheus"
           },
           "editorMode": "code",
           "expr": "sum(increase(nome_da_metrica{code=\"500\"}[5m]))",
@@ -189,7 +189,7 @@
       "datasource": {
         "default": true,
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "name": "Prometheus"
       },
       "description": "Consumo de CPU pela aplicação",
       "fieldConfig": {
@@ -262,7 +262,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "name": "Prometheus"
           },
           "editorMode": "code",
           "expr": "system_runtime_cpu_usage{job=\"contatos-api\"}",
@@ -279,7 +279,7 @@
       "datasource": {
         "default": true,
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "name": "Prometheus"
       },
       "description": "Quantidade de memória RAM consumida pela aplicação",
       "fieldConfig": {
@@ -339,7 +339,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "name": "Prometheus"
           },
           "editorMode": "code",
           "expr": "process_working_set_bytes{job=\"contatos-api\"}",
@@ -368,7 +368,7 @@
       "datasource": {
         "default": true,
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "name": "Prometheus"
       },
       "description": "Uso de CPU pela aplicação",
       "fieldConfig": {
@@ -488,7 +488,7 @@
       "datasource": {
         "default": true,
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "name": "Prometheus"
       },
       "description": "Quantidade de memória RAM consumida pela aplicação",
       "fieldConfig": {
@@ -581,7 +581,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "name": "Prometheus"
           },
           "disableTextWrap": false,
           "editorMode": "code",
@@ -602,7 +602,7 @@
       "datasource": {
         "default": true,
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "name": "Prometheus"
       },
       "description": "Contagem total de requisições HTTP recebidas, agrupadas por código de status.",
       "fieldConfig": {
@@ -768,7 +768,7 @@
       "datasource": {
         "default": true,
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "name": "Prometheus"
       },
       "description": "Latência das requisições",
       "fieldConfig": {
@@ -857,7 +857,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "name": "Prometheus"
           },
           "disableTextWrap": false,
           "editorMode": "code",
@@ -874,7 +874,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "name": "Prometheus"
           },
           "disableTextWrap": false,
           "editorMode": "code",
@@ -892,7 +892,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "name": "Prometheus"
           },
           "disableTextWrap": false,
           "editorMode": "code",
@@ -910,7 +910,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "name": "Prometheus"
           },
           "disableTextWrap": false,
           "editorMode": "code",
@@ -928,7 +928,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "name": "Prometheus"
           },
           "disableTextWrap": false,
           "editorMode": "code",
