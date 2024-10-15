@@ -76,7 +76,7 @@ Além disso, o relatório de cobertura de testes é executado automaticamente no
 
 2 - Na raíz do projeto execute o seguinte comando:
 ```bash
-docker compose -f .\deploy\docker-compose.yaml -p contatos up -d --build
+docker compose -f .\deploy\docker-compose.yaml -p tech-challenge up -d --build
 ```
 Esse comando irá fazer o build da aplicação e subir o container com a aplicação e recursos necessários.
 
@@ -86,5 +86,16 @@ dotnet ef database update -p .\src\Fase1.Contatos.Infra.Data\Fase1.Contatos.Infr
 ```
 Pronto! A aplicação está pronta para ser utilizada.
 
-### Monitorando a API 🔎
+## Monitorando a API 🔎
 
+Ao iniciarmos o container o Prometheus e Grafana também são iniciados. Os deashboard do Grafana já estão configurados para monitorar a aplicação.
+
+### Passo a passo
+
+1 - Acesse o Grafana em `http://localhost:3000` e faça login com as credenciais `admin` e `root`.
+
+2 - Selecione o dashboard `Contatos API` para visualizar as métricas da aplicação.
+
+![assets/grafana.png](assets/grafana.png)
+
+Cada uma das visualizações contém uma descrição detalhada das métricas monitoradas.

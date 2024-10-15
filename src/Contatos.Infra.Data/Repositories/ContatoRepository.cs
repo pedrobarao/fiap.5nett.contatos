@@ -35,6 +35,7 @@ public sealed class ContatoRepository(ContatoDbContext context) : IContatoReposi
                                INNER JOIN ""Telefones"" AS ""Telefones"" ON ""Contatos"".""Id"" = ""Telefones"".""ContatoId""
                               WHERE (@query IS NULL OR UPPER(""PrimeiroNome"") LIKE '%' || @query || '%')
                                 OR (@query IS NULL OR UPPER(""Sobrenome"") LIKE '%' || @query || '%')
+                                OR (@query IS NULL OR ""Telefones"".""Ddd""::text = @query)
                               ORDER BY ""PrimeiroNome""
                               LIMIT @pageSize OFFSET @pageIndex * @pageSize";
 
