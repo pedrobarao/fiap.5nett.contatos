@@ -1,4 +1,4 @@
-﻿namespace Infra.CrossCutting.Extensions;
+﻿namespace Contatos.ServiceDefaults.Extensions;
 
 public static class StringExtension
 {

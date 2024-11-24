@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Commons.Domain.Communication;
-using Infra.CrossCutting.Extensions;
+using Contatos.ServiceDefaults.Extensions;
 
-namespace Contatos.Domain.ValueObjects;
+namespace Contatos.SharedKernel.ValueObjects;
 
 public record Telefone
 {

@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Contatos.Infra.Data;
-using Microsoft.EntityFrameworkCore;
 using Npgsql;
 using Polly;
 
@@ -27,6 +26,6 @@ public static class MigrationExtensions
 
         using var scope = app.Services.CreateScope();
         var dbContext = scope.ServiceProvider.GetRequiredService<ContatoDbContext>();
-        retryPolicy.Execute(() => dbContext.Database.Migrate());
+        //retryPolicy.Execute(() => dbContext.Database.Migrate());
     }
 }
