@@ -17,11 +17,11 @@ public static class ConsultaContatosApi
 
         return api;
     }
-    
+
     private static async Task<Results<Ok<PagedResult<ObterContatoOutput>>, ValidationProblem>> ListarContatos(
         [AsParameters] ListarContatosServices services, PagedResultInput input)
     {
-        var result = await services.useCase.ExecuteAsync(input.PageSize, input.PageIndex, input.Query);
+        var result = await services.Query.ExecuteAsync(input.PageSize, input.PageIndex, input.Query);
         return TypedResults.Ok(result);
     }
 
@@ -29,7 +29,7 @@ public static class ConsultaContatosApi
         [AsParameters] ObterContatoServices services,
         [FromRoute] Guid id)
     {
-        var result = await services.useCase.ExecuteAsync(id);
+        var result = await services.Query.ExecuteAsync(id);
         return result is not null ? TypedResults.Ok(result) : TypedResults.NotFound();
     }
 }

@@ -1,5 +1,5 @@
 ﻿using Commons.Domain.Data;
-using Contatos.SharedKernel.Entities;
+using Contatos.Cadastro.Api.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Contatos.Cadastro.Api.Infra.Data;

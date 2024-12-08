@@ -1,4 +1,5 @@
 using Contatos.Consulta.Api.Apis;
+using Contatos.Consulta.Api.Application.Mappings;
 using Contatos.Consulta.Api.Config;
 using Contatos.ServiceDefaults;
 using Contatos.ServiceDefaults.OpenApi;
@@ -9,16 +10,18 @@ builder.AddServiceDefaults();
 
 builder.Services.AddEndpointsApiExplorer();
 
-builder.Services.RegisterServices(builder.Configuration);
+builder.RegisterServices();
 
 var withApiVersioning = builder.Services.AddApiVersioning();
 builder.AddDefaultOpenApiConfig(withApiVersioning);
+
+MappingConfig.Register();
 
 var app = builder.Build();
 
 app.MapDefaultEndpoints();
 
-var contatos = app.NewVersionedApi("Atualização Contatos");
+var contatos = app.NewVersionedApi("Consulta Contatos");
 contatos.MapConsultaContatosApiV1();
 
 app.UseDefaultOpenApiConfig();

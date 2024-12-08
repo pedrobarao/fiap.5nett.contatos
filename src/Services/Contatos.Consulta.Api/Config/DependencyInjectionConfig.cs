@@ -1,26 +1,38 @@
-﻿using Contatos.Consulta.Api.Application.UseCases;
-using Contatos.Consulta.Api.Domain;
+﻿using Contatos.Consulta.Api.Application.Events;
+using Contatos.Consulta.Api.Application.Mappings;
+using Contatos.Consulta.Api.Application.Queries;
+using Contatos.Consulta.Api.Domain.Repositories;
 using Contatos.Consulta.Api.Infra.Data;
 using Contatos.Consulta.Api.Infra.Data.Repositories;
+using Mapster;
+using MessageBus;
 using Microsoft.EntityFrameworkCore;
+using Utils;
 
 namespace Contatos.Consulta.Api.Config;
 
 public static class DependencyInjectionConfig
 {
-    public static IServiceCollection RegisterServices(this IServiceCollection services, IConfiguration configuration)
+    public static IHostApplicationBuilder RegisterServices(this IHostApplicationBuilder builder)
     {
-        RegisterApplicationServices(services);
-        RegisterDomainServices(services);
-        RegisterInfraServices(services, configuration);
+        RegisterApplicationServices(builder.Services);
+        RegisterDomainServices(builder.Services);
+        RegisterInfraServices(builder.Services, builder.Configuration);
 
-        return services;
+        builder.Services.AddMapster();
+        GlobalMappingConfig.Register();
+        MappingConfig.Register();
+
+        builder.Services.AddMessageBus(x => { x.AddConsumer<CriarContatoIntegrationEventHandler>(); },
+            builder.Configuration);
+
+        return builder;
     }
 
     private static void RegisterApplicationServices(IServiceCollection services)
     {
-        services.AddScoped<IListarContatoUseCase, ListarContatoUseCase>();
-        services.AddScoped<IObterContatoUseCase, ObterContatoUseCase>();
+        services.AddScoped<IListarContatoQuery, ListarContatoQuery>();
+        services.AddScoped<IObterContatoQuery, ObterContatoQuery>();
     }
 
     private static void RegisterDomainServices(IServiceCollection services)

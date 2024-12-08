@@ -1,4 +1,4 @@
-﻿namespace Contatos.ServiceDefaults.Extensions;
+﻿namespace Commons.Domain.Utils;
 
 public static class StringExtension
 {

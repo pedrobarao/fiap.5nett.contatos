@@ -1,7 +1,7 @@
-﻿using Contatos.SharedKernel.Entities;
-using Contatos.SharedKernel.ValueObjects;
+﻿using Contatos.Consulta.Api.Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Contato = Contatos.Consulta.Api.Domain.Entities.Contato;
 
 namespace Contatos.Consulta.Api.Infra.Data.Mappings;
 

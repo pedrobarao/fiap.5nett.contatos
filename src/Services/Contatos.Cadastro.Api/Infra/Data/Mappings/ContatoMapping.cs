@@ -1,5 +1,5 @@
-﻿using Contatos.SharedKernel.Entities;
-using Contatos.SharedKernel.ValueObjects;
+﻿using Contatos.Cadastro.Api.Domain.Entities;
+using Contatos.Cadastro.Api.Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

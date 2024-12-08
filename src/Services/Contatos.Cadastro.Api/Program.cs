@@ -19,7 +19,7 @@ var app = builder.Build();
 app.MapDefaultEndpoints();
 
 var contatos = app.NewVersionedApi("Cadastro Contatos");
-contatos.MapCadastroContatosApiV1();
+contatos.MapContatosApiV1();
 
 app.UseDefaultOpenApiConfig();
 

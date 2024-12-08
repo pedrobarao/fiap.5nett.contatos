@@ -1,8 +1,8 @@
-﻿using Contatos.Consulta.Api.Application.UseCases;
+﻿using Contatos.Consulta.Api.Application.Queries;
 
 namespace Contatos.Consulta.Api.Apis;
 
 public class ListarContatosServices
 {
-    public IListarContatoUseCase useCase { get; set; }
+    public IListarContatoQuery Query { get; set; }
 }

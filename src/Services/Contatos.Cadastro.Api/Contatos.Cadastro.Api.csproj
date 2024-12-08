@@ -9,6 +9,8 @@
 
     <ItemGroup>
         <PackageReference Include="Asp.Versioning.Http" Version="8.1.0"/>
+        <PackageReference Include="Dapper" Version="2.1.35" />
+        <PackageReference Include="MassTransit.RabbitMQ" Version="8.3.2" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.8"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.8">
@@ -19,19 +21,15 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Content Include="..\..\..\.dockerignore">
-            <Link>.dockerignore</Link>
-        </Content>
-    </ItemGroup>
-
-    <ItemGroup>
-        <ProjectReference Include="..\..\BuildingBlocks\Commons.Domain\Commons.Domain.csproj" />
+        <ProjectReference Include="..\..\BuildingBlocks\Commons.Domain\Commons.Domain.csproj"/>
         <ProjectReference Include="..\..\BuildingBlocks\Contatos.ServiceDefaults\Contatos.ServiceDefaults.csproj"/>
-        <ProjectReference Include="..\..\BuildingBlocks\Contatos.SharedKernel\Contatos.SharedKernel.csproj" />
+        <ProjectReference Include="..\..\BuildingBlocks\MessageBus\MessageBus.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Infra\Data\Migrations\" />
+      <Content Include="..\..\..\.dockerignore">
+        <Link>.dockerignore</Link>
+      </Content>
     </ItemGroup>
 
 </Project>

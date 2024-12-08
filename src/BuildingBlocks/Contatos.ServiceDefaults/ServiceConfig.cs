@@ -15,7 +15,7 @@ public static class ServiceConfig
     public static IHostApplicationBuilder AddServiceDefaults(this IHostApplicationBuilder builder)
     {
         builder.Services.AddHttpContextAccessor();
-        
+
         builder.ConfigureOpenTelemetry();
 
         builder.AddDefaultHealthChecks();

@@ -1,10 +1,10 @@
 ﻿using Commons.Domain.Communication;
 using Commons.Domain.Data;
-using Contatos.Consulta.Api.Domain;
-using Contatos.SharedKernel.Entities;
-using Contatos.SharedKernel.ValueObjects;
+using Contatos.Consulta.Api.Domain.Repositories;
+using Contatos.Consulta.Api.Domain.ValueObjects;
 using Dapper;
 using Microsoft.EntityFrameworkCore;
+using Contato = Contatos.Consulta.Api.Domain.Entities.Contato;
 
 namespace Contatos.Consulta.Api.Infra.Data.Repositories;
 
@@ -12,7 +12,7 @@ public sealed class ContatoRepository(ContatoDbContext context) : IContatoReposi
 {
     public IUnitOfWork UnitOfWork => context!;
 
-public async Task<Contato?> ObterContatoPorIdAsync(Guid id)
+    public async Task<Contato?> ObterContatoPorIdAsync(Guid id)
     {
         return await context.Contatos.FirstOrDefaultAsync(p => p.Id == id);
     }
@@ -67,7 +67,7 @@ public async Task<Contato?> ObterContatoPorIdAsync(Guid id)
 
         return new PagedResult<Contato>(contatos?.Distinct(), totalItems, pageIndex, pageSize, query);
     }
-    
+
     public void Dispose()
     {
         context?.Dispose();

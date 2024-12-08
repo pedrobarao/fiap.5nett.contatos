@@ -8,6 +8,9 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["src/Services/Contatos.Cadastro.Api/Contatos.Cadastro.Api.csproj", "src/Services/Contatos.Cadastro.Api/"]
+COPY ["src/BuildingBlocks/Commons.Domain/Commons.Domain.csproj", "src/BuildingBlocks/Commons.Domain/"]
+COPY ["src/BuildingBlocks/Contatos.ServiceDefaults/Contatos.ServiceDefaults.csproj", "src/BuildingBlocks/Contatos.ServiceDefaults/"]
+COPY ["src/BuildingBlocks/MessageBus/MessageBus.csproj", "src/BuildingBlocks/MessageBus/"]
 RUN dotnet restore "src/Services/Contatos.Cadastro.Api/Contatos.Cadastro.Api.csproj"
 COPY . .
 WORKDIR "/src/src/Services/Contatos.Cadastro.Api"

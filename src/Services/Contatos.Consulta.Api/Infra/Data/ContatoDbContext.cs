@@ -1,6 +1,6 @@
 ﻿using Commons.Domain.Data;
-using Contatos.SharedKernel.Entities;
 using Microsoft.EntityFrameworkCore;
+using Contato = Contatos.Consulta.Api.Domain.Entities.Contato;
 
 namespace Contatos.Consulta.Api.Infra.Data;
 

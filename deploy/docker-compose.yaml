@@ -1,16 +1,29 @@
 ﻿version: '3'
 services:
   
-  contatos-api:
-    container_name: contatos-api
+  cadastro-contatos-api:
+    container_name: cadastro-contatos-api
     depends_on:
       - contatos-db
       - prometheus
     build:
       context: ../
-      dockerfile: ./src/Contatos.Api/Dockerfile
+      dockerfile: ./src/Services/Contatos.Cadastro.Api/Dockerfile
     ports:
       - "8080:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+        
+  consulta-contatos-api:
+    container_name: consulta-contatos-api
+    depends_on:
+      - contatos-db-leitura
+      - prometheus
+    build:
+      context: ../
+      dockerfile: ./src/Services/Contatos.Consulta.Api/Dockerfile
+    ports:
+      - "8081:8080"
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
 
@@ -50,6 +63,32 @@ services:
     depends_on:
       - prometheus
 
+  contatos-db-leitura:
+    image: mongo:latest
+    container_name: contatos-db-leitura
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: contatos
+      MONGO_INITDB_DATABASE: contatos
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: contatos
+    ports:
+      - "5672:5672"    # Porta padrão do RabbitMQ
+      - "15672:15672"  # Porta para acessar o painel de administração
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+
 volumes:
   postgres_data:
   grafana_data:
+  mongo_data:
+  rabbitmq_data:
