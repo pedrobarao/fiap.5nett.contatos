@@ -6,8 +6,8 @@ namespace MessageBus;
 
 public static class MessageBusConfig
 {
-    public static IServiceCollection AddMessageBus(this IServiceCollection services,
-        Action<IBusRegistrationConfigurator> configureConsumers, IConfiguration config)
+    public static IServiceCollection AddMessageBus(this IServiceCollection services, IConfiguration config,
+        Action<IBusRegistrationConfigurator>? configureConsumers = null)
     {
         var messageBusSettings = new MessageBusSettings();
         config.GetRequiredSection("MessageBus").Bind(messageBusSettings);
@@ -15,12 +15,12 @@ public static class MessageBusConfig
         services.AddMassTransit(
                 x =>
                 {
-                    configureConsumers(x);
+                    if (configureConsumers != null) configureConsumers(x);
 
                     x.UsingRabbitMq(
                         (context, cfg) =>
                         {
-                            cfg.Host(messageBusSettings.Host, "/", h =>
+                            cfg.Host(new Uri(messageBusSettings.Host), "/", h =>
                             {
                                 h.Username(messageBusSettings.Username);
                                 h.Password(messageBusSettings.Password);
@@ -28,7 +28,7 @@ public static class MessageBusConfig
                         });
                 })
             .BuildServiceProvider();
-        
+
         services.AddSingleton<IMessageBus, MessageBus>();
 
         return services;

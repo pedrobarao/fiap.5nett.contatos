@@ -7,11 +7,11 @@ public class AtualizarContatoCommand
     public string? Sobrenome { get; set; }
     public string? Email { get; set; }
     public List<Telefone> Telefones { get; set; } = [];
-    
-    public class Telefone 
+
+    public class Telefone
     {
         public short Ddd { get; set; }
         public string Numero { get; set; } = null!;
         public string Tipo { get; set; } = null!;
-    } 
+    }
 }

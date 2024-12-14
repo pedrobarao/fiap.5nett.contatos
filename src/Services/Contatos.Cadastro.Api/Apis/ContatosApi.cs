@@ -15,8 +15,8 @@ public static class ContatosApi
         var api = app.MapGroup("api/contatos").HasApiVersion(1.0);
 
         api.MapPost("/", CadastrarContato);
-        api.MapPut("/", AtualizarContato);
-        api.MapDelete("/", ExcluirContato);
+        api.MapPut("/{id}", AtualizarContato);
+        api.MapDelete("/{id}", ExcluirContato);
 
         return api;
     }
@@ -33,11 +33,14 @@ public static class ContatosApi
         return TypedResults.Created($"https://consulta-contatos/{result.Value}", result.Value);
     }
 
-    private static async Task<Results<NoContent, ValidationProblem>> AtualizarContato(
+    private static async Task<Results<NoContent, ValidationProblem, BadRequest>> AtualizarContato(
         HttpContext context,
         IMediator mediator,
+        [FromRoute] Guid id,
         [FromBody] AtualizarContatoCommand command)
     {
+        if(id != command.Id) return TypedResults.BadRequest();
+        
         var result = await mediator.Send(command);
 
         if (!result.IsSuccess) return TypedResults.Extensions.InvalidOperation(result.Errors, context);
@@ -46,7 +49,7 @@ public static class ContatosApi
     }
 
     private static async Task<NoContent> ExcluirContato(
-        IMediator mediator, 
+        IMediator mediator,
         [FromRoute] Guid id)
     {
         await mediator.Send(new ExcluirContatoCommand { Id = id });

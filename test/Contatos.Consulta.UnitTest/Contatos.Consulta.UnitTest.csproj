@@ -29,4 +29,8 @@
         <ProjectReference Include="..\..\src\Services\Contatos.Consulta.Api\Contatos.Consulta.Api.csproj"/>
     </ItemGroup>
 
+    <ItemGroup>
+        <Folder Include="Application\Commands\"/>
+    </ItemGroup>
+
 </Project>

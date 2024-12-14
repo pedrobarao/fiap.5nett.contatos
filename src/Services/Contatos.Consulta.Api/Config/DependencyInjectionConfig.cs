@@ -1,12 +1,9 @@
 ﻿using Contatos.Consulta.Api.Application.Events;
-using Contatos.Consulta.Api.Application.Mappings;
-using Contatos.Consulta.Api.Application.Queries;
 using Contatos.Consulta.Api.Domain.Repositories;
-using Contatos.Consulta.Api.Infra.Data;
-using Contatos.Consulta.Api.Infra.Data.Repositories;
+using Contatos.Consulta.Api.Infra;
 using Mapster;
 using MessageBus;
-using Microsoft.EntityFrameworkCore;
+using MongoDB.Driver;
 using Utils;
 
 namespace Contatos.Consulta.Api.Config;
@@ -17,22 +14,15 @@ public static class DependencyInjectionConfig
     {
         RegisterApplicationServices(builder.Services);
         RegisterDomainServices(builder.Services);
-        RegisterInfraServices(builder.Services, builder.Configuration);
-
-        builder.Services.AddMapster();
-        GlobalMappingConfig.Register();
-        MappingConfig.Register();
-
-        builder.Services.AddMessageBus(x => { x.AddConsumer<CriarContatoIntegrationEventHandler>(); },
-            builder.Configuration);
+        RegisterInfraServices(builder);
 
         return builder;
     }
 
     private static void RegisterApplicationServices(IServiceCollection services)
     {
-        services.AddScoped<IListarContatoQuery, ListarContatoQuery>();
-        services.AddScoped<IObterContatoQuery, ObterContatoQuery>();
+        services.AddMapster();
+        GlobalMappingConfig.Register();
     }
 
     private static void RegisterDomainServices(IServiceCollection services)
@@ -40,11 +30,17 @@ public static class DependencyInjectionConfig
         services.AddScoped<IContatoRepository, ContatoRepository>();
     }
 
-    private static void RegisterInfraServices(IServiceCollection services, IConfiguration configuration)
+    private static void RegisterInfraServices(IHostApplicationBuilder builder)
     {
-        services.AddDbContext<ContatoDbContext>(options =>
+        builder.Services.AddSingleton(sp =>
         {
-            options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
+            var dbName = builder.Configuration["ConnectionStrings:DatabaseName"];
+            var client = sp.GetRequiredService<IMongoClient>();
+            return client.GetDatabase(dbName);
         });
+
+        builder.Services.AddMessageBus(
+            builder.Configuration,
+            x => { x.AddConsumer<CriarContatoIntegrationEventHandler>(); });
     }
 }

@@ -1,14 +1,13 @@
-﻿namespace Contatos.Consulta.Api.Application.DTOs;
+﻿namespace Commons.Domain.Messages.IntegrationEvents;
 
-public class ObterContatoOutput
+public class ContatoAtualizadoIntegrationEvent : Event
 {
-    public Guid Id { get; set; }
     public string Nome { get; set; } = null!;
     public string? Sobrenome { get; set; }
-    public IList<TelefoneOutput> Telefones { get; set; } = null!;
     public string? Email { get; set; }
+    public List<Telefone> Telefones { get; set; } = [];
 
-    public class TelefoneOutput
+    public class Telefone
     {
         public short Ddd { get; set; }
         public string Numero { get; set; } = null!;

@@ -5,9 +5,9 @@ using MassTransit.Mediator;
 
 namespace Contatos.Consulta.Api.Application.Events;
 
-public class AtualizarContatoIntegrationEventHandler(IMediator mediator) : IConsumer<AtualizarContatoIntegrationEvent>
+public class AtualizarContatoIntegrationEventHandler(IMediator mediator) : IConsumer<ContatoAtualizadoIntegrationEvent>
 {
-    public async Task Consume(ConsumeContext<AtualizarContatoIntegrationEvent> context)
+    public async Task Consume(ConsumeContext<ContatoAtualizadoIntegrationEvent> context)
     {
         var message = context.Message;
         var command = new AtualizarContatoCommand
@@ -22,7 +22,7 @@ public class AtualizarContatoIntegrationEventHandler(IMediator mediator) : ICons
                 Tipo = t.Tipo
             }).ToList()
         };
-       
+
         await mediator.Send(command);
     }
 }

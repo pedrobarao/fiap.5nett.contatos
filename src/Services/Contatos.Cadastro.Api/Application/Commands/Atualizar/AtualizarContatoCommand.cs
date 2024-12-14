@@ -14,10 +14,10 @@ public class AtualizarContatoCommand : IRequest<Result>
     public string Nome { get; set; } = null!;
 
     public string? Sobrenome { get; set; }
-    public IList<Telefone> Telefones { get; set; } = null!;
+    public IList<TelefoneAtualizacao> Telefones { get; set; } = null!;
     public string? Email { get; set; }
 
-    public class Telefone
+    public class TelefoneAtualizacao
     {
         public short Ddd { get; set; }
         public string Numero { get; set; } = null!;

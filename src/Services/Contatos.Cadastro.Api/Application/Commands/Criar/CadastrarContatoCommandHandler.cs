@@ -23,16 +23,16 @@ public class CadastrarContatoCommandHandler(IMessageBus bus)
 
         if (ValidationResult.IsInvalid) return Result.Failure<Guid>(ValidationResult.Errors);
 
-        await bus.Publish(new CriarContatoIntegrationEvent
+        await bus.Publish(new ContatoCriadoIntegrationEvent
         {
             AggregateId = contato.Id,
             Nome = contato.Nome.PrimeiroNome,
             Sobrenome = contato.Nome.Sobrenome,
-            Telefones = contato.Telefones.Select(t => new CriarContatoIntegrationEvent.Telefone
+            Telefones = contato.Telefones.Select(t => new ContatoCriadoIntegrationEvent.Telefone
             {
                 Ddd = t.Ddd,
                 Numero = t.Numero,
-                Tipo = t.Tipo.ToString(),
+                Tipo = t.Tipo.ToString()
             }).ToList(),
             Email = contato.Email?.Endereco
         }, cancellationToken);

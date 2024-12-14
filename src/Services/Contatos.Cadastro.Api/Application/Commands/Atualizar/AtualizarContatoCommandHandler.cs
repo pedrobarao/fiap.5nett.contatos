@@ -2,7 +2,6 @@
 using Commons.Domain.DomainObjects;
 using Commons.Domain.Messages;
 using Commons.Domain.Messages.IntegrationEvents;
-using Contatos.Cadastro.Api.Domain.Entities;
 using Contatos.Cadastro.Api.Domain.Repositories;
 using Contatos.Cadastro.Api.Domain.ValueObjects;
 using MediatR;
@@ -15,7 +14,7 @@ public class AtualizarContatoCommandHandler(IMessageBus bus, IContatoRepository 
 {
     public async Task<Result> Handle(AtualizarContatoCommand request, CancellationToken cancellationToken)
     {
-        Contato? contato = await repository.ObterContatoPorIdAsync(request.Id);
+        var contato = await repository.ObterContatoPorId(request.Id);
 
         if (contato is null) throw new DomainException("Contato inválido.");
 
@@ -33,16 +32,16 @@ public class AtualizarContatoCommandHandler(IMessageBus bus, IContatoRepository 
 
         if (!validationResult.IsValid) return Result.Failure(validationResult.Errors);
 
-        await bus.Publish(new CriarContatoIntegrationEvent
+        await bus.Publish(new ContatoAtualizadoIntegrationEvent
         {
             AggregateId = contato.Id,
             Nome = contato.Nome.PrimeiroNome,
             Sobrenome = contato.Nome.Sobrenome,
-            Telefones = contato.Telefones.Select(t => new CriarContatoIntegrationEvent.Telefone
+            Telefones = contato.Telefones.Select(t => new ContatoAtualizadoIntegrationEvent.Telefone
             {
                 Ddd = t.Ddd,
                 Numero = t.Numero,
-                Tipo = t.Tipo.ToString(),
+                Tipo = t.Tipo.ToString()
             }).ToList(),
             Email = contato.Email?.Endereco
         }, cancellationToken);

@@ -9,7 +9,7 @@ builder.AddServiceDefaults();
 
 builder.Services.AddEndpointsApiExplorer();
 
-builder.Services.RegisterServices(builder.Configuration);
+builder.RegisterServices();
 
 var withApiVersioning = builder.Services.AddApiVersioning();
 builder.AddDefaultOpenApiConfig(withApiVersioning);

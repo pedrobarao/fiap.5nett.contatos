@@ -1,5 +1,6 @@
 ﻿using Commons.Domain.Communication;
-using Contatos.Consulta.Api.Application.DTOs;
+using Contatos.Consulta.Api.Domain.Entities;
+using Contatos.Consulta.Api.Domain.Repositories;
 using Contatos.ServiceDefaults.Inputs;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -18,18 +19,18 @@ public static class ConsultaContatosApi
         return api;
     }
 
-    private static async Task<Results<Ok<PagedResult<ObterContatoOutput>>, ValidationProblem>> ListarContatos(
-        [AsParameters] ListarContatosServices services, PagedResultInput input)
+    private static async Task<Results<Ok<PagedResult<Contato>>, ValidationProblem>> ListarContatos(
+        [FromServices] IContatoRepository repository, PagedResultInput input)
     {
-        var result = await services.Query.ExecuteAsync(input.PageSize, input.PageIndex, input.Query);
-        return TypedResults.Ok(result);
+        var contatos = await repository.ObterContatosPaginados(input.PageSize, input.PageIndex, input.Query);
+        return TypedResults.Ok(contatos);
     }
 
-    private static async Task<Results<Ok<ObterContatoOutput>, NotFound>> ObterContato(
-        [AsParameters] ObterContatoServices services,
+    private static async Task<Results<Ok<Contato>, NotFound>> ObterContato(
+        [FromServices] IContatoRepository repository,
         [FromRoute] Guid id)
     {
-        var result = await services.Query.ExecuteAsync(id);
-        return result is not null ? TypedResults.Ok(result) : TypedResults.NotFound();
+        var contato = await repository.ObterContatoPorId(id);
+        return contato is not null ? TypedResults.Ok(contato) : TypedResults.NotFound();
     }
 }

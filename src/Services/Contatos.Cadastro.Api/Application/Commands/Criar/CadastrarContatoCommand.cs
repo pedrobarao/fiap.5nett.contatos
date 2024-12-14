@@ -13,11 +13,11 @@ public class CadastrarContatoCommand : IRequest<Result<Guid>>
     public string? Sobrenome { get; set; }
 
     [Required(ErrorMessage = "A propriedade {0} é obrigatória")]
-    public List<Telefone> Telefones { get; set; } = null!;
+    public List<TelefoneCriacao> Telefones { get; set; } = null!;
 
     public string? Email { get; set; }
 
-    public class Telefone
+    public class TelefoneCriacao
     {
         public short Ddd { get; set; }
         public string Numero { get; set; } = null!;

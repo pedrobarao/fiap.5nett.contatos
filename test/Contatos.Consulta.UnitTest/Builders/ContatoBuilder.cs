@@ -1,4 +1,5 @@
 ﻿using Bogus;
+using Contatos.Consulta.Api.Domain.Entities;
 
 namespace Contatos.Consulta.UnitTest.Builders;
 

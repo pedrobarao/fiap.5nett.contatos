@@ -1,6 +1,9 @@
-﻿namespace Contatos.Cadastro.Api.Application.Commands.Excluir;
+﻿using Commons.Domain.Communication;
+using MediatR;
 
-public class ExcluirContatoCommand
+namespace Contatos.Cadastro.Api.Application.Commands.Excluir;
+
+public class ExcluirContatoCommand : IRequest<Result>
 {
     public Guid Id { get; set; }
 }
