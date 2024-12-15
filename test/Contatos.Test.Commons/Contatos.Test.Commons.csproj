@@ -12,7 +12,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\..\src\Services\Contatos.Cadastro.Api\Contatos.Cadastro.Api.csproj"/>
-        <ProjectReference Include="..\..\src\Services\Contatos.Consulta.Api\Contatos.Consulta.Api.csproj" />
+        <ProjectReference Include="..\..\src\Services\Contatos.Consulta.Api\Contatos.Consulta.Api.csproj"/>
     </ItemGroup>
 
 </Project>

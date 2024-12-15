@@ -9,8 +9,8 @@ public static class HealthCheckConfig
     {
         builder.Services.AddHealthChecks()
             .AddMongoDb(
-                mongodbConnectionString: builder.Configuration.GetConnectionString("DefaultConnection") ??
-                                         throw new NoNullAllowedException(),
+                builder.Configuration.GetConnectionString("DefaultConnection") ??
+                throw new NoNullAllowedException(),
                 failureStatus: HealthStatus.Unhealthy,
                 tags: ["ready"]);
 

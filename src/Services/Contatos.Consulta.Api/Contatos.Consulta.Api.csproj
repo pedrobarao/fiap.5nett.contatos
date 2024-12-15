@@ -9,7 +9,7 @@
 
     <ItemGroup>
         <PackageReference Include="Asp.Versioning.Http" Version="8.1.0"/>
-        <PackageReference Include="AspNetCore.HealthChecks.MongoDb" Version="8.1.0" />
+        <PackageReference Include="AspNetCore.HealthChecks.MongoDb" Version="8.1.0"/>
         <PackageReference Include="Mapster.DependencyInjection" Version="1.0.1"/>
         <PackageReference Include="MongoDB.Driver" Version="3.1.0"/>
     </ItemGroup>

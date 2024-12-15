@@ -94,17 +94,17 @@ public static class ServiceConfig
     public static WebApplication MapDefaultEndpoints(this WebApplication app)
     {
         app.MapHealthChecks("/health");
-        
+
         app.MapHealthChecks("/alive", new HealthCheckOptions
         {
             Predicate = r => r.Tags.Contains("live")
         });
-        
+
         app.MapHealthChecks("/ready", new HealthCheckOptions
         {
             Predicate = r => r.Tags.Contains("ready")
         });
-        
+
         app.UseMetricServer();
         app.UseHttpMetrics();
         app.UseHealthChecksPrometheusExporter("/metrics");

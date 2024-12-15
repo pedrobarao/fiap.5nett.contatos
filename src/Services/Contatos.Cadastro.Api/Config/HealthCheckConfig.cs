@@ -8,7 +8,8 @@ public static class HealthCheckConfig
     public static IHostApplicationBuilder AddHealthCheckConfig(this IHostApplicationBuilder builder)
     {
         builder.Services.AddHealthChecks()
-            .AddNpgSql(builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new NoNullAllowedException(),
+            .AddNpgSql(
+                builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new NoNullAllowedException(),
                 failureStatus: HealthStatus.Unhealthy,
                 tags: ["ready"]);
 
