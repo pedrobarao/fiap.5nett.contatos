@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using Contatos.Cadastro.Api.Apis;
 using Contatos.Cadastro.Api.Config;
+using Contatos.Cadastro.Api.Extensions;
 using Contatos.ServiceDefaults;
 using Contatos.ServiceDefaults.OpenApi;
 
@@ -26,6 +27,11 @@ contatos.MapContatosApiV1();
 app.UseDefaultOpenApiConfig();
 
 app.UseHttpsRedirection();
+
+// Comente esta linha para desabilitar a aplicação de migrações
+app.ApplyMigrations();
+
+app.UseMiddleware<ErrorHandlingMiddleware>();
 
 app.Run();
 
