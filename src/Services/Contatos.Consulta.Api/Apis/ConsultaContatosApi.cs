@@ -13,14 +13,14 @@ public static class ConsultaContatosApi
     {
         var api = app.MapGroup("api/contatos").HasApiVersion(1.0);
 
-        api.MapPost("/{id}", ObterContato);
-        api.MapPost("/", ListarContatos);
+        api.MapGet("/{id}", ObterContato);
+        api.MapGet("/", ListarContatos);
 
         return api;
     }
 
     private static async Task<Results<Ok<PagedResult<Contato>>, ValidationProblem>> ListarContatos(
-        [FromServices] IContatoRepository repository, PagedResultInput input)
+        [FromServices] IContatoRepository repository, [AsParameters] PagedResultInput input)
     {
         var contatos = await repository.ObterContatosPaginados(input.PageSize, input.PageIndex, input.Query);
         return TypedResults.Ok(contatos);

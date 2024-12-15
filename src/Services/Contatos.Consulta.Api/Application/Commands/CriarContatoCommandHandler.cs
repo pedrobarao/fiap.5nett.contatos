@@ -12,13 +12,13 @@ public class CriarContatoCommandHandler(IContatoRepository repository)
 {
     public async Task<Result> Handle(CriarContatoCommand request, CancellationToken cancellationToken)
     {
-        var contato = new Contato();
-
-        if (!string.IsNullOrEmpty(request.Email))
+        var contato = new Contato
         {
-            contato.Email = new Email(request.Email);
-        }
-        
+            Id = request.Id
+        };
+
+        if (!string.IsNullOrEmpty(request.Email)) contato.Email = new Email(request.Email);
+
         contato.Nome = new Nome(request.Nome, request.Sobrenome);
 
         contato.Telefones = request.Telefones

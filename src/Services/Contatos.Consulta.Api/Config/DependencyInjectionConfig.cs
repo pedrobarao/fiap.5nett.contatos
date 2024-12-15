@@ -70,9 +70,7 @@ public static class DependencyInjectionConfig
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
             if (string.IsNullOrEmpty(connectionString))
-            {
                 throw new InvalidOperationException("MongoDB connection string is not configured.");
-            }
 
             return new MongoClient(connectionString);
         });
@@ -83,9 +81,7 @@ public static class DependencyInjectionConfig
             var client = services.GetRequiredService<IMongoClient>();
 
             if (string.IsNullOrEmpty(dbName))
-            {
                 throw new InvalidOperationException("MongoDB database name is not configured.");
-            }
 
             return client.GetDatabase(dbName);
         });
@@ -99,6 +95,8 @@ public static class DependencyInjectionConfig
                 busConfig =>
                 {
                     busConfig.AddConsumer<CriarContatoIntegrationEventHandler>();
+                    busConfig.AddConsumer<AtualizarContatoIntegrationEventHandler>();
+                    busConfig.AddConsumer<ExcluirContatoIntegrationEventHandler>();
 
                     busConfig.UsingRabbitMq(
                         (context, cfg) =>
@@ -117,6 +115,32 @@ public static class DependencyInjectionConfig
                                 re.ConfigureConsumer<CriarContatoIntegrationEventHandler>(context);
                                 // re.Durable = true;
                                 // re.AutoDelete = false;
+                                re.UseMessageRetry(r =>
+                                {
+                                    r.Immediate(5);
+                                    r.Interval(999999, TimeSpan.FromMinutes(1));
+                                });
+                            });
+                            
+                            cfg.ReceiveEndpoint("ContatoAtualizadoQueue", re =>
+                            {
+                                re.ConfigureConsumeTopology = false;
+                                re.Bind("ContatoAtualizadoExchange",
+                                    binding => { binding.ExchangeType = ExchangeType.Topic; });
+                                re.ConfigureConsumer<AtualizarContatoIntegrationEventHandler>(context);
+                                re.UseMessageRetry(r =>
+                                {
+                                    r.Immediate(5);
+                                    r.Interval(999999, TimeSpan.FromMinutes(1));
+                                });
+                            });
+                            
+                            cfg.ReceiveEndpoint("ContatoExcluidoQueue", re =>
+                            {
+                                re.ConfigureConsumeTopology = false;
+                                re.Bind("ContatoExcluidoExchange",
+                                    binding => { binding.ExchangeType = ExchangeType.Topic; });
+                                re.ConfigureConsumer<ExcluirContatoIntegrationEventHandler>(context);
                                 re.UseMessageRetry(r =>
                                 {
                                     r.Immediate(5);

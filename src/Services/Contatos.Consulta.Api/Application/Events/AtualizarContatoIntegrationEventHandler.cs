@@ -1,7 +1,7 @@
 ﻿using Commons.Domain.Messages.IntegrationEvents;
 using Contatos.Consulta.Api.Application.Commands;
 using MassTransit;
-using MassTransit.Mediator;
+using MediatR;
 
 namespace Contatos.Consulta.Api.Application.Events;
 
