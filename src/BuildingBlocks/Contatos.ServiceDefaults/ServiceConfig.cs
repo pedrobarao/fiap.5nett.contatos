@@ -51,7 +51,8 @@ public static class ServiceConfig
             {
                 metrics.AddAspNetCoreInstrumentation()
                     .AddHttpClientInstrumentation()
-                    .AddRuntimeInstrumentation();
+                    .AddRuntimeInstrumentation()
+                    .AddPrometheusExporter();
             })
             .WithTracing(tracing =>
             {
