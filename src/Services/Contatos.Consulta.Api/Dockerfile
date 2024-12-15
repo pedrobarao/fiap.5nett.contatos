@@ -11,7 +11,6 @@ COPY ["src/Services/Contatos.Consulta.Api/Contatos.Consulta.Api.csproj", "src/Se
 COPY ["src/BuildingBlocks/Contatos.ServiceDefaults/Contatos.ServiceDefaults.csproj", "src/BuildingBlocks/Contatos.ServiceDefaults/"]
 COPY ["src/BuildingBlocks/Commons.Domain/Commons.Domain.csproj", "src/BuildingBlocks/Commons.Domain/"]
 COPY ["src/BuildingBlocks/MessageBus/MessageBus.csproj", "src/BuildingBlocks/MessageBus/"]
-COPY ["src/BuildingBlocks/Utils/Utils.csproj", "src/BuildingBlocks/Utils/"]
 RUN dotnet restore "src/Services/Contatos.Consulta.Api/Contatos.Consulta.Api.csproj"
 COPY . .
 WORKDIR "/src/src/Services/Contatos.Consulta.Api"

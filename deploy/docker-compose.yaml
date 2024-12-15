@@ -1,5 +1,4 @@
-﻿version: '3'
-services:
+﻿services:
   
   cadastro-contatos-api:
     container_name: cadastro-contatos-api
