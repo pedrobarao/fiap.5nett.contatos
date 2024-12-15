@@ -67,7 +67,7 @@ services:
     image: mongo:latest
     container_name: contatos-db-leitura
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_USERNAME: contatos
       MONGO_INITDB_ROOT_PASSWORD: contatos
       MONGO_INITDB_DATABASE: contatos
     ports:
@@ -79,11 +79,11 @@ services:
     image: rabbitmq:management
     container_name: rabbitmq
     environment:
-      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_USER: contatos
       RABBITMQ_DEFAULT_PASS: contatos
     ports:
-      - "5672:5672"    # Porta padrão do RabbitMQ
-      - "15672:15672"  # Porta para acessar o painel de administração
+      - "5672:5672"
+      - "15672:15672"
     volumes:
       - rabbitmq_data:/var/lib/rabbitmq
 
