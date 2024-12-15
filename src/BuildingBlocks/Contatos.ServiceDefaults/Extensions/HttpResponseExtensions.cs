@@ -7,11 +7,11 @@ namespace Contatos.ServiceDefaults.Extensions;
 public static class HttpResponseExtensions
 {
     public static ValidationProblem InvalidOperation(this IResultExtensions _,
-        List<Error>? errors,
+        List<Error> errors,
         HttpContext context)
     {
         var errorsDictionary =
-            errors?.ToDictionary<Error?, string, string[]>(_ => "details", error => [error.ToString()]);
+            errors.ToDictionary<Error?, string, string[]>(_ => "details", error => [error!.ToString()]);
 
         return TypedResults.ValidationProblem(type: "https://datatracker.ietf.org/doc/html/rfc7807",
             title: "Erro ao processar a requisição.",
