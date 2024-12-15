@@ -21,7 +21,7 @@ app.MapDefaultEndpoints();
 
 var contatos = app.NewVersionedApi("Consulta Contatos");
 contatos.MapConsultaContatosApiV1();
-builder.AddHealthCheckConfig();
+// builder.AddHealthCheckConfig();
 
 app.UseDefaultOpenApiConfig();
 
