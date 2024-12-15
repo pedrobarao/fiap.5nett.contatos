@@ -15,7 +15,7 @@ builder.RegisterServices();
 
 var withApiVersioning = builder.Services.AddApiVersioning();
 builder.AddDefaultOpenApiConfig(withApiVersioning);
-//builder.AddHealthCheckConfig();
+builder.AddHealthCheckConfig();
 
 var app = builder.Build();
 
@@ -28,7 +28,7 @@ app.UseDefaultOpenApiConfig();
 
 app.UseHttpsRedirection();
 
-// Comente esta linha para desabilitar a aplicação de migrações
+// Comente esta linha para desabilitar a execução dos migrations
 app.ApplyMigrations();
 
 app.UseMiddleware<ErrorHandlingMiddleware>();

@@ -14,6 +14,7 @@ builder.RegisterServices();
 
 var withApiVersioning = builder.Services.AddApiVersioning();
 builder.AddDefaultOpenApiConfig(withApiVersioning);
+builder.AddHealthCheckConfig();
 
 var app = builder.Build();
 
@@ -21,7 +22,6 @@ app.MapDefaultEndpoints();
 
 var contatos = app.NewVersionedApi("Consulta Contatos");
 contatos.MapConsultaContatosApiV1();
-// builder.AddHealthCheckConfig();
 
 app.UseDefaultOpenApiConfig();
 
