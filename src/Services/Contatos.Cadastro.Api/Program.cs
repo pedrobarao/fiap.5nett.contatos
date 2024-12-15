@@ -14,6 +14,7 @@ builder.RegisterServices();
 
 var withApiVersioning = builder.Services.AddApiVersioning();
 builder.AddDefaultOpenApiConfig(withApiVersioning);
+builder.AddHealthCheckConfig();
 
 var app = builder.Build();
 
