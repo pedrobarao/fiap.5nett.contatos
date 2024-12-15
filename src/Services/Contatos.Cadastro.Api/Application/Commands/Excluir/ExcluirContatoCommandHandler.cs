@@ -17,21 +17,22 @@ public class ExcluirContatoCommandHandler(IMessageBus bus, IContatoRepository re
         if (contato is null) return Result.Success();
 
         repository.Excluir(contato);
-        await repository.UnitOfWork.Commit();
 
-        await bus.Publish(new ContatoExcluidoIntegrationEvent
-        {
-            AggregateId = contato.Id,
-            Nome = contato.Nome.PrimeiroNome,
-            Sobrenome = contato.Nome.Sobrenome,
-            Telefones = contato.Telefones.Select(t => new ContatoExcluidoIntegrationEvent.Telefone
+        if ((await PersistData(repository.UnitOfWork)).IsValid)
+            await bus.Publish(new ContatoExcluidoIntegrationEvent
             {
-                Ddd = t.Ddd,
-                Numero = t.Numero,
-                Tipo = t.Tipo.ToString()
-            }).ToList(),
-            Email = contato.Email?.Endereco
-        }, cancellationToken);
+                AggregateId = contato.Id,
+                Nome = contato.Nome.PrimeiroNome,
+                Sobrenome = contato.Nome.Sobrenome,
+                Telefones = contato.Telefones.Select(t => new ContatoExcluidoIntegrationEvent.Telefone
+                {
+                    Ddd = t.Ddd,
+                    Numero = t.Numero,
+                    Tipo = t.Tipo.ToString()
+                }).ToList(),
+                Email = contato.Email?.Endereco
+            }, cancellationToken);
+
 
         return Result.Success();
     }

@@ -7,7 +7,7 @@ using MediatR;
 
 namespace Contatos.Consulta.Api.Application.Commands;
 
-public class AtualizarContatoCommandHanlder(IContatoRepository repository)
+public class AtualizarContatoCommandHandler(IContatoRepository repository)
     : CommandHandler, IRequestHandler<AtualizarContatoCommand, Result>
 {
     public async Task<Result> Handle(AtualizarContatoCommand request, CancellationToken cancellationToken)
@@ -22,7 +22,7 @@ public class AtualizarContatoCommandHanlder(IContatoRepository repository)
         contato.Nome = new Nome(request.Nome, request.Sobrenome);
 
         contato.Telefones = request.Telefones
-            .Select(t => new Telefone(t.Ddd, t.Numero, Enum.Parse<TipoTelefone>(t.Tipo))).ToList();
+            .Select(t => new Telefone(t.Ddd, t.Numero, t.Tipo)).ToList();
 
         await repository.Atualizar(contato);
 

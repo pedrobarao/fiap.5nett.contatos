@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Contatos.Consulta.Api.Apis;
 using Contatos.Consulta.Api.Config;
 using Contatos.ServiceDefaults;
@@ -26,3 +27,11 @@ app.UseDefaultOpenApiConfig();
 app.UseHttpsRedirection();
 
 app.Run();
+
+namespace Contatos.Consulta.Api
+{
+    [ExcludeFromCodeCoverage]
+    public class ConsultasProgram
+    {
+    }
+}

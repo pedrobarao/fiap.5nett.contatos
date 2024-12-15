@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Contatos.Consulta.Api.Application.Commands;
 
-public class ExcluirContatoCommandHanlder(IContatoRepository repository)
+public class ExcluirContatoCommandHandler(IContatoRepository repository)
     : CommandHandler, IRequestHandler<ExcluirContatoCommand, Result>
 {
     public async Task<Result> Handle(ExcluirContatoCommand request, CancellationToken cancellationToken)

@@ -27,10 +27,8 @@
 
     <ItemGroup>
         <ProjectReference Include="..\..\src\Services\Contatos.Consulta.Api\Contatos.Consulta.Api.csproj"/>
-    </ItemGroup>
-
-    <ItemGroup>
-        <Folder Include="Application\Commands\"/>
+        <ProjectReference Include="..\Contatos.Consulta.IntegrationTest\Contatos.Consulta.IntegrationTest.csproj"/>
+        <ProjectReference Include="..\Contatos.Test.Commons\Contatos.Test.Commons.csproj"/>
     </ItemGroup>
 
 </Project>

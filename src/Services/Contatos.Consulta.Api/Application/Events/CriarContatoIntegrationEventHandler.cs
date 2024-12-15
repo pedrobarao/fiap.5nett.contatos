@@ -1,10 +1,12 @@
-﻿using Commons.Domain.Messages.IntegrationEvents;
+﻿using System.Diagnostics.CodeAnalysis;
+using Commons.Domain.Messages.IntegrationEvents;
 using Contatos.Consulta.Api.Application.Commands;
 using MassTransit;
 using MediatR;
 
 namespace Contatos.Consulta.Api.Application.Events;
 
+[ExcludeFromCodeCoverage]
 public class CriarContatoIntegrationEventHandler(IMediator mediator) : IConsumer<ContatoCriadoIntegrationEvent>
 {
     public async Task Consume(ConsumeContext<ContatoCriadoIntegrationEvent> context)

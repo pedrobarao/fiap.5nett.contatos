@@ -14,7 +14,7 @@ public sealed class ContatoRepository : IContatoRepository
         _contatosCollection = database.GetCollection<Contato>("Contatos");
     }
 
-    public async Task Inserir(Contato contato)
+    public async Task Criar(Contato contato)
     {
         await _contatosCollection.InsertOneAsync(contato);
     }
@@ -41,7 +41,7 @@ public sealed class ContatoRepository : IContatoRepository
         return await _contatosCollection.Find(filter).FirstOrDefaultAsync();
     }
 
-    public async Task<PagedResult<Contato>> ObterContatosPaginados(int pageSize, int pageIndex, string? query = "")
+    public async Task<PagedResult<Contato>> ObterContatosPaginados(int pageSize, int pageIndex, string? query = null)
     {
         var skip = pageIndex * pageSize;
         var filters = string.IsNullOrEmpty(query)

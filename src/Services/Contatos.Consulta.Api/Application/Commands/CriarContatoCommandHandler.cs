@@ -22,9 +22,9 @@ public class CriarContatoCommandHandler(IContatoRepository repository)
         contato.Nome = new Nome(request.Nome, request.Sobrenome);
 
         contato.Telefones = request.Telefones
-            .Select(t => new Telefone(t.Ddd, t.Numero, Enum.Parse<TipoTelefone>(t.Tipo))).ToList();
+            .Select(t => new Telefone(t.Ddd, t.Numero, t.Tipo)).ToList();
 
-        await repository.Inserir(contato);
+        await repository.Criar(contato);
 
         return Result.Success();
     }

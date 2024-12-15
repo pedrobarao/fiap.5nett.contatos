@@ -63,7 +63,7 @@ public static class DependencyInjectionConfig
                             {
                                 publishConfig.ExchangeType = ExchangeType.Topic;
                             });
-                            
+
                             // Contato atualizado
                             cfg.Message<ContatoAtualizadoIntegrationEvent>(configTopology =>
                             {
@@ -74,7 +74,7 @@ public static class DependencyInjectionConfig
                             {
                                 publishConfig.ExchangeType = ExchangeType.Topic;
                             });
-                            
+
                             // Contato excluído
                             cfg.Message<ContatoExcluidoIntegrationEvent>(configTopology =>
                             {

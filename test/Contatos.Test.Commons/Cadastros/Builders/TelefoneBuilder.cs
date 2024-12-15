@@ -1,7 +1,7 @@
 ﻿using Bogus;
-using Contatos.Consulta.Api.Domain.ValueObjects;
+using Contatos.Cadastro.Api.Domain.ValueObjects;
 
-namespace Contatos.Consulta.UnitTest.Builders;
+namespace Contatos.Test.Commons.Cadastros.Builders;
 
 public class TelefoneBuilder
 {

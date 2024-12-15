@@ -28,6 +28,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\..\src\Services\Contatos.Cadastro.Api\Contatos.Cadastro.Api.csproj"/>
+        <ProjectReference Include="..\Contatos.Test.Commons\Contatos.Test.Commons.csproj"/>
     </ItemGroup>
 
 </Project>

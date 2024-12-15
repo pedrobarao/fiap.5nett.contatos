@@ -32,19 +32,22 @@ public class AtualizarContatoCommandHandler(IMessageBus bus, IContatoRepository 
 
         if (!validationResult.IsValid) return Result.Failure(validationResult.Errors);
 
-        await bus.Publish(new ContatoAtualizadoIntegrationEvent
-        {
-            AggregateId = contato.Id,
-            Nome = contato.Nome.PrimeiroNome,
-            Sobrenome = contato.Nome.Sobrenome,
-            Telefones = contato.Telefones.Select(t => new ContatoAtualizadoIntegrationEvent.Telefone
+        repository.Atualizar(contato);
+
+        if ((await PersistData(repository.UnitOfWork)).IsValid)
+            await bus.Publish(new ContatoAtualizadoIntegrationEvent
             {
-                Ddd = t.Ddd,
-                Numero = t.Numero,
-                Tipo = t.Tipo.ToString()
-            }).ToList(),
-            Email = contato.Email?.Endereco
-        }, cancellationToken);
+                AggregateId = contato.Id,
+                Nome = contato.Nome.PrimeiroNome,
+                Sobrenome = contato.Nome.Sobrenome,
+                Telefones = contato.Telefones.Select(t => new ContatoAtualizadoIntegrationEvent.Telefone
+                {
+                    Ddd = t.Ddd,
+                    Numero = t.Numero,
+                    Tipo = t.Tipo.ToString()
+                }).ToList(),
+                Email = contato.Email?.Endereco
+            }, cancellationToken);
 
         return !validationResult.IsValid ? Result.Failure(validationResult.Errors) : Result.Success();
     }

@@ -1,7 +1,7 @@
 ﻿using Bogus;
-using Contatos.Consulta.Api.Domain.Entities;
+using Contatos.Cadastro.Api.Domain.Entities;
 
-namespace Contatos.Consulta.UnitTest.Builders;
+namespace Contatos.Test.Commons.Cadastros.Builders;
 
 public class ContatoBuilder
 {
@@ -14,12 +14,11 @@ public class ContatoBuilder
         var email = new EmailBuilder().Build();
 
         _faker = new Faker<Contato>("pt_BR")
-            .CustomInstantiator(f => new Contato
-            {
-                Nome = nome,
-                Telefones = telefones,
-                Email = email
-            });
+            .CustomInstantiator(f => new Contato(
+                nome,
+                telefones,
+                email
+            ));
     }
 
     public Contato Build()
@@ -61,12 +60,11 @@ public class ContatoBuilder
             .ComNumero("12345678910")
             .Build(1);
 
-        _faker.CustomInstantiator(f => new Contato
-        {
-            Nome = new NomeBuilder().Build(),
-            Telefones = telefones,
-            Email = new EmailBuilder().Build()
-        });
+        _faker.CustomInstantiator(f => new Contato(
+            new NomeBuilder().Build(),
+            telefones,
+            new EmailBuilder().Build()
+        ));
 
         return this;
     }

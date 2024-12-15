@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Contatos.Cadastro.Api.Apis;
 using Contatos.Cadastro.Api.Config;
 using Contatos.ServiceDefaults;
@@ -26,3 +27,11 @@ app.UseDefaultOpenApiConfig();
 app.UseHttpsRedirection();
 
 app.Run();
+
+namespace Contatos.Cadastro.Api
+{
+    [ExcludeFromCodeCoverage]
+    public class CadastrosProgram
+    {
+    }
+}

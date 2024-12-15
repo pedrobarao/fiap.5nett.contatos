@@ -113,15 +113,13 @@ public static class DependencyInjectionConfig
                                 re.Bind("ContatoCriadoExchange",
                                     binding => { binding.ExchangeType = ExchangeType.Topic; });
                                 re.ConfigureConsumer<CriarContatoIntegrationEventHandler>(context);
-                                // re.Durable = true;
-                                // re.AutoDelete = false;
                                 re.UseMessageRetry(r =>
                                 {
                                     r.Immediate(5);
                                     r.Interval(999999, TimeSpan.FromMinutes(1));
                                 });
                             });
-                            
+
                             cfg.ReceiveEndpoint("ContatoAtualizadoQueue", re =>
                             {
                                 re.ConfigureConsumeTopology = false;
@@ -134,7 +132,7 @@ public static class DependencyInjectionConfig
                                     r.Interval(999999, TimeSpan.FromMinutes(1));
                                 });
                             });
-                            
+
                             cfg.ReceiveEndpoint("ContatoExcluidoQueue", re =>
                             {
                                 re.ConfigureConsumeTopology = false;
