@@ -23,7 +23,7 @@ public class ErrorHandlingMiddleware
             throw;
         }
     }
-    
+
     private static void HandleRequestExceptionAsync(HttpContext context, HttpStatusCode statusCode)
     {
         context.Response.StatusCode = (int)statusCode;
