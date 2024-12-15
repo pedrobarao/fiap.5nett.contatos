@@ -24,7 +24,7 @@
     <ItemGroup>
         <ProjectReference Include="..\..\BuildingBlocks\Commons.Domain\Commons.Domain.csproj"/>
         <ProjectReference Include="..\..\BuildingBlocks\Contatos.ServiceDefaults\Contatos.ServiceDefaults.csproj"/>
-        <ProjectReference Include="..\..\BuildingBlocks\MessageBus\MessageBus.csproj"/>
+        <ProjectReference Include="..\..\BuildingBlocks\MessageBus\MessageBus.csproj" />
     </ItemGroup>
 
     <ItemGroup>

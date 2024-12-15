@@ -40,9 +40,9 @@ public class Result
     {
         switch (isSuccess)
         {
-            case true when errors is not { Count: 0 }:
+            case true when errors?.Count > 0:
                 throw new InvalidOperationException("A successful result cannot have errors.");
-            case false when errors is null || errors.Count == 0:
+            case false when errors?.Count == 0:
                 throw new InvalidOperationException("A failed result must have at least one error.");
             default:
                 IsSuccess = isSuccess;

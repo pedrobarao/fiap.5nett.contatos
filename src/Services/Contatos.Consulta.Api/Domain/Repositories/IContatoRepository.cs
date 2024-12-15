@@ -6,6 +6,8 @@ namespace Contatos.Consulta.Api.Domain.Repositories;
 public interface IContatoRepository
 {
     Task Inserir(Contato contato);
+    Task Atualizar(Contato contato);
+    Task Excluir(Guid id);
     Task<Contato?> ObterContatoPorId(Guid id);
     Task<PagedResult<Contato>> ObterContatosPaginados(int pageSize, int pageIndex, string? query = null);
 }

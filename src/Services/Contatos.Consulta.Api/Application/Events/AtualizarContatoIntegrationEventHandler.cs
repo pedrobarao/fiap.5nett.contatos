@@ -14,6 +14,7 @@ public class AtualizarContatoIntegrationEventHandler(IMediator mediator) : ICons
         {
             Id = message.AggregateId,
             Nome = message.Nome,
+            Sobrenome = message.Sobrenome,
             Email = message.Email,
             Telefones = message.Telefones.Select(t => new AtualizarContatoCommand.Telefone
             {

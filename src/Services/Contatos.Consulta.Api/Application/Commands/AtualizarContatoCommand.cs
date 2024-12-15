@@ -1,6 +1,9 @@
-﻿namespace Contatos.Consulta.Api.Application.Commands;
+﻿using Commons.Domain.Communication;
+using MediatR;
 
-public class AtualizarContatoCommand
+namespace Contatos.Consulta.Api.Application.Commands;
+
+public class AtualizarContatoCommand : IRequest<Result>
 {
     public Guid Id { get; set; }
     public string Nome { get; set; } = null!;

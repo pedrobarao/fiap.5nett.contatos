@@ -9,23 +9,14 @@
 
     <ItemGroup>
         <PackageReference Include="Asp.Versioning.Http" Version="8.1.0"/>
-        <PackageReference Include="Dapper" Version="2.1.35"/>
         <PackageReference Include="Mapster.DependencyInjection" Version="1.0.1"/>
-        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8"/>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.8"/>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.8">
-            <PrivateAssets>all</PrivateAssets>
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
         <PackageReference Include="MongoDB.Driver" Version="3.1.0"/>
-        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.8"/>
-        <PackageReference Include="Mapster" Version="7.4.0"/>
     </ItemGroup>
 
     <ItemGroup>
         <ProjectReference Include="..\..\BuildingBlocks\Commons.Domain\Commons.Domain.csproj"/>
         <ProjectReference Include="..\..\BuildingBlocks\Contatos.ServiceDefaults\Contatos.ServiceDefaults.csproj"/>
-        <ProjectReference Include="..\..\BuildingBlocks\MessageBus\MessageBus.csproj"/>
+        <ProjectReference Include="..\..\BuildingBlocks\MessageBus\MessageBus.csproj" />
         <ProjectReference Include="..\..\BuildingBlocks\Utils\Utils.csproj"/>
     </ItemGroup>
 

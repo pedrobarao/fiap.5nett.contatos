@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Contatos.Cadastro.Api.Application.Commands.Criar;
 
-public class CadastrarContatoCommand : IRequest<Result<Guid>>
+public class CriarContatoCommand : IRequest<Result<Guid>>
 {
     [Required(ErrorMessage = "A propriedade {0} é obrigatória")]
     public string Nome { get; set; } = null!;

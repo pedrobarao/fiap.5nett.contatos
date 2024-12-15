@@ -1,7 +1,7 @@
 ﻿using Commons.Domain.Messages.IntegrationEvents;
 using Contatos.Consulta.Api.Application.Commands;
 using MassTransit;
-using MassTransit.Mediator;
+using MediatR;
 
 namespace Contatos.Consulta.Api.Application.Events;
 
@@ -10,12 +10,13 @@ public class CriarContatoIntegrationEventHandler(IMediator mediator) : IConsumer
     public async Task Consume(ConsumeContext<ContatoCriadoIntegrationEvent> context)
     {
         var message = context.Message;
-        var command = new CriarContadoCommand
+        var command = new CriarContatoCommand
         {
             Id = message.AggregateId,
             Nome = message.Nome,
+            Sobrenome = message.Sobrenome,
             Email = message.Email,
-            Telefones = message.Telefones.Select(t => new CriarContadoCommand.Telefone
+            Telefones = message.Telefones.Select(t => new CriarContatoCommand.Telefone
             {
                 Ddd = t.Ddd,
                 Numero = t.Numero,

@@ -24,7 +24,7 @@ public static class ContatosApi
     private static async Task<Results<Created<Guid>, ValidationProblem>> CadastrarContato(
         HttpContext context,
         IMediator mediator,
-        [FromBody] CadastrarContatoCommand command)
+        [FromBody] CriarContatoCommand command)
     {
         var result = await mediator.Send(command);
 
@@ -39,8 +39,8 @@ public static class ContatosApi
         [FromRoute] Guid id,
         [FromBody] AtualizarContatoCommand command)
     {
-        if(id != command.Id) return TypedResults.BadRequest();
-        
+        if (id != command.Id) return TypedResults.BadRequest();
+
         var result = await mediator.Send(command);
 
         if (!result.IsSuccess) return TypedResults.Extensions.InvalidOperation(result.Errors, context);

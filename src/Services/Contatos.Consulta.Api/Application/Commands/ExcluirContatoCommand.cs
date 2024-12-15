@@ -1,6 +1,9 @@
-﻿namespace Contatos.Consulta.Api.Application.Commands;
+﻿using Commons.Domain.Communication;
+using MediatR;
 
-public class ExcluirContatoCommand
+namespace Contatos.Consulta.Api.Application.Commands;
+
+public class ExcluirContatoCommand : IRequest<Result>
 {
     public Guid Id { get; set; }
 }

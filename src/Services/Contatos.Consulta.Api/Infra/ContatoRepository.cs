@@ -19,6 +19,22 @@ public sealed class ContatoRepository : IContatoRepository
         await _contatosCollection.InsertOneAsync(contato);
     }
 
+    public async Task Atualizar(Contato contato)
+    {
+        var updateDefinition = Builders<Contato>.Update
+            .Set(c => c.Nome, contato.Nome)
+            .Set(c => c.Email, contato.Email)
+            .Set(c => c.Telefones, contato.Telefones);
+
+        await _contatosCollection.UpdateOneAsync(c => c.Id == contato.Id, updateDefinition);
+    }
+    
+    public async Task Excluir(Guid id)
+    {
+        var filter = Builders<Contato>.Filter.Eq(c => c.Id, id);
+        await _contatosCollection.DeleteOneAsync(filter);
+    }
+
     public async Task<Contato?> ObterContatoPorId(Guid id)
     {
         var filter = Builders<Contato>.Filter.Eq(c => c.Id, id);
