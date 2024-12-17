@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
@@ -93,21 +94,22 @@ public static class ServiceConfig
 
     public static WebApplication MapDefaultEndpoints(this WebApplication app)
     {
-        app.MapHealthChecks("/health");
-
         app.MapHealthChecks("/alive", new HealthCheckOptions
         {
+            ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse,
             Predicate = r => r.Tags.Contains("live")
         });
 
         app.MapHealthChecks("/ready", new HealthCheckOptions
         {
+            ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse,
             Predicate = r => r.Tags.Contains("ready")
         });
-
+        
+        app.UseHealthChecksPrometheusExporter("/metrics");
         app.UseMetricServer();
         app.UseHttpMetrics();
-        app.UseHealthChecksPrometheusExporter("/metrics");
+        app.MapHealthChecksUI();
 
         return app;
     }

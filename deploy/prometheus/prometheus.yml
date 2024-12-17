@@ -2,10 +2,10 @@
   scrape_interval: 15s
 
 scrape_configs:
-  - job_name: 'contatos-api'
+  - job_name: 'cadastro-contatos-api'
     metrics_path: '/metrics'
     static_configs:
-      - targets: [ 'contatos-api:8080' ]
+      - targets: [ 'cadastro-contatos-api:8080' ]
 
   - job_name: 'consulta-contatos-api'
     metrics_path: '/metrics'

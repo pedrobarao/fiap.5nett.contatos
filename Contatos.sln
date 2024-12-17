@@ -29,7 +29,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "prometheus", "prometheus", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dashboards", "dashboards", "{EF4E6105-412B-491F-889E-4D97769196A7}"
 	ProjectSection(SolutionItems) = preProject
-		deploy\grafana\dashboards\contatosapi-dashboard.json = deploy\grafana\dashboards\contatosapi-dashboard.json
+		deploy\grafana\dashboards\cadastro-dashboard.json = deploy\grafana\dashboards\cadastro-dashboard.json
+		deploy\grafana\dashboards\consulta-dashboard.json = deploy\grafana\dashboards\consulta-dashboard.json
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{AF3AC6F4-72CE-4DED-880E-1CFBD8E9159C}"
