@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consulta-contatos-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: consulta-contatos-api
+  template:
+    metadata:
+      labels:
+        app: consulta-contatos-api
+    spec:
+      containers:
+      - name: consulta-contatos-api
+        image: consulta-contatos-api:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "Production"
+        envFrom:
+        - configMapRef:
+            name: consulta-api-config
+        - secretRef:
+            name: mongodb-credentials
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 15
+          periodSeconds: 5

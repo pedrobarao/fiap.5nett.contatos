@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: consulta-api-config
+data:
+  ConnectionStrings__MongoDB: "mongodb://$(MONGO_ROOT_USERNAME):$(MONGO_ROOT_PASSWORD)@mongodb:27017/contatos?authSource=admin"
+  RabbitMQ__Host: "rabbitmq"
+  RabbitMQ__Port: "5672"
+  Prometheus__Port: "9090"
