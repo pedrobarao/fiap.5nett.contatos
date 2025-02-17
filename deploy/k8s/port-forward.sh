@@ -11,6 +11,8 @@ echo "Prometheus: http://localhost:9090"
 echo "Grafana: http://localhost:3000"
 echo "Cadastro API: http://localhost:8080"
 echo "Cadastro API Swagger: http://localhost:8080/swagger"
+echo "Consulta API: http://localhost:8081"
+echo "Consulta API Swagger: http://localhost:8081/swagger"
 echo ""
 
 trap 'kill $(jobs -p)' SIGINT SIGTERM EXIT
@@ -21,5 +23,6 @@ kubectl port-forward -n contatos-app service/mongodb 27017:27017 --address 0.0.0
 kubectl port-forward -n contatos-app service/prometheus 9090:9090 --address 0.0.0.0 &
 kubectl port-forward -n contatos-app service/grafana 3000:3000 --address 0.0.0.0 &
 kubectl port-forward -n contatos-app service/cadastro-contatos-api 8080:8080 --address 0.0.0.0 &
+kubectl port-forward -n contatos-app service/consulta-contatos-api 8081:8081 --address 0.0.0.0 &
 
 wait 

@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consulta-contatos-api
+  namespace: contatos-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: consulta-contatos-api
+  template:
+    metadata:
+      labels:
+        app: consulta-contatos-api
+    spec:
+      containers:
+      - name: consulta-contatos-api
+        image: pedrobaraof/consulta-contatos-api:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8081
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "Production"
+        - name: MongoDB__ConnectionString
+          value: "mongodb://contatos:contatos@mongodb:27017/contatos?authSource=contatos"
+        - name: RabbitMQ__Host
+          value: "rabbitmq"
+        - name: RabbitMQ__Username
+          value: "admin"
+        - name: RabbitMQ__Password
+          value: "contatos"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: consulta-contatos-api
+  namespace: contatos-app
+spec:
+  selector:
+    app: consulta-contatos-api
+  ports:
+  - name: http
+    port: 8081
+    targetPort: 8081
+  type: ClusterIP 

@@ -27,6 +27,7 @@ kubectl apply -f deploy/k8s/rabbitmq.yaml
 kubectl apply -f deploy/k8s/prometheus.yaml
 kubectl apply -f deploy/k8s/grafana.yaml
 kubectl apply -f deploy/k8s/cadastro-api.yaml
+kubectl apply -f deploy/k8s/consulta-api.yaml
 
 echo "Aguardando pods iniciarem..."
 kubectl wait --namespace contatos-app \
@@ -44,6 +45,10 @@ kubectl wait --namespace contatos-app \
 kubectl wait --namespace contatos-app \
   --for=condition=ready pod \
   --selector=app=cadastro-contatos-api \
+  --timeout=90s
+kubectl wait --namespace contatos-app \
+  --for=condition=ready pod \
+  --selector=app=consulta-contatos-api \
   --timeout=90s
 
 echo "Verificando recursos criados..."

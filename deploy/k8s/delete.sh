@@ -8,6 +8,8 @@ kubectl delete -f deploy/k8s/postgres.yaml
 kubectl delete -f deploy/k8s/mongodb.yaml
 kubectl delete -f deploy/k8s/prometheus.yaml
 kubectl delete -f deploy/k8s/grafana.yaml
+kubectl delete -f deploy/k8s/cadastro-api.yaml
+kubectl delete -f deploy/k8s/consulta-api.yaml
 
 echo "Removendo ConfigMaps..."
 kubectl delete -f deploy/k8s/prometheus-config.yaml
