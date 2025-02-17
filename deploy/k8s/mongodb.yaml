@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb
+  namespace: contatos-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongodb
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      containers:
+      - name: mongodb
+        image: mongo:latest
+        ports:
+        - containerPort: 27017
+          name: mongodb
+        env:
+        - name: MONGO_INITDB_ROOT_USERNAME
+          value: "contatos"
+        - name: MONGO_INITDB_ROOT_PASSWORD
+          value: "contatos"
+        - name: MONGO_INITDB_DATABASE
+          value: "contatos"
+        volumeMounts:
+        - name: mongodb-storage
+          mountPath: /data/db
+        - name: mongo-init
+          mountPath: /docker-entrypoint-initdb.d
+        readinessProbe:
+          exec:
+            command: 
+              - mongosh
+              - --eval
+              - "db.adminCommand('ping')"
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 5
+      volumes:
+      - name: mongodb-storage
+        persistentVolumeClaim:
+          claimName: mongodb-pvc
+      - name: mongo-init
+        configMap:
+          name: mongo-init
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mongo-init
+  namespace: contatos-app
+data:
+  init.js: |
+    db = db.getSiblingDB('contatos');
+    db.createUser({
+      user: 'contatos',
+      pwd: 'contatos',
+      roles: [
+        { role: 'readWrite', db: 'contatos' }
+      ]
+    });
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb
+  namespace: contatos-app
+spec:
+  selector:
+    app: mongodb
+  ports:
+  - name: mongodb
+    port: 27017
+    targetPort: 27017
+  type: ClusterIP 

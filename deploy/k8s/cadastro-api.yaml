@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cadastro-contatos-api
+  namespace: contatos-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cadastro-contatos-api
+  template:
+    metadata:
+      labels:
+        app: cadastro-contatos-api
+    spec:
+      containers:
+      - name: cadastro-contatos-api
+        image: pedrobaraof/cadastro-contatos-api:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "Production"
+        - name: ConnectionStrings__DefaultConnection
+          value: "Server=postgres;Port=5432;Database=contatos;User Id=contatos;Password=contatos;"
+        - name: RabbitMQ__Host
+          value: "rabbitmq"
+        - name: RabbitMQ__Username
+          value: "admin"
+        - name: RabbitMQ__Password
+          value: "contatos"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cadastro-contatos-api
+  namespace: contatos-app
+spec:
+  selector:
+    app: cadastro-contatos-api
+  ports:
+  - name: http
+    port: 8080
+    targetPort: 8080
+  type: ClusterIP 
