@@ -21,9 +21,15 @@ spec:
           name: postgres
         env:
         - name: POSTGRES_USER
-          value: "contatos"
+          valueFrom:
+            secretKeyRef:
+              name: app-credentials
+              key: POSTGRES_USER
         - name: POSTGRES_PASSWORD
-          value: "contatos"
+          valueFrom:
+            secretKeyRef:
+              name: app-credentials
+              key: POSTGRES_PASSWORD
         - name: POSTGRES_DB
           value: "contatos"
         - name: PGDATA
@@ -37,6 +43,13 @@ spec:
           initialDelaySeconds: 5
           periodSeconds: 5
           timeoutSeconds: 1
+        resources:
+          limits:
+            cpu: "1000m"
+            memory: "1Gi"
+          requests:
+            cpu: "500m"
+            memory: "512Mi"
       volumes:
       - name: postgres-storage
         persistentVolumeClaim:

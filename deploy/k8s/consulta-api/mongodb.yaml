@@ -21,9 +21,15 @@ spec:
           name: mongodb
         env:
         - name: MONGO_INITDB_ROOT_USERNAME
-          value: "contatos"
+          valueFrom:
+            secretKeyRef:
+              name: app-credentials
+              key: MONGO_USER
         - name: MONGO_INITDB_ROOT_PASSWORD
-          value: "contatos"
+          valueFrom:
+            secretKeyRef:
+              name: app-credentials
+              key: MONGO_PASSWORD
         - name: MONGO_INITDB_DATABASE
           value: "contatos"
         volumeMounts:
@@ -40,6 +46,13 @@ spec:
           initialDelaySeconds: 10
           periodSeconds: 10
           timeoutSeconds: 5
+        resources:
+          limits:
+            cpu: "1000m"    # MongoDB precisa de mais recursos
+            memory: "1Gi"
+          requests:
+            cpu: "500m"
+            memory: "512Mi"
       volumes:
       - name: mongodb-storage
         persistentVolumeClaim:

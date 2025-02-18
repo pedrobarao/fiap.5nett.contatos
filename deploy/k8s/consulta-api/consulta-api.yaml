@@ -4,7 +4,7 @@ metadata:
   name: consulta-contatos-api
   namespace: contatos-app
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: consulta-contatos-api
@@ -23,13 +23,29 @@ spec:
         - name: ASPNETCORE_ENVIRONMENT
           value: "Production"
         - name: MongoDB__ConnectionString
-          value: "mongodb://contatos:contatos@mongodb:27017/contatos?authSource=contatos"
+          valueFrom:
+            secretKeyRef:
+              name: app-credentials
+              key: MONGODB_CONNECTION
         - name: RabbitMQ__Host
           value: "rabbitmq"
         - name: RabbitMQ__Username
-          value: "admin"
+          valueFrom:
+            secretKeyRef:
+              name: app-credentials
+              key: RABBITMQ_USER
         - name: RabbitMQ__Password
-          value: "contatos"
+          valueFrom:
+            secretKeyRef:
+              name: app-credentials
+              key: RABBITMQ_PASSWORD
+        resources:
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+          requests:
+            cpu: "200m"
+            memory: "256Mi"
 ---
 apiVersion: v1
 kind: Service

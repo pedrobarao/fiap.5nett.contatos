@@ -23,12 +23,25 @@ spec:
           name: management
         env:
         - name: RABBITMQ_DEFAULT_USER
-          value: "admin"
+          valueFrom:
+            secretKeyRef:
+              name: app-credentials
+              key: RABBITMQ_USER
         - name: RABBITMQ_DEFAULT_PASS
-          value: "contatos"
+          valueFrom:
+            secretKeyRef:
+              name: app-credentials
+              key: RABBITMQ_PASSWORD
         volumeMounts:
         - name: rabbitmq-storage
           mountPath: /var/lib/rabbitmq
+        resources:
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+          requests:
+            cpu: "200m"
+            memory: "256Mi"
       volumes:
       - name: rabbitmq-storage
         persistentVolumeClaim:
