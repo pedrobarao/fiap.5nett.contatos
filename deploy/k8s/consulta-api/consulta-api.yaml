@@ -8,6 +8,11 @@ spec:
   selector:
     matchLabels:
       app: consulta-contatos-api
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
   template:
     metadata:
       labels:
@@ -22,19 +27,23 @@ spec:
         env:
         - name: ASPNETCORE_ENVIRONMENT
           value: "Production"
-        - name: MongoDB__ConnectionString
+        - name: ASPNETCORE_URLS
+          value: "http://+:8081"
+        - name: ConnectionStrings__DefaultConnection
           valueFrom:
             secretKeyRef:
               name: app-credentials
               key: MONGODB_CONNECTION
-        - name: RabbitMQ__Host
-          value: "rabbitmq"
-        - name: RabbitMQ__Username
+        - name: ConnectionStrings__DatabaseName
+          value: "contatos"
+        - name: MessageBus__Host
+          value: "amqp://rabbitmq:5672"
+        - name: MessageBus__Username
           valueFrom:
             secretKeyRef:
               name: app-credentials
               key: RABBITMQ_USER
-        - name: RabbitMQ__Password
+        - name: MessageBus__Password
           valueFrom:
             secretKeyRef:
               name: app-credentials
@@ -50,19 +59,18 @@ spec:
           httpGet:
             path: /ready
             port: 8081
-          initialDelaySeconds: 15
+          initialDelaySeconds: 30
           periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
         livenessProbe:
           httpGet:
             path: /alive
             port: 8081
-          initialDelaySeconds: 30
+          initialDelaySeconds: 60
           periodSeconds: 20
+          timeoutSeconds: 5
+          failureThreshold: 3
         securityContext:
           runAsNonRoot: true
           runAsUser: 1000
-      strategy:
-        type: RollingUpdate
-        rollingUpdate:
-          maxSurge: 1
-          maxUnavailable: 0

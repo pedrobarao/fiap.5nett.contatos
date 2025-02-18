@@ -10,7 +10,7 @@ spec:
     kind: Deployment
     name: cadastro-contatos-api
   minReplicas: 2    # Número mínimo de réplicas
-  maxReplicas: 5    # Número máximo de réplicas
+  maxReplicas: 3    # Número máximo de réplicas
   metrics:
   - type: Resource
     resource:

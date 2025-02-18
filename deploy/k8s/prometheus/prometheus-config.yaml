@@ -15,4 +15,4 @@ data:
       # Configuração para coletar métricas da API de Consulta
       - job_name: 'consulta-contatos-api'
         static_configs:
-          - targets: ['consulta-contatos-api:8080'] 
+          - targets: ['consulta-contatos-api:8081'] 

@@ -20,7 +20,6 @@ kubectl apply -f deploy/k8s/prometheus/prometheus-pvc.yaml
 kubectl apply -f deploy/k8s/grafana/grafana-pvc.yaml
 
 echo "Criando ConfigMaps..."
-./deploy/k8s/scripts/create-grafana-dashboards-cm.sh
 kubectl apply -f deploy/k8s/prometheus/prometheus-config.yaml
 kubectl apply -f deploy/k8s/grafana/grafana-config.yaml
 
