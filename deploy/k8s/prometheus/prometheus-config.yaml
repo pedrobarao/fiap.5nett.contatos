@@ -6,11 +6,13 @@ metadata:
 data:
   prometheus.yml: |
     global:
-      scrape_interval: 15s
+      scrape_interval: 15s    # Intervalo de coleta de métricas
     scrape_configs:
+      # Configuração para coletar métricas da API de Cadastro
       - job_name: 'cadastro-contatos-api'
         static_configs:
           - targets: ['cadastro-contatos-api:8080']
+      # Configuração para coletar métricas da API de Consulta
       - job_name: 'consulta-contatos-api'
         static_configs:
           - targets: ['consulta-contatos-api:8080'] 

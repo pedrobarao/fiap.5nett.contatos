@@ -5,9 +5,9 @@ metadata:
   namespace: contatos-app
 spec:
   selector:
-    app: postgres
+    app: postgres    # Seleciona os pods do PostgreSQL
   ports:
   - name: postgres
-    port: 5432
-    targetPort: 5432
-  type: ClusterIP 
+    port: 5432      # Porta exposta pelo serviço
+    targetPort: 5432 # Porta do container que receberá o tráfego
+  type: ClusterIP   # Serviço acessível apenas dentro do cluster 

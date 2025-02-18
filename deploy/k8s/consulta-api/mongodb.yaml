@@ -4,7 +4,7 @@ metadata:
   name: mongodb
   namespace: contatos-app
 spec:
-  replicas: 1
+  replicas: 1      # Banco de dados não é escalável horizontalmente (sem configuração de replica set)
   selector:
     matchLabels:
       app: mongodb
@@ -19,6 +19,7 @@ spec:
         ports:
         - containerPort: 27017
           name: mongodb
+        # Variáveis de ambiente para configuração do MongoDB
         env:
         - name: MONGO_INITDB_ROOT_USERNAME
           valueFrom:
@@ -34,9 +35,10 @@ spec:
           value: "contatos"
         volumeMounts:
         - name: mongodb-storage
-          mountPath: /data/db
+          mountPath: /data/db    # Montagem do volume persistente
         - name: mongo-init
-          mountPath: /docker-entrypoint-initdb.d
+          mountPath: /docker-entrypoint-initdb.d  # Scripts de inicialização
+        # Verificação de saúde do MongoDB
         readinessProbe:
           exec:
             command: 
@@ -46,20 +48,21 @@ spec:
           initialDelaySeconds: 10
           periodSeconds: 10
           timeoutSeconds: 5
+        # Recursos alocados para o MongoDB
         resources:
           limits:
-            cpu: "1000m"    # MongoDB precisa de mais recursos
-            memory: "1Gi"
+            cpu: "1000m"    # Limite máximo de CPU (1 core)
+            memory: "1Gi"    # Limite máximo de memória
           requests:
-            cpu: "500m"
-            memory: "512Mi"
+            cpu: "500m"     # Requisição mínima de CPU
+            memory: "512Mi"  # Requisição mínima de memória
       volumes:
       - name: mongodb-storage
         persistentVolumeClaim:
-          claimName: mongodb-pvc
+          claimName: mongodb-pvc  # Referência ao PVC
       - name: mongo-init
         configMap:
-          name: mongo-init
+          name: mongo-init    # ConfigMap com scripts de inicialização
 ---
 apiVersion: v1
 kind: ConfigMap

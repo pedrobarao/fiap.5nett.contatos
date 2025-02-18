@@ -4,6 +4,7 @@ metadata:
   name: grafana-datasources
   namespace: contatos-app
 data:
+  # Configuração da fonte de dados Prometheus
   datasources.yml: |
     apiVersion: 1
     datasources:
@@ -20,6 +21,7 @@ metadata:
   name: grafana-dashboards-config
   namespace: contatos-app
 data:
+  # Configuração do provedor de dashboards
   dashboard.yml: |
     apiVersion: 1
     providers:
@@ -36,7 +38,8 @@ metadata:
   name: grafana-dashboards
   namespace: contatos-app
 data:
+  # Definições dos dashboards em JSON
   cadastro-dashboard.json: |
-    {{ conteúdo do arquivo deploy/grafana/dashboards/cadastro-dashboard.json }}
+    {{ conteúdo do dashboard de cadastro }}
   consulta-dashboard.json: |
-    {{ conteúdo do arquivo deploy/grafana/dashboards/consulta-dashboard.json }} 
+    {{ conteúdo do dashboard de consulta }} 

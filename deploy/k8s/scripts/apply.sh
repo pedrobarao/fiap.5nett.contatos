@@ -39,6 +39,8 @@ kubectl apply -f deploy/k8s/cadastro-api/cadastro-api.yaml
 kubectl apply -f deploy/k8s/cadastro-api/service.yaml
 kubectl apply -f deploy/k8s/consulta-api/consulta-api.yaml
 kubectl apply -f deploy/k8s/consulta-api/service.yaml
+kubectl apply -f deploy/k8s/cadastro-api/hpa.yaml
+kubectl apply -f deploy/k8s/consulta-api/hpa.yaml
 
 echo "Aguardando pods iniciarem..."
 kubectl wait --namespace contatos-app \

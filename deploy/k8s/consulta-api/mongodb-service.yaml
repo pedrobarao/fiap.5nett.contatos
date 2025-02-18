@@ -5,9 +5,9 @@ metadata:
   namespace: contatos-app
 spec:
   selector:
-    app: mongodb
+    app: mongodb    # Seleciona os pods do MongoDB
   ports:
   - name: mongodb
-    port: 27017
-    targetPort: 27017
-  type: ClusterIP 
+    port: 27017     # Porta exposta pelo serviço
+    targetPort: 27017 # Porta do container que receberá o tráfego
+  type: ClusterIP   # Serviço acessível apenas dentro do cluster 

@@ -5,7 +5,7 @@ metadata:
   namespace: contatos-app
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteOnce    # Volume pode ser montado como leitura-escrita por um único nó
   resources:
     requests:
-      storage: 1Gi 
+      storage: 1Gi     # Solicita 1GB de armazenamento persistente 
