@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: cadastro-contatos-api
+  namespace: contatos-app
+spec:
+  selector:
+    app: cadastro-contatos-api
+  ports:
+  - name: http
+    port: 8080
+    targetPort: 8080
+  type: ClusterIP 

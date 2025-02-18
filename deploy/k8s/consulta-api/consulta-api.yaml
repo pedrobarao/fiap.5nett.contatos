@@ -46,17 +46,3 @@ spec:
           requests:
             cpu: "200m"
             memory: "256Mi"
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: consulta-contatos-api
-  namespace: contatos-app
-spec:
-  selector:
-    app: consulta-contatos-api
-  ports:
-  - name: http
-    port: 8081
-    targetPort: 8081
-  type: ClusterIP 

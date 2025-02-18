@@ -54,18 +54,4 @@ spec:
           name: grafana-dashboards-config
       - name: grafana-dashboards
         configMap:
-          name: grafana-dashboards
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: grafana
-  namespace: contatos-app
-spec:
-  selector:
-    app: grafana
-  ports:
-  - name: http
-    port: 3000
-    targetPort: 3000
-  type: ClusterIP 
+          name: grafana-dashboards 

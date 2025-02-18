@@ -53,18 +53,4 @@ spec:
       volumes:
       - name: postgres-storage
         persistentVolumeClaim:
-          claimName: postgres-pvc
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: postgres
-  namespace: contatos-app
-spec:
-  selector:
-    app: postgres
-  ports:
-  - name: postgres
-    port: 5432
-    targetPort: 5432
-  type: ClusterIP 
+          claimName: postgres-pvc 

@@ -75,18 +75,4 @@ data:
       roles: [
         { role: 'readWrite', db: 'contatos' }
       ]
-    });
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: mongodb
-  namespace: contatos-app
-spec:
-  selector:
-    app: mongodb
-  ports:
-  - name: mongodb
-    port: 27017
-    targetPort: 27017
-  type: ClusterIP 
+    }); 

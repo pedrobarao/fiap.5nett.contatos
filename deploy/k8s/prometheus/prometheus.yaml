@@ -42,17 +42,3 @@ spec:
       - name: prometheus-config
         configMap:
           name: prometheus-config
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: prometheus
-  namespace: contatos-app
-spec:
-  selector:
-    app: prometheus
-  ports:
-  - name: http
-    port: 9090
-    targetPort: 9090
-  type: ClusterIP 
