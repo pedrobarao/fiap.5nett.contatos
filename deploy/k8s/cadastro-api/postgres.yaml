@@ -48,11 +48,11 @@ spec:
         # Recursos alocados para o PostgreSQL
         resources:
           limits:
-            cpu: "1000m"    # Limite máximo de CPU (1 core)
-            memory: "1Gi"    # Limite máximo de memória
+            cpu: "500m"     # Reduzir para 0.5 CPU
+            memory: "1Gi"   # Reduzir para 1GB
           requests:
-            cpu: "500m"     # Requisição mínima de CPU
-            memory: "512Mi"  # Requisição mínima de memória
+            cpu: "200m"     # Reduzir para 0.2 CPU
+            memory: "256Mi" # Reduzir para 256MB
       volumes:
       - name: postgres-storage
         persistentVolumeClaim:

@@ -5,7 +5,7 @@ metadata:
   namespace: contatos-app
 spec:
   # Define o número desejado de réplicas do pod
-  replicas: 2
+  # replicas: 2
   # Define como o Deployment identifica os pods que ele gerencia
   selector:
     matchLabels:

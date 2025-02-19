@@ -25,4 +25,7 @@ kubectl port-forward -n contatos-app service/grafana 3000:3000 --address 0.0.0.0
 kubectl port-forward -n contatos-app service/cadastro-contatos-api 8080:8080 --address 0.0.0.0 &
 kubectl port-forward -n contatos-app service/consulta-contatos-api 8081:8081 --address 0.0.0.0 &
 
+echo "Monitorando HPAs..."
+watch -n 1 "kubectl get hpa -n contatos-app"
+
 wait 

@@ -9,6 +9,9 @@ echo "Criando recursos Kubernetes..."
 echo "Criando namespace..."
 kubectl apply -f deploy/k8s/namespace.yaml
 
+echo "Aplicando Metrics Server..."
+kubectl apply -f deploy/k8s/metrics-server.yaml
+
 echo "Criando Secrets..."
 kubectl apply -f deploy/k8s/secrets.yaml
 
