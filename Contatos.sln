@@ -68,6 +68,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageBus", "src\BuildingB
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contatos.Test.Commons", "test\Contatos.Test.Commons\Contatos.Test.Commons.csproj", "{2C1A9725-2E16-46F2-BFBB-0D6F9C174009}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "terraform", "terraform", "{6F1B9972-2C99-45AB-B822-B1B4A99C8EEE}"
+	ProjectSection(SolutionItems) = preProject
+		deploy\terraform\.terraform.lock.hcl = deploy\terraform\.terraform.lock.hcl
+		deploy\terraform\main.tf = deploy\terraform\main.tf
+		deploy\terraform\provider.tf = deploy\terraform\provider.tf
+		deploy\terraform\terraform.tf = deploy\terraform\terraform.tf
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,6 +101,7 @@ Global
 		{DA04E762-2C55-4D1C-88A8-FB996366730E} = {164A1157-BED3-4CA5-8869-B40E1F141B77}
 		{B732B66D-07D9-475B-AC0A-27804582C2E1} = {D971BE94-680E-4B9B-871F-3E2E691E4FF9}
 		{2C1A9725-2E16-46F2-BFBB-0D6F9C174009} = {4C719486-60BB-4F37-80AC-ABA0778BD3AD}
+		{6F1B9972-2C99-45AB-B822-B1B4A99C8EEE} = {3A1B411B-ECE7-4409-B28D-A40B6E650E26}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{761A2983-1170-4BD7-8998-E137F1DB6DD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
