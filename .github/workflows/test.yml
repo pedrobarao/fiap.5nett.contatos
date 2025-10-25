@@ -80,7 +80,7 @@ jobs:
 
       - name: Test
         run: dotnet test -c Release --no-build --verbosity normal --collect:"XPlat Code Coverage" --results-directory ./test/results/coverlet/
-      
+
       - name: Report generator
         uses: danielpalme/ReportGenerator-GitHub-Action@5.3.9
         with:
