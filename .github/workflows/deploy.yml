@@ -17,7 +17,7 @@ jobs:
     env:
       IMAGE_CADASTRO: pedrobarao/fiap.5nett.contatos-cadastro
       IMAGE_CONSULTA: pedrobarao/fiap.5nett.contatos-consulta
-      TAG: ${{ github.event.workflow_run.head_branch == 'main' ? 'latest' : github.event.workflow_run.head_sha }}
+      TAG: "${{ github.event.workflow_run.head_branch == 'main' ? 'latest' : github.event.workflow_run.head_sha }}"
 
     steps:
       - name: Checkout
