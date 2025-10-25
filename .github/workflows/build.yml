@@ -99,18 +99,18 @@ jobs:
           targetdir: test/results/coverage-report
           reporttypes: Html;MarkdownSummaryGithub
 
-        - name: Publish coverage in build summary
-          run: cat test/results/coverage-report/SummaryGithub.md >> $GITHUB_STEP_SUMMARY
-          shell: bash
+      - name: Publish coverage in build summary
+        run: cat test/results/coverage-report/SummaryGithub.md >> $GITHUB_STEP_SUMMARY
+        shell: bash
 
-        - name: Setup Pages
-          uses: actions/configure-pages@v5
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
 
-        - name: Upload artifact
-          uses: actions/upload-pages-artifact@v3
-          with:
-            path: test/results/coverage-report
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: test/results/coverage-report
 
-        - name: Deploy to GitHub Pages
-          id: deployment
-          uses: actions/deploy-pages@v4
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
