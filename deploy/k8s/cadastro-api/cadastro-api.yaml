@@ -4,16 +4,13 @@ metadata:
   name: cadastro-contatos-api
   namespace: contatos-app
 spec:
-  # Define o número desejado de réplicas do pod
-  # replicas: 2
-  # Define como o Deployment identifica os pods que ele gerencia
-  selector:
+  # replicas: 2 # Define o número desejado de réplicas do pod
+  selector: # Define como o Deployment identifica os pods que ele gerencia
     matchLabels:
       app: cadastro-contatos-api
   template:
     metadata:
-      # Labels aplicadas aos pods criados por este Deployment
-      labels:
+      labels:   # Labels aplicadas aos pods criados por este Deployment
         app: cadastro-contatos-api
     spec:
       containers:
