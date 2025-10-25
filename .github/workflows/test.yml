@@ -18,7 +18,6 @@ jobs:
   
   test:
     name: Test
-    needs: build
     runs-on: ubuntu-latest
     
     services: # Services para testes de integração
