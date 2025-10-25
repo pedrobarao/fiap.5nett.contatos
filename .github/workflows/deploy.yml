@@ -1,49 +1,49 @@
-﻿  yaml
-  name: Deploy to AKS
-  
-  on:
-    workflow_run:
-      workflows: ["Build and Publish Docker Images"]
-      types: [completed]
-    workflow_dispatch:
-  
-  permissions:
-    contents: read
-    id-token: write
-  
-  jobs:
-    deploy:
-      runs-on: ubuntu-latest
-      if: ${{ github.event.workflow_run.conclusion == 'success' }}
-      env:
-        IMAGE_CADASTRO: pedrobarao/fiap.5nett.contatos-cadastro
-        IMAGE_CONSULTA: pedrobarao/fiap.5nett.contatos-consulta
-        TAG: ${{ github.event.workflow_run.head_branch == 'main' ? 'latest' : github.event.workflow_run.head_sha }}
-      
-      steps:
-        - name: Checkout
-          uses: actions/checkout@v4
+﻿name: Deploy to AKS
 
-        - name: Login to Azure
-          uses: azure/login@v1
-          with:
-            creds: ${{ secrets.AZURE_CREDENTIALS }}
+on:
+  workflow_run:
+    workflows: [ "Build and Publish Docker Images" ]
+    types: [ completed ]
+  workflow_dispatch:
 
-        - name: Set AKS context
-          uses: azure/aks-set-context@v2
-          with:
-            resource-group: ${{ secrets.AKS_RESOURCE_GROUP }}
-            cluster-name: ${{ secrets.AKS_CLUSTER_NAME }}
+permissions:
+  contents: read
+  id-token: write
 
-        - name: Apply Kubernetes manifests
-          run: kubectl apply -R -f k8s/
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    env:
+      IMAGE_CADASTRO: pedrobarao/fiap.5nett.contatos-cadastro
+      IMAGE_CONSULTA: pedrobarao/fiap.5nett.contatos-consulta
+      TAG:
+        ${{ github.event.workflow_run.head_branch == 'main' ? 'latest': github.event.workflow_run.head_sha }}
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-        - name: Update deployment images
-          run: |
-            kubectl set image deployment/cadastro cadastro=${IMAGE_CADASTRO}:${TAG} --record || true
-            kubectl set image deployment/consulta consulta=${IMAGE_CONSULTA}:${TAG} --record || true
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-        - name: Wait for rollouts
-          run: |
-            kubectl rollout status deployment/cadastro --timeout=120s || kubectl rollout restart deployment/cadastro
-            kubectl rollout status deployment/consulta --timeout=120s || kubectl rollout restart deployment/consulta
+      - name: Set AKS context
+        uses: azure/aks-set-context@v2
+        with:
+          resource-group: ${{ secrets.AKS_RESOURCE_GROUP }}
+          cluster-name: ${{ secrets.AKS_CLUSTER_NAME }}
+
+      - name: Apply Kubernetes manifests
+        run: kubectl apply -R -f k8s/
+
+      - name: Update deployment images
+        run: |
+          kubectl set image deployment/cadastro cadastro=${IMAGE_CADASTRO}:${TAG} --record || true
+          kubectl set image deployment/consulta consulta=${IMAGE_CONSULTA}:${TAG} --record || true
+
+      - name: Wait for rollouts
+        run: |
+          kubectl rollout status deployment/cadastro --timeout=120s || kubectl rollout restart deployment/cadastro
+          kubectl rollout status deployment/consulta --timeout=120s || kubectl rollout restart deployment/consulta
