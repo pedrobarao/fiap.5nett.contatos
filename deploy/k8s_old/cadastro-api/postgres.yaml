@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+  namespace: contatos-app
+spec:
+  replicas: 1      # Banco de dados não é escalável horizontalmente
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:latest
+        ports:
+        - containerPort: 5432
+          name: postgres
+        # Variáveis de ambiente para configuração do PostgreSQL
+        env:
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: app-credentials
+              key: POSTGRES_USER
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: app-credentials
+              key: POSTGRES_PASSWORD
+        - name: POSTGRES_DB
+          value: "contatos"
+        - name: PGDATA
+          value: /var/lib/postgresql/data/pgdata
+        volumeMounts:
+        - name: postgres-storage
+          mountPath: /var/lib/postgresql/data  # Montagem do volume persistente
+        # Verificação de saúde do PostgreSQL
+        readinessProbe:
+          exec:
+            command: ["pg_isready", "-U", "contatos"]
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          timeoutSeconds: 1
+        # Recursos alocados para o PostgreSQL
+        resources:
+          limits:
+            cpu: "500m"     # Reduzir para 0.5 CPU
+            memory: "1Gi"   # Reduzir para 1GB
+          requests:
+            cpu: "200m"     # Reduzir para 0.2 CPU
+            memory: "256Mi" # Reduzir para 256MB
+      volumes:
+      - name: postgres-storage
+        persistentVolumeClaim:
+          claimName: postgres-pvc  # Referência ao PVC 

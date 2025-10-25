@@ -1,0 +1,4 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: contatos-app    # Namespace isolado para todos os recursos da aplicação 

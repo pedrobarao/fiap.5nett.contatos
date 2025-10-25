@@ -1,3 +1,4 @@
+# minikube addons enable metrics-server
 apiVersion: v1
 kind: ServiceAccount
 metadata:
