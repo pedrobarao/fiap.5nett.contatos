@@ -44,8 +44,17 @@ jobs:
           resource-group: ${{ secrets.AKS_RESOURCE_GROUP }}
           cluster-name: ${{ secrets.AKS_CLUSTER_NAME }}
 
-      - name: Apply Kubernetes manifests
-        run: kubectl apply -R -f ./deploy/k8s/
+      - name: Make apply script executable
+        run: chmod +x deploy/k8s/apply.sh
+
+      - name: Apply Kubernetes manifests (ordered via script)
+        run: |
+          if [ -f deploy/k8s/apply.sh ]; then
+            ./deploy/k8s/apply.sh
+          else
+            echo "::error::`deploy/k8s/apply.sh` não encontrado"
+            exit 1
+          fi
 
       - name: Update deployment images
         run: |
