@@ -33,12 +33,6 @@ jobs:
     
     - name: Build Solution (Release)
       run: dotnet build -c Release --no-restore
-      
-#    - name: Publish build artifacts
-#      uses: actions/upload-artifact@v4
-#      with:
-#        name: build-output
-#        path: '**/bin/Release/**'
   
   test:
     name: Test
@@ -91,12 +85,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-#      - name: Get build artifact
-#        uses: actions/download-artifact@v4
-#        with:
-#          name: build-output
-#          path: ./artifacts
-
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
@@ -111,18 +99,18 @@ jobs:
           targetdir: test/results/coverage-report
           reporttypes: Html;MarkdownSummaryGithub
 
-  #      - name: Publish coverage in build summary
-  #        run: cat test/results/coverage-report/SummaryGithub.md >> $GITHUB_STEP_SUMMARY
-  #        shell: bash
-  #
-  #      - name: Setup Pages
-  #        uses: actions/configure-pages@v5
-  #
-  #      - name: Upload artifact
-  #        uses: actions/upload-pages-artifact@v3
-  #        with:
-  #          path: test/results/coverage-report
-  #
-  #      - name: Deploy to GitHub Pages
-  #        id: deployment
-  #        uses: actions/deploy-pages@v4
+        - name: Publish coverage in build summary
+          run: cat test/results/coverage-report/SummaryGithub.md >> $GITHUB_STEP_SUMMARY
+          shell: bash
+
+        - name: Setup Pages
+          uses: actions/configure-pages@v5
+
+        - name: Upload artifact
+          uses: actions/upload-pages-artifact@v3
+          with:
+            path: test/results/coverage-report
+
+        - name: Deploy to GitHub Pages
+          id: deployment
+          uses: actions/deploy-pages@v4
