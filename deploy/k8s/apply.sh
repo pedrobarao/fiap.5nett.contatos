@@ -15,12 +15,6 @@ echo "Criando PVCs..."
 kubectl apply -f deploy/k8s/rabbitmq/rabbitmq-pvc.yaml
 kubectl apply -f deploy/k8s/cadastro-api/postgres-pvc.yaml
 kubectl apply -f deploy/k8s/consulta-api/mongodb-pvc.yaml
-kubectl apply -f deploy/k8s/prometheus/prometheus-pvc.yaml
-kubectl apply -f deploy/k8s/grafana/grafana-pvc.yaml
-
-echo "Criando ConfigMaps..."
-kubectl apply -f deploy/k8s/prometheus/prometheus-config.yaml
-kubectl apply -f deploy/k8s/grafana/grafana-config.yaml
 
 echo "Criando Deployments e Services..."
 kubectl apply -f deploy/k8s/cadastro-api/postgres.yaml
@@ -29,10 +23,6 @@ kubectl apply -f deploy/k8s/consulta-api/mongodb.yaml
 kubectl apply -f deploy/k8s/consulta-api/mongodb-service.yaml
 kubectl apply -f deploy/k8s/rabbitmq/rabbitmq.yaml
 kubectl apply -f deploy/k8s/rabbitmq/service.yaml
-kubectl apply -f deploy/k8s/prometheus/prometheus.yaml
-kubectl apply -f deploy/k8s/prometheus/service.yaml
-kubectl apply -f deploy/k8s/grafana/grafana.yaml
-kubectl apply -f deploy/k8s/grafana/service.yaml
 kubectl apply -f deploy/k8s/cadastro-api/cadastro-api.yaml
 kubectl apply -f deploy/k8s/cadastro-api/service.yaml
 kubectl apply -f deploy/k8s/consulta-api/consulta-api.yaml
