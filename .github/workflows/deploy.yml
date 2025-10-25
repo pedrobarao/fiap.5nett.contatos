@@ -45,7 +45,7 @@ jobs:
           cluster-name: ${{ secrets.AKS_CLUSTER_NAME }}
 
       - name: Apply Kubernetes manifests
-        run: kubectl apply -R -f k8s/
+        run: kubectl apply -R -f ./deploy/k8s/
 
       - name: Update deployment images
         run: |
