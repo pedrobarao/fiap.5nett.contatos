@@ -21,6 +21,7 @@ jobs:
       IMAGE_CADASTRO: pedrobaraof/fiap.5nett.contatos-cadastro
       IMAGE_CONSULTA: pedrobaraof/fiap.5nett.contatos-consulta
       TAG: latest
+      NS: contatos-app
 
     steps:
       - name: Checkout
