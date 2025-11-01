@@ -87,14 +87,14 @@ echo "Aguardando pods iniciarem..."
 #  --for=condition=ready pod \
 #  --selector=app=mongodb \
 #  --timeout=90s
-kubectl wait --namespace contatos-app \
-  --for=condition=ready pod \
-  --selector=app=cadastro-contatos-api \
-  --timeout=90s
-kubectl wait --namespace contatos-app \
-  --for=condition=ready pod \
-  --selector=app=consulta-contatos-api \
-  --timeout=90s
+#kubectl wait --namespace contatos-app \
+#  --for=condition=ready pod \
+#  --selector=app=cadastro-contatos-api \
+#  --timeout=90s
+#kubectl wait --namespace contatos-app \
+#  --for=condition=ready pod \
+#  --selector=app=consulta-contatos-api \
+#  --timeout=90s
 
 echo "Verificando recursos criados..."
 kubectl get all -n contatos-app
