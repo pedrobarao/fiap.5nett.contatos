@@ -49,14 +49,14 @@ public static class DefaultOpenApiConfig
         // {
         app.UseSwaggerUI(setup =>
         {
-            var pathBase = configuration["PATH_BASE"] ?? string.Empty;
+            setup.RoutePrefix = "swagger";
             var authSection = openApiSection.GetSection("Auth");
             var endpointSection = openApiSection.GetRequiredSection("Endpoint");
 
             foreach (var description in app.DescribeApiVersions())
             {
                 var name = description.GroupName;
-                var url = endpointSection["Url"] ?? $"{pathBase}/swagger/{name}/swagger.json";
+                var url = endpointSection["Url"] ?? $"{name}/swagger.json";
 
                 setup.SwaggerEndpoint(url, name);
             }
@@ -69,7 +69,7 @@ public static class DefaultOpenApiConfig
         });
 
         // Add a redirect from the root of the app to the swagger endpoint
-        app.MapGet("/", () => Results.Redirect("/swagger")).ExcludeFromDescription();
+        app.MapGet("/", () => Results.Redirect("swagger")).ExcludeFromDescription();
         // }
 
         return app;
