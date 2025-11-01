@@ -4,73 +4,74 @@ metadata:
   name: consulta-contatos-api
   namespace: contatos-app
 spec:
-  #replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: consulta-contatos-api
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 0
   template:
     metadata:
       labels:
         app: consulta-contatos-api
     spec:
       containers:
-      - name: consulta-contatos-api
-        image: pedrobaraof/consulta-contatos-api:latest
-        imagePullPolicy: Always
-        ports:
-        - containerPort: 8081
-        env:
-        - name: ASPNETCORE_ENVIRONMENT
-          value: "Production"
-        - name: ASPNETCORE_URLS
-          value: "http://+:8081"
-        - name: ConnectionStrings__DefaultConnection
-          valueFrom:
-            secretKeyRef:
-              name: app-credentials
-              key: MONGODB_CONNECTION
-        - name: ConnectionStrings__DatabaseName
-          value: "contatos"
-        - name: MessageBus__Host
-          value: "amqp://rabbitmq:5672"
-        - name: MessageBus__Username
-          valueFrom:
-            secretKeyRef:
-              name: app-credentials
-              key: RABBITMQ_USER
-        - name: MessageBus__Password
-          valueFrom:
-            secretKeyRef:
-              name: app-credentials
-              key: RABBITMQ_PASSWORD
-        resources:
-          limits:
-            cpu: "500m"
-            memory: "512Mi"
-          requests:
-            cpu: "200m"
-            memory: "256Mi"
-        readinessProbe:
-          httpGet:
-            path: /ready
-            port: 8081
-          initialDelaySeconds: 30
-          periodSeconds: 10
-          timeoutSeconds: 5
-          failureThreshold: 3
-        livenessProbe:
-          httpGet:
-            path: /alive
-            port: 8081
-          initialDelaySeconds: 60
-          periodSeconds: 20
-          timeoutSeconds: 5
-          failureThreshold: 3
-        securityContext:
-          runAsNonRoot: true
-          runAsUser: 1000
+        - name: consulta-contatos-api
+          image: pedrobaraof/consulta-contatos-api:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8081
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: "Production"
+            - name: ASPNETCORE_URLS
+              value: "http://+:8081"
+            - name: ConnectionStrings__DefaultConnection
+              valueFrom:
+                secretKeyRef:
+                  name: app-credentials
+                  key: MONGODB_CONNECTION
+            - name: ConnectionStrings__DatabaseName
+              value: "contatos"
+            - name: MessageBus__Host
+              value: "amqp://rabbitmq:5672"
+            - name: MessageBus__Username
+              valueFrom:
+                secretKeyRef:
+                  name: app-credentials
+                  key: RABBITMQ_USER
+            - name: MessageBus__Password
+              valueFrom:
+                secretKeyRef:
+                  name: app-credentials
+                  key: RABBITMQ_PASSWORD
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+            requests:
+              cpu: "200m"
+              memory: "256Mi"
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 8081
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /alive
+              port: 8081
+            initialDelaySeconds: 60
+            periodSeconds: 20
+            timeoutSeconds: 5
+            failureThreshold: 3
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+            
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0

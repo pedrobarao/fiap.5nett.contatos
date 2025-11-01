@@ -4,77 +4,72 @@ metadata:
   name: cadastro-contatos-api
   namespace: contatos-app
 spec:
-  # replicas: 2 # Define o número desejado de réplicas do pod
+  replicas: 1 # Quantidade de Pods que o Deployment irá tentar manter.
   selector: # Define como o Deployment identifica os pods que ele gerencia
     matchLabels:
-      app: cadastro-contatos-api
+      app: cadastro-contatos-api # Usa a label para encontrar os Pods que serão gerenciados
   template:
     metadata:
-      labels:   # Labels aplicadas aos pods criados por este Deployment
+      labels: # Definição das labels aplicadas aos Pods criados por este Deployment
         app: cadastro-contatos-api
     spec:
       containers:
-      - name: cadastro-contatos-api
-        image: pedrobaraof/cadastro-contatos-api:latest
-        imagePullPolicy: Always  # Sempre baixa a imagem, mesmo se existir localmente
-        ports:
-        - containerPort: 8080    # Porta que a aplicação escuta dentro do container
-        
-        # Variáveis de ambiente necessárias para a aplicação
-        env:
-        - name: ASPNETCORE_ENVIRONMENT
-          value: "Production"
-        # Conexão com PostgreSQL usando secrets
-        - name: ConnectionStrings__DefaultConnection
-          valueFrom:
-            secretKeyRef:
-              name: app-credentials
-              key: POSTGRES_CONNECTION
-        # Configurações do RabbitMQ usando secrets
-        - name: RabbitMQ__Host
-          value: "rabbitmq"
-        - name: RabbitMQ__Username
-          valueFrom:
-            secretKeyRef:
-              name: app-credentials
-              key: RABBITMQ_USER
-        - name: RabbitMQ__Password
-          valueFrom:
-            secretKeyRef:
-              name: app-credentials
-              key: RABBITMQ_PASSWORD
+        - name: cadastro-contatos-api
+          image: pedrobaraof/cadastro-contatos-api:latest
+          imagePullPolicy: Always  # Sempre baixa a imagem, mesmo se existir localmente
+          ports:
+            - containerPort: 8080 # Porta que a aplicação escuta dentro do container
+          env: # Variáveis de ambiente
+            - name: ASPNETCORE_ENVIRONMENT
+              value: "Production"
+           
+            - name: ConnectionStrings__DefaultConnection  # Conexão com PostgreSQL usando secrets
+              valueFrom:
+                secretKeyRef:
+                  name: app-credentials
+                  key: POSTGRES_CONNECTION
+            
+            - name: RabbitMQ__Host # Configurações do RabbitMQ usando secrets
+              value: "rabbitmq"
+            - name: RabbitMQ__Username
+              valueFrom:
+                secretKeyRef:
+                  name: app-credentials
+                  key: RABBITMQ_USER
+                  
+            - name: RabbitMQ__Password
+              valueFrom:
+                secretKeyRef:
+                  name: app-credentials
+                  key: RABBITMQ_PASSWORD
+          
+          resources:
+            limits: # Limites e requisitos de recursos do container
+              cpu: "500m"    # Limite máximo de CPU (500 milicores = 0.5 CPU)
+              memory: "512Mi" # Limite máximo de memória
+            requests:
+              cpu: "200m"    # Requisição mínima de CPU (200 milicores = 0.2 CPU)
+              memory: "256Mi" # Requisição mínima de memória
+          
+          readinessProbe: # Verificações de saúde da aplicação
+            httpGet:
+              path: /ready  # Verifica se a aplicação está pronta para receber tráfego
+              port: 8080
+            initialDelaySeconds: 15  # Espera 15s antes da primeira verificação
+            periodSeconds: 10 # Verifica a cada 10s
+          livenessProbe:
+            httpGet:
+              path: /alive # Verifica se a aplicação está 'viva'
+              port: 8080
+            initialDelaySeconds: 30  # Espera 30s antes da primeira verificação
+            periodSeconds: 20 # Verifica a cada 20s
 
-        # Limites e requisitos de recursos do container
-        resources:
-          limits:
-            cpu: "500m"    # Limite máximo de CPU (500 milicores = 0.5 CPU)
-            memory: "512Mi" # Limite máximo de memória
-          requests:
-            cpu: "200m"    # Requisição mínima de CPU (200 milicores = 0.2 CPU)
-            memory: "256Mi" # Requisição mínima de memória
-
-        # Verificações de saúde da aplicação
-        readinessProbe:
-          httpGet:
-            path: /ready   # Endpoint que verifica se a aplicação está pronta para receber tráfego
-            port: 8080
-          initialDelaySeconds: 15  # Espera 15s antes da primeira verificação
-          periodSeconds: 10        # Verifica a cada 10s
-        livenessProbe:
-          httpGet:
-            path: /alive   # Endpoint que verifica se a aplicação está viva
-            port: 8080
-          initialDelaySeconds: 30  # Espera 30s antes da primeira verificação
-          periodSeconds: 20        # Verifica a cada 20s
-
-      # Configurações de segurança do pod
-      securityContext:
+      securityContext: # Configurações de segurança do pod
         runAsNonRoot: true  # Não permite execução como root
         runAsUser: 1000     # Define o ID do usuário não-root
 
-  # Estratégia de atualização do Deployment
-  strategy:
-    type: RollingUpdate           # Atualização gradual dos pods
+  strategy: # Estratégia de atualização do Deployment
+    type: RollingUpdate # Atualização gradual dos pods
     rollingUpdate:
-      maxSurge: 1                 # Número máximo de pods extras durante atualização
-      maxUnavailable: 0           # Número de pods que podem ficar indisponíveis durante atualização
+      maxSurge: 1 # Número máximo de pods extras durante atualização
+      maxUnavailable: 0 # Número de pods que podem ficar indisponíveis durante atualização
