@@ -4,20 +4,21 @@ metadata:
   name: contatos-app-ingress
   namespace: contatos-app
   annotations:
-    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: "/$2"
 spec:
-    rules:
-    - host: ""
-      http:
+  ingressClassName: nginx
+  rules:
+    - http:
         paths:
-          - path: /cadastro
+          - path: /cadastro(/|$)(.*)
             pathType: Prefix
             backend:
               service:
                 name: cadastro-contatos-api
                 port:
                   number: 8080
-          - path: /consulta
+          - path: /consulta(/|$)(.*)
             pathType: Prefix
             backend:
               service:

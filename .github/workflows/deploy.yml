@@ -1,9 +1,11 @@
 ﻿name: Deploy to AKS
 
 on:
-  workflow_run:
-    workflows: [ "Build and Publish Docker Images" ]
-    types: [ completed ]
+#  workflow_run:
+#    workflows: [ "Build and Publish Docker Images" ]
+#    types: [ completed ]
+  push:
+    branches: [ "main" ]
   workflow_dispatch:
 
 permissions:
