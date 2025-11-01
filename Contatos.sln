@@ -76,6 +76,29 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "terraform", "terraform", "{
 		deploy\terraform\terraform.tf = deploy\terraform\terraform.tf
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "k8s", "k8s", "{1871B3AA-14D0-4BAA-845B-F1E66AE66C74}"
+	ProjectSection(SolutionItems) = preProject
+		deploy\k8s\rabbitmq\rabbitmq-pvc.yaml = deploy\k8s\rabbitmq\rabbitmq-pvc.yaml
+		deploy\k8s\rabbitmq\rabbitmq.yaml = deploy\k8s\rabbitmq\rabbitmq.yaml
+		deploy\k8s\rabbitmq\service.yaml = deploy\k8s\rabbitmq\service.yaml
+		deploy\k8s\consulta-api\consulta-api.yaml = deploy\k8s\consulta-api\consulta-api.yaml
+		deploy\k8s\consulta-api\hpa.yaml = deploy\k8s\consulta-api\hpa.yaml
+		deploy\k8s\consulta-api\mongodb-pvc.yaml = deploy\k8s\consulta-api\mongodb-pvc.yaml
+		deploy\k8s\consulta-api\mongodb-service.yaml = deploy\k8s\consulta-api\mongodb-service.yaml
+		deploy\k8s\consulta-api\mongodb.yaml = deploy\k8s\consulta-api\mongodb.yaml
+		deploy\k8s\consulta-api\service.yaml = deploy\k8s\consulta-api\service.yaml
+		deploy\k8s\cadastro-api\cadastro-api.yaml = deploy\k8s\cadastro-api\cadastro-api.yaml
+		deploy\k8s\cadastro-api\hpa.yaml = deploy\k8s\cadastro-api\hpa.yaml
+		deploy\k8s\cadastro-api\postgres-pvc.yaml = deploy\k8s\cadastro-api\postgres-pvc.yaml
+		deploy\k8s\cadastro-api\postgres-service.yaml = deploy\k8s\cadastro-api\postgres-service.yaml
+		deploy\k8s\cadastro-api\postgres.yaml = deploy\k8s\cadastro-api\postgres.yaml
+		deploy\k8s\cadastro-api\service.yaml = deploy\k8s\cadastro-api\service.yaml
+		deploy\k8s\apply.sh = deploy\k8s\apply.sh
+		deploy\k8s\secrets.yaml = deploy\k8s\secrets.yaml
+		deploy\k8s\namespace.yaml = deploy\k8s\namespace.yaml
+		deploy\k8s\metrics-server.yaml = deploy\k8s\metrics-server.yaml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -102,6 +125,7 @@ Global
 		{B732B66D-07D9-475B-AC0A-27804582C2E1} = {D971BE94-680E-4B9B-871F-3E2E691E4FF9}
 		{2C1A9725-2E16-46F2-BFBB-0D6F9C174009} = {4C719486-60BB-4F37-80AC-ABA0778BD3AD}
 		{6F1B9972-2C99-45AB-B822-B1B4A99C8EEE} = {3A1B411B-ECE7-4409-B28D-A40B6E650E26}
+		{1871B3AA-14D0-4BAA-845B-F1E66AE66C74} = {3A1B411B-ECE7-4409-B28D-A40B6E650E26}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{761A2983-1170-4BD7-8998-E137F1DB6DD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
