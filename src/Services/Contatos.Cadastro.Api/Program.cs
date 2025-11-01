@@ -29,7 +29,7 @@ app.UseDefaultOpenApiConfig();
 app.UseHttpsRedirection();
 
 // Comente esta linha para desabilitar a execução dos migrations
-app.ApplyMigrations();
+// app.ApplyMigrations();
 
 app.UseMiddleware<ErrorHandlingMiddleware>();
 

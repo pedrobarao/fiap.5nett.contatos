@@ -7,7 +7,7 @@ using MessageBus;
 
 namespace Contatos.Cadastro.Api.Application.Commands.Excluir;
 
-public class ExcluirContatoCommandHandler(IMessageBus bus, IContatoRepository repository)
+public class ExcluirContatoCommandHandler(/*IMessageBus bus,*/ IContatoRepository repository)
     : CommandHandler, IRequestHandler<ExcluirContatoCommand, Result>
 {
     public async Task<Result> Handle(ExcluirContatoCommand request, CancellationToken cancellationToken)
@@ -18,20 +18,20 @@ public class ExcluirContatoCommandHandler(IMessageBus bus, IContatoRepository re
 
         repository.Excluir(contato);
 
-        if ((await PersistData(repository.UnitOfWork)).IsValid)
-            await bus.Publish(new ContatoExcluidoIntegrationEvent
-            {
-                AggregateId = contato.Id,
-                Nome = contato.Nome.PrimeiroNome,
-                Sobrenome = contato.Nome.Sobrenome,
-                Telefones = contato.Telefones.Select(t => new ContatoExcluidoIntegrationEvent.Telefone
-                {
-                    Ddd = t.Ddd,
-                    Numero = t.Numero,
-                    Tipo = t.Tipo.ToString()
-                }).ToList(),
-                Email = contato.Email?.Endereco
-            }, cancellationToken);
+        // if ((await PersistData(repository.UnitOfWork)).IsValid)
+        //     await bus.Publish(new ContatoExcluidoIntegrationEvent
+        //     {
+        //         AggregateId = contato.Id,
+        //         Nome = contato.Nome.PrimeiroNome,
+        //         Sobrenome = contato.Nome.Sobrenome,
+        //         Telefones = contato.Telefones.Select(t => new ContatoExcluidoIntegrationEvent.Telefone
+        //         {
+        //             Ddd = t.Ddd,
+        //             Numero = t.Numero,
+        //             Tipo = t.Tipo.ToString()
+        //         }).ToList(),
+        //         Email = contato.Email?.Endereco
+        //     }, cancellationToken);
 
 
         return Result.Success();

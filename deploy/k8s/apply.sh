@@ -38,29 +38,29 @@ echo "Criando Secrets..."
 kubectl apply -f deploy/k8s/secrets.yaml
 
 echo "Criando Persistent Volumes Claims..."
-kubectl apply -f deploy/k8s/rabbitmq/pvc-rabbitmq.yaml
+#kubectl apply -f deploy/k8s/rabbitmq/pvc-rabbitmq.yaml
 kubectl apply -f deploy/k8s/cadastro-api/pvc-database.yaml
 kubectl apply -f deploy/k8s/consulta-api/pvc-database.yaml
 
 echo "Criando Deployments..."
 
 ## Cadastro API
-kubectl apply -f deploy/k8s/cadastro-api/deploy-database.yaml
+#kubectl apply -f deploy/k8s/cadastro-api/deploy-database.yaml
 kubectl apply -f deploy/k8s/cadastro-api/deploy-api.yaml
 
 ## Consulta API
-kubectl apply -f deploy/k8s/consulta-api/deploy-database.yaml
+#kubectl apply -f deploy/k8s/consulta-api/deploy-database.yaml
 kubectl apply -f deploy/k8s/consulta-api/deploy-api.yaml
 
 ## RabbitMQ
-kubectl apply -f deploy/k8s/rabbitmq/deploy-rabbitmq.yaml
+#kubectl apply -f deploy/k8s/rabbitmq/deploy-rabbitmq.yaml
 
 echo "Criando Services..."
-kubectl apply -f deploy/k8s/cadastro-api/svc-database.yaml
-kubectl apply -f deploy/k8s/consulta-api/svc-database.yaml
+#kubectl apply -f deploy/k8s/cadastro-api/svc-database.yaml
+#kubectl apply -f deploy/k8s/consulta-api/svc-database.yaml
 kubectl apply -f deploy/k8s/cadastro-api/svc-api.yaml
 kubectl apply -f deploy/k8s/consulta-api/svc-api.yaml
-kubectl apply -f deploy/k8s/rabbitmq/svc-rabbitmq.yaml
+#kubectl apply -f deploy/k8s/rabbitmq/svc-rabbitmq.yaml
 
 echo "Criando Ingress..."
 install_ingress_controller
@@ -75,18 +75,18 @@ kubectl apply -f deploy/k8s/consulta-api/hpa-api.yaml
 
 
 echo "Aguardando pods iniciarem..."
-kubectl wait --namespace contatos-app \
-  --for=condition=ready pod \
-  --selector=app=rabbitmq \
-  --timeout=90s
-kubectl wait --namespace contatos-app \
-  --for=condition=ready pod \
-  --selector=app=postgres \
-  --timeout=90s
-kubectl wait --namespace contatos-app \
-  --for=condition=ready pod \
-  --selector=app=mongodb \
-  --timeout=90s
+#kubectl wait --namespace contatos-app \
+#  --for=condition=ready pod \
+#  --selector=app=rabbitmq \
+#  --timeout=90s
+#kubectl wait --namespace contatos-app \
+#  --for=condition=ready pod \
+#  --selector=app=postgres \
+#  --timeout=90s
+#kubectl wait --namespace contatos-app \
+#  --for=condition=ready pod \
+#  --selector=app=mongodb \
+#  --timeout=90s
 kubectl wait --namespace contatos-app \
   --for=condition=ready pod \
   --selector=app=cadastro-contatos-api \

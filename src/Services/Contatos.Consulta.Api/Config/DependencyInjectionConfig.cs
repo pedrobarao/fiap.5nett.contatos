@@ -19,7 +19,7 @@ public static class DependencyInjectionConfig
     {
         RegisterApplicationServices(builder.Services);
         RegisterDomainServices(builder.Services);
-        RegisterInfraServices(builder);
+        //RegisterInfraServices(builder);
 
         return builder;
     }
@@ -46,58 +46,58 @@ public static class DependencyInjectionConfig
             cm.MapMember(c => c.Id)
                 .SetSerializer(new GuidSerializer(GuidRepresentation.Standard));
         });
-
+        
         BsonClassMap.RegisterClassMap<Nome>(cm =>
         {
             cm.AutoMap();
             cm.SetIgnoreExtraElements(true);
         });
-
+        
         BsonClassMap.RegisterClassMap<Telefone>(cm =>
         {
             cm.AutoMap();
             cm.SetIgnoreExtraElements(true);
         });
-
+        
         BsonClassMap.RegisterClassMap<Email>(cm =>
         {
             cm.AutoMap();
             cm.SetIgnoreExtraElements(true);
         });
-
+        
         builder.Services.AddSingleton<IMongoClient>(services =>
         {
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-
+        
             if (string.IsNullOrEmpty(connectionString))
                 throw new InvalidOperationException("MongoDB connection string is not configured.");
-
+        
             return new MongoClient(connectionString);
         });
-
+        
         builder.Services.AddScoped<IMongoDatabase>(services =>
         {
             var dbName = builder.Configuration["ConnectionStrings:DatabaseName"];
             var client = services.GetRequiredService<IMongoClient>();
-
+        
             if (string.IsNullOrEmpty(dbName))
                 throw new InvalidOperationException("MongoDB database name is not configured.");
-
+        
             return client.GetDatabase(dbName);
         });
-
+        
         builder.Services.AddScoped<IContatoRepository, ContatoRepository>();
-
+        
         var messageBusSettings = new MessageBusSettings();
         builder.Configuration.GetRequiredSection("MessageBus").Bind(messageBusSettings);
-
+        
         builder.Services.AddMassTransit(
                 busConfig =>
                 {
                     busConfig.AddConsumer<CriarContatoIntegrationEventHandler>();
                     busConfig.AddConsumer<AtualizarContatoIntegrationEventHandler>();
                     busConfig.AddConsumer<ExcluirContatoIntegrationEventHandler>();
-
+        
                     busConfig.UsingRabbitMq(
                         (context, cfg) =>
                         {
@@ -106,7 +106,7 @@ public static class DependencyInjectionConfig
                                 h.Username(messageBusSettings.Username);
                                 h.Password(messageBusSettings.Password);
                             });
-
+        
                             cfg.ReceiveEndpoint("ContatoCriadoQueue", re =>
                             {
                                 re.ConfigureConsumeTopology = false;
@@ -119,7 +119,7 @@ public static class DependencyInjectionConfig
                                     r.Interval(999999, TimeSpan.FromMinutes(1));
                                 });
                             });
-
+        
                             cfg.ReceiveEndpoint("ContatoAtualizadoQueue", re =>
                             {
                                 re.ConfigureConsumeTopology = false;
@@ -132,7 +132,7 @@ public static class DependencyInjectionConfig
                                     r.Interval(999999, TimeSpan.FromMinutes(1));
                                 });
                             });
-
+        
                             cfg.ReceiveEndpoint("ContatoExcluidoQueue", re =>
                             {
                                 re.ConfigureConsumeTopology = false;

@@ -9,9 +9,9 @@ public sealed class ContatoRepository : IContatoRepository
 {
     private readonly IMongoCollection<Contato> _contatosCollection;
 
-    public ContatoRepository(IMongoDatabase database)
+    public ContatoRepository(/*IMongoDatabase database*/)
     {
-        _contatosCollection = database.GetCollection<Contato>("Contatos");
+        throw new NotImplementedException();//_contatosCollection = database.GetCollection<Contato>("Contatos");
     }
 
     public async Task Criar(Contato contato)

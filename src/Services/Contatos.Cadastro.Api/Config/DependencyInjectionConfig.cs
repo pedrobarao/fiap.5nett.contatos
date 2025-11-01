@@ -16,7 +16,7 @@ public static class DependencyInjectionConfig
         builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         RegisterApplicationServices(builder.Services);
         RegisterDomainServices(builder.Services);
-        RegisterInfraServices(builder);
+        //RegisterInfraServices(builder);
 
         return builder;
     }
@@ -52,35 +52,35 @@ public static class DependencyInjectionConfig
                                 h.Username(messageBusSettings.Username);
                                 h.Password(messageBusSettings.Password);
                             });
-
+                    
                             // Contato criado
                             cfg.Message<ContatoCriadoIntegrationEvent>(configTopology =>
                             {
                                 configTopology.SetEntityName("ContatoCriadoExchange");
                             });
-
+                    
                             cfg.Publish<ContatoCriadoIntegrationEvent>(publishConfig =>
                             {
                                 publishConfig.ExchangeType = ExchangeType.Topic;
                             });
-
+                    
                             // Contato atualizado
                             cfg.Message<ContatoAtualizadoIntegrationEvent>(configTopology =>
                             {
                                 configTopology.SetEntityName("ContatoAtualizadoExchange");
                             });
-
+                    
                             cfg.Publish<ContatoAtualizadoIntegrationEvent>(publishConfig =>
                             {
                                 publishConfig.ExchangeType = ExchangeType.Topic;
                             });
-
+                    
                             // Contato excluído
                             cfg.Message<ContatoExcluidoIntegrationEvent>(configTopology =>
                             {
                                 configTopology.SetEntityName("ContatoExcluidoExchange");
                             });
-
+                    
                             cfg.Publish<ContatoExcluidoIntegrationEvent>(publishConfig =>
                             {
                                 publishConfig.ExchangeType = ExchangeType.Topic;
