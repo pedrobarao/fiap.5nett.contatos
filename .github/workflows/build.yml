@@ -3,6 +3,7 @@ name: Build and Publish Docker Images
 on:
   workflow_run:
     workflows: ["Test"]
+    types: [ completed ]
   workflow_dispatch:
 
 permissions:
