@@ -25,6 +25,7 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/cont
 kubectl apply -f deploy/k8s/ingress.yaml
 
 echo "Aplicando Metrics Server..."
+ubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
 kubectl apply -f deploy/k8s/sa-metrics.yaml
 
 echo "Criando Horizontal Pod Autoscaler..."
