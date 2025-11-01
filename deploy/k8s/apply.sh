@@ -1,4 +1,6 @@
 #!/bin/bash
+set -Eeuo pipefail
+trap 'rc=$?; echo "[ERRO] Linha $LINENO: comando \"$BASH_COMMAND\" falhou (exit $rc)" >&2; exit $rc' ERR
 
 echo "Iniciando criação de recursos Kubernetes..."
 
@@ -29,7 +31,15 @@ echo "Criando Horizontal Pod Autoscaler..."
 kubectl apply -f deploy/k8s/cadastro-api/hpa-api.yaml
 kubectl apply -f deploy/k8s/consulta-api/hpa-api.yaml
 
+echo "Forçando rollout dos Deployments..."
+kubectl -n contatos-app rollout restart deploy cadastro-contatos-api
+kubectl -n contatos-app rollout restart deploy consulta-contatos-api
+
+echo "Aguardando conclusão do rollout..."
+kubectl -n contatos-app rollout status deploy cadastro-contatos-api --timeout=180s
+kubectl -n contatos-app rollout status deploy consulta-contatos-api --timeout=180s
+
 echo "Verificando recursos criados..."
 kubectl get all -n contatos-app
 
-echo "Aplicação implantada com sucesso!" 
+echo "Aplicação implantada com sucesso!"
