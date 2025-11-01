@@ -1,0 +1,26 @@
+﻿apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: contatos-app-ingress
+  namespace: contatos-app
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+spec:
+    rules:
+    - host: ""
+      http:
+        paths:
+          - path: /cadastro
+            pathType: Prefix
+            backend:
+              service:
+                name: cadastro-contatos-api
+                port:
+                  number: 8080
+          - path: /consulta
+            pathType: Prefix
+            backend:
+              service:
+                name: consulta-contatos-api
+                port:
+                  number: 8081
