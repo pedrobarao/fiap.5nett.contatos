@@ -58,10 +58,10 @@ jobs:
 
       - name: Update deployment images
         run: |
-          kubectl set image deployment/cadastro cadastro=${IMAGE_CADASTRO}:${TAG} --record || true
-          kubectl set image deployment/consulta consulta=${IMAGE_CONSULTA}:${TAG} --record || true
+          kubectl -n contatos-app set image deployment/cadastro-contatos-api cadastro-contatos-api=${IMAGE_CADASTRO}:${TAG} --record || true
+          kubectl -n contatos-app set image deployment/consulta-contatos-api consulta-contatos-api=${IMAGE_CONSULTA}:${TAG} --record || true
 
       - name: Wait for rollouts
         run: |
-          kubectl rollout status deployment/cadastro --timeout=120s || kubectl rollout restart deployment/cadastro
-          kubectl rollout status deployment/consulta --timeout=120s || kubectl rollout restart deployment/consulta
+          kubectl -n contatos-app rollout status deployment/cadastro-contatos-api --timeout=120s || kubectl -n contatos-app rollout restart deployment/cadastro-contatos-api
+          kubectl -n contatos-app rollout status deployment/consulta-contatos-api --timeout=120s || kubectl -n contatos-app rollout restart deployment/consulta-contatos-api
