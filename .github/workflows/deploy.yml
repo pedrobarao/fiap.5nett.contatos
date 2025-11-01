@@ -55,13 +55,48 @@ jobs:
             echo "::error::`deploy/k8s/apply.sh` não encontrado"
             exit 1
           fi
-
-      - name: Update deployment images
+          
+      - name: Update images and trigger rollout
+        shell: bash
         run: |
-          kubectl -n contatos-app set image deployment/cadastro-contatos-api cadastro-contatos-api=${IMAGE_CADASTRO}:${TAG} --record || true
-          kubectl -n contatos-app set image deployment/consulta-contatos-api consulta-contatos-api=${IMAGE_CONSULTA}:${TAG} --record || true
-
+          set -Eeuo pipefail
+          NS="contatos-app"
+          # Força atualização das imagens (dispara rollout)
+          kubectl -n "$NS" set image deploy/cadastro-contatos-api cadastro-contatos-api="${IMAGE_CADASTRO}:${TAG}"
+          kubectl -n "$NS" set image deploy/consulta-contatos-api consulta-contatos-api="${IMAGE_CONSULTA}:${TAG}"
+          
       - name: Wait for rollouts
+        shell: bash
         run: |
-          kubectl -n contatos-app rollout status deployment/cadastro-contatos-api --timeout=120s || kubectl -n contatos-app rollout restart deployment/cadastro-contatos-api
-          kubectl -n contatos-app rollout status deployment/consulta-contatos-api --timeout=120s || kubectl -n contatos-app rollout restart deployment/consulta-contatos-api
+          set -Eeuo pipefail
+          NS="contatos-app"
+          DEPLOYS=("cadastro-contatos-api" "consulta-contatos-api")
+          dump() {
+            local d="$1"
+            echo "[DIAG] Deployment: $d"
+            kubectl -n "$NS" get deploy "$d" -o wide || true
+            kubectl -n "$NS" describe deploy "$d" || true
+            echo "[DIAG] ReplicaSets (recentes):"
+            kubectl -n "$NS" get rs --sort-by=.metadata.creationTimestamp -o wide | tail -n 5 || true
+            local sel
+            sel="$(kubectl -n "$NS" get deploy "$d" -o jsonpath='{range $k,$v := .spec.selector.matchLabels}{printf "%s=%s," $k $v}{end}' | sed 's/,$//' || true)"
+            if [[ -n "$sel" ]]; then
+              echo "[DIAG] Pods ($sel):"
+              kubectl -n "$NS" get pods -l "$sel" -o wide || true
+              kubectl -n "$NS" describe pods -l "$sel" || true
+              for p in $(kubectl -n "$NS" get pods -l "$sel" --sort-by=.metadata.creationTimestamp -o jsonpath='{range .items[*]}{.metadata.name}{"\n"}{end}' 2>/dev/null | tail -n 3); do
+                echo "[DIAG] Logs (tail 200) do pod: $p"
+                kubectl -n "$NS" logs "$p" --all-containers --tail=200 || true
+              done
+            fi
+            echo "[DIAG] Eventos recentes:"
+            kubectl -n "$NS" get events --sort-by=.metadata.creationTimestamp | tail -n 100 || true
+          }
+          for d in "${DEPLOYS[@]}"; do
+            echo "Aguardando rollout de $d..."
+            if ! kubectl -n "$NS" rollout status deploy "$d" --timeout=600s; then
+              echo "::error::Rollout de $d falhou ou expirou"
+              dump "$d"
+              exit 1
+            fi
+          done

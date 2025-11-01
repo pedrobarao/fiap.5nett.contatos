@@ -52,7 +52,7 @@ spec:
               memory: "256Mi"
           readinessProbe:
             httpGet:
-              path: /ready
+              path: consulta/ready
               port: 8081
             initialDelaySeconds: 30
             periodSeconds: 10
@@ -60,7 +60,7 @@ spec:
             failureThreshold: 3
           livenessProbe:
             httpGet:
-              path: /alive
+              path: consulta/alive
               port: 8081
             initialDelaySeconds: 60
             periodSeconds: 20
