@@ -18,7 +18,7 @@ jobs:
 #    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     env:
       IMAGE_CADASTRO: pedrobaraof/fiap.5nett.contatos-cadastro
-      IMAGE_CONSULTA: pedrobaraof/fiap.5nett.contatos-cadastro
+      IMAGE_CONSULTA: pedrobaraof/fiap.5nett.contatos-consulta
       TAG: latest
 
     steps:
