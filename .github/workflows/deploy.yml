@@ -1,21 +1,22 @@
 ﻿name: Deploy to AKS
 
 on:
-#  workflow_run:
-#    workflows: [ "Build and Publish Docker Images" ]
-#    types: [ completed ]
-  push:
-    branches: [ "main" ]
+  workflow_run:
+    workflows: [ "Build and Publish Docker Images" ]
+    types: [ completed ]
   workflow_dispatch:
 
 permissions:
   contents: read
   id-token: write
+  
+concurrency:
+  group: deploy-aks-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-#    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     env:
       IMAGE_CADASTRO: pedrobaraof/fiap.5nett.contatos-cadastro
       IMAGE_CONSULTA: pedrobaraof/fiap.5nett.contatos-consulta
@@ -25,16 +26,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       
-      #      - name: Set TAG
-      #        run: |
-      #          if [ "${{ github.event.workflow_run.head_branch }}" = "main" ]; then
-      #            echo "TAG=latest" >> $GITHUB_ENV
-      #          else
-      #            echo "TAG=${{ github.event.workflow_run.head_sha }}" >> $GITHUB_ENV
-      #          fi
+      - name: Set TAG
+        run: |
+          if [ "${{ github.event.workflow_run.head_branch }}" = "main" ]; then
+            echo "TAG=latest" >> $GITHUB_ENV
+          else
+            echo "TAG=${{ github.event.workflow_run.head_sha }}" >> $GITHUB_ENV
+          fi
 
       - name: Login to Azure
-        uses: azure/login@v1
+        uses: azure/login@v2
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
@@ -44,59 +45,79 @@ jobs:
           resource-group: ${{ secrets.AKS_RESOURCE_GROUP }}
           cluster-name: ${{ secrets.AKS_CLUSTER_NAME }}
 
+      - name: Ensure namespace exists
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          kubectl get ns "$NS" >/dev/null 2>&1 || kubectl create ns "$NS"
+
       - name: Make apply script executable
         run: chmod +x deploy/k8s/apply.sh
 
       - name: Apply Kubernetes manifests (ordered via script)
+        shell: bash
         run: |
+          set -Eeuo pipefail
           if [ -f deploy/k8s/apply.sh ]; then
             ./deploy/k8s/apply.sh
           else
             echo "::error::`deploy/k8s/apply.sh` não encontrado"
             exit 1
           fi
-          
+
+      - name: Wait for Metrics Server rollout (if present)
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          if kubectl -n kube-system get deploy metrics-server >/dev/null 2>&1; then
+            echo "Aguardando rollout do Metrics Server..."
+            kubectl -n kube-system rollout status deploy/metrics-server --timeout=180s
+          else
+            echo "Metrics Server não encontrado; pulando espera."
+          fi
+
       - name: Update images and trigger rollout
         shell: bash
         run: |
           set -Eeuo pipefail
-          NS="contatos-app"
-          # Força atualização das imagens (dispara rollout)
-          kubectl -n "$NS" set image deploy/cadastro-contatos-api cadastro-contatos-api="${IMAGE_CADASTRO}:${TAG}"
-          kubectl -n "$NS" set image deploy/consulta-contatos-api consulta-contatos-api="${IMAGE_CONSULTA}:${TAG}"
-          
-      - name: Wait for rollouts
+          for d in cadastro-contatos-api consulta-contatos-api; do
+            if kubectl -n "$NS" get deploy "$d" >/dev/null 2>&1; then
+              if [ "$d" = "cadastro-contatos-api" ]; then
+                IMG="${IMAGE_CADASTRO}:${TAG}"
+              else
+                IMG="${IMAGE_CONSULTA}:${TAG}"
+              fi
+              echo "Atualizando imagem de $d para $IMG"
+              kubectl -n "$NS" set image "deploy/$d" "$d=$IMG"
+            else
+              echo "::warning::Deployment $d não encontrado no namespace $NS; pulando atualização de imagem."
+            fi
+          done
+
+      - name: Wait for workloads rollouts (generic)
         shell: bash
         run: |
           set -Eeuo pipefail
-          NS="contatos-app"
-          DEPLOYS=("cadastro-contatos-api" "consulta-contatos-api")
-          dump() {
-            local d="$1"
-            echo "[DIAG] Deployment: $d"
-            kubectl -n "$NS" get deploy "$d" -o wide || true
-            kubectl -n "$NS" describe deploy "$d" || true
-            echo "[DIAG] ReplicaSets (recentes):"
-            kubectl -n "$NS" get rs --sort-by=.metadata.creationTimestamp -o wide | tail -n 5 || true
-            local sel
-            sel="$(kubectl -n "$NS" get deploy "$d" -o jsonpath='{range $k,$v := .spec.selector.matchLabels}{printf "%s=%s," $k $v}{end}' | sed 's/,$//' || true)"
-            if [[ -n "$sel" ]]; then
-              echo "[DIAG] Pods ($sel):"
-              kubectl -n "$NS" get pods -l "$sel" -o wide || true
-              kubectl -n "$NS" describe pods -l "$sel" || true
-              for p in $(kubectl -n "$NS" get pods -l "$sel" --sort-by=.metadata.creationTimestamp -o jsonpath='{range .items[*]}{.metadata.name}{"\n"}{end}' 2>/dev/null | tail -n 3); do
-                echo "[DIAG] Logs (tail 200) do pod: $p"
-                kubectl -n "$NS" logs "$p" --all-containers --tail=200 || true
-              done
-            fi
-            echo "[DIAG] Eventos recentes:"
-            kubectl -n "$NS" get events --sort-by=.metadata.creationTimestamp | tail -n 100 || true
-          }
-          for d in "${DEPLOYS[@]}"; do
-            echo "Aguardando rollout de $d..."
-            if ! kubectl -n "$NS" rollout status deploy "$d" --timeout=600s; then
-              echo "::error::Rollout de $d falhou ou expirou"
-              dump "$d"
+          SEL="${ROLLWAIT_SELECTOR:-}"
+
+          if [[ -n "$SEL" ]]; then
+            mapfile -t WORKLOADS < <(kubectl -n "$NS" get deploy,daemonset,statefulset -l "$SEL" -o name)
+          else
+            mapfile -t WORKLOADS < <(kubectl -n "$NS" get deploy,daemonset,statefulset -o name)
+          fi
+
+          if [[ "${#WORKLOADS[@]}" -eq 0 ]]; then
+            echo "Nenhum Deployment/StatefulSet/DaemonSet encontrado no namespace '$NS'."
+            exit 0
+          fi
+
+          for w in "${WORKLOADS[@]}"; do
+            echo "Aguardando rollout de $w..."
+            if ! kubectl -n "$NS" rollout status "$w" --timeout=600s; then
+              echo "::error::Rollout de $w falhou ou expirou"
+              kubectl -n "$NS" get "$w" -o wide || true
+              kubectl -n "$NS" describe "$w" || true
+              kubectl -n "$NS" get events --sort-by=.metadata.creationTimestamp | tail -n 100 || true
               exit 1
             fi
           done
