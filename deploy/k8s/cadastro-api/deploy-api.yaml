@@ -53,13 +53,13 @@ spec:
           
           readinessProbe: # Verificações de saúde da aplicação
             httpGet:
-              path: cadastro/ready  # Verifica se a aplicação está pronta para receber tráfego
+              path: /ready  # Verifica se a aplicação está pronta para receber tráfego
               port: 8080
             initialDelaySeconds: 15  # Espera 15s antes da primeira verificação
             periodSeconds: 10 # Verifica a cada 10s
           livenessProbe:
             httpGet:
-              path: cadastro/alive # Verifica se a aplicação está 'viva'
+              path: /alive # Verifica se a aplicação está 'viva'
               port: 8080
             initialDelaySeconds: 30  # Espera 30s antes da primeira verificação
             periodSeconds: 20 # Verifica a cada 20s
