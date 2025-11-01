@@ -23,37 +23,44 @@ spec:
     spec:
       serviceAccountName: metrics-server
       containers:
-      - name: metrics-server
-        image: k8s.gcr.io/metrics-server/metrics-server:v0.6.1
-        args:
-        - --cert-dir=/tmp
-        - --secure-port=4443
-        - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
-        - --kubelet-use-node-status-port
-        - --metric-resolution=15s
-        - --kubelet-insecure-tls
-        ports:
-        - name: https
-          containerPort: 4443
-        readinessProbe:
-          httpGet:
-            path: /readyz
-            port: https
-            scheme: HTTPS
-          periodSeconds: 10
-        livenessProbe:
-          httpGet:
-            path: /livez
-            port: https
-            scheme: HTTPS
-          periodSeconds: 10
-        securityContext:
-          readOnlyRootFilesystem: true
-          runAsNonRoot: true
-          runAsUser: 1000
-        volumeMounts:
-        - name: tmp-dir
-          mountPath: /tmp
+        - name: metrics-server
+          image: registry.k8s.io/metrics-server/metrics-server:v0.6.4
+          imagePullPolicy: IfNotPresent
+          args:
+            - --cert-dir=/tmp
+            - --secure-port=4443
+            - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
+            - --kubelet-use-node-status-port
+            - --metric-resolution=15s
+            - --kubelet-insecure-tls
+          ports:
+            - name: https
+              containerPort: 4443
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: https
+              scheme: HTTPS
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /livez
+              port: https
+              scheme: HTTPS
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              memory: 256Mi
+          securityContext:
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 1000
+          volumeMounts:
+            - name: tmp-dir
+              mountPath: /tmp
       volumes:
-      - name: tmp-dir
-        emptyDir: {} 
+        - name: tmp-dir
+          emptyDir: {}
