@@ -39,8 +39,8 @@ kubectl apply -f deploy/k8s/secrets.yaml
 
 echo "Criando Persistent Volumes Claims..."
 #kubectl apply -f deploy/k8s/rabbitmq/pvc-rabbitmq.yaml
-kubectl apply -f deploy/k8s/cadastro-api/pvc-database.yaml
-kubectl apply -f deploy/k8s/consulta-api/pvc-database.yaml
+#kubectl apply -f deploy/k8s/cadastro-api/pvc-database.yaml
+#kubectl apply -f deploy/k8s/consulta-api/pvc-database.yaml
 
 echo "Criando Deployments..."
 
