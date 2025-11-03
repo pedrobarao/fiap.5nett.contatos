@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: cadastro-contatos-api
-          image: pedrobaraof/cadastro-contatos-api:latest
+          image: pedrobaraof/fiap.5nett.contatos-cadastro:latest
           imagePullPolicy: Always  # Sempre baixa a imagem, mesmo se existir localmente
           ports:
             - containerPort: 8080 # Porta que a aplicação escuta dentro do container

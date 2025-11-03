@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: consulta-contatos-api
-          image: pedrobaraof/consulta-contatos-api:latest
+          image: pedrobaraof/fiap.5nett.contatos-consulta:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8081
