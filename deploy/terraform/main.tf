@@ -1,14 +1,10 @@
-# =========================
 # Resource Group
-# =========================
 resource "azurerm_resource_group" "res-0" {
   name     = "dev-rg-fiap-westus2-01"
   location = "westus2"
 }
 
-# =========================
-# AKS Cluster (mínimo custo)
-# =========================
+# AKS Cluster
 resource "azurerm_kubernetes_cluster" "res-1" {
   name                = "dev-aks-fiap-westus2-01"
   location            = azurerm_resource_group.res-0.location
@@ -31,7 +27,7 @@ resource "azurerm_kubernetes_cluster" "res-1" {
   sku_tier                          = "Free"
   support_plan                      = "KubernetesOfficial"
 
-  # ===== Networking =====
+  # Rede
   network_profile {
     network_plugin       = "azure"
     network_plugin_mode  = "overlay"
@@ -44,7 +40,7 @@ resource "azurerm_kubernetes_cluster" "res-1" {
     service_cidr    = "10.0.0.0/16"
     pod_cidr        = "10.244.0.0/16"
 
-    # Um único IP público gerenciado
+    # IP público gerenciado
     load_balancer_profile {
       managed_outbound_ip_count = 1
       backend_pool_type         = "NodeIPConfiguration"
@@ -52,7 +48,7 @@ resource "azurerm_kubernetes_cluster" "res-1" {
     }
   }
 
-  # ===== Default Node Pool =====
+  # Node Pool
   default_node_pool {
     name              = "agentpool"
     vm_size           = "Standard_A2_v2"    
@@ -71,8 +67,6 @@ resource "azurerm_kubernetes_cluster" "res-1" {
 
   lifecycle {
     ignore_changes = [
-      #network_profile[0].load_balancer_profile[0].effective_outbound_ips,
-      #network_profile[0].load_balancer_profile[0].outbound_ports_allocated
     ]
   }
 
