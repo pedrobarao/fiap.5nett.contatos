@@ -13,7 +13,7 @@ resource "azurerm_kubernetes_cluster" "res-1" {
   # Mantém prefixo/DNS para consistência
   dns_prefix = "dev-aksdns-fiap-westus2-01"
 
-  # Versão fixa — evita upgrades automáticos
+  # Versão fixa
   kubernetes_version           = "1.32.7"
   node_os_upgrade_channel      = "None"
   image_cleaner_interval_hours = 168
@@ -22,7 +22,7 @@ resource "azurerm_kubernetes_cluster" "res-1" {
     type = "SystemAssigned"
   }
 
-  # Configurações de controle de custo
+  # Tier
   role_based_access_control_enabled = true
   sku_tier                          = "Free"
   support_plan                      = "KubernetesOfficial"
