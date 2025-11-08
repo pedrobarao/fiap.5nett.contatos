@@ -25,40 +25,6 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/cont
 kubectl apply -f deploy/k8s/ingress.yaml
 
 echo "Aplicando Metrics Server (com Kustomize + patch de resources)..."
-mkdir -p deploy/k8s/metrics
-
-cat > deploy/k8s/metrics/kustomization.yaml <<'EOF'
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
-resources:
-  - https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.6.4/components.yaml
-patches:
-  - target:
-      kind: Deployment
-      name: metrics-server
-      namespace: kube-system
-    path: patch-resources.yaml
-EOF
-
-cat > deploy/k8s/metrics/patch-resources.yaml <<'EOF'
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: metrics-server
-  namespace: kube-system
-spec:
-  template:
-    spec:
-      containers:
-        - name: metrics-server
-          resources:
-            requests:
-              cpu: 50m
-              memory: 64Mi
-            limits:
-              memory: 256Mi
-EOF
-
 kubectl apply -k deploy/k8s/metrics
 kubectl rollout status -n kube-system deploy/metrics-server --timeout=120s
 
